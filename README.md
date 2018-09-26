@@ -9,4 +9,4 @@
 
 ## PITCH
 
-La team Game Data Center développe un site permettant de choisir un format de classement et de règles selon le jeu voulu ainsi que d'afficher des news concernant le jeu concerné.
+Game Data Center Team is developing a website providing users with ranking systems and ruleset corresponding to a game they selected. It is also meant to display their personnal scores and news about the game.
