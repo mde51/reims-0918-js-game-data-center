@@ -1,3 +1,6 @@
 # reims-0918-js-game-data-center
 
-Robin Guerre
+## TEAM GAME DATA CENTER
+
+- Charles Crepin
+- Robin Guerre
