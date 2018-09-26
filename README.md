@@ -1,2 +1,4 @@
 # reims-0918-js-game-data-center
-Gautier Simonin
+
+-Gautier Simonin
+-Charles Crepin
