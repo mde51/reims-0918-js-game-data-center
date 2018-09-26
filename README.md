@@ -1,4 +1,6 @@
 # reims-0918-js-game-data-center
 
 ## TEAM GAME DATA CENTER
-Gautier Simonin
+
+-Gautier Simonin
+-Charles Crepin
