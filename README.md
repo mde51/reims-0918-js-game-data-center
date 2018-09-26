@@ -5,3 +5,5 @@
 - Charles Crepin
 - Robin Guerre
 - Michel Descotes
+- Gautier Simonin
+
