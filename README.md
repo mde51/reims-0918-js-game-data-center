@@ -2,5 +2,8 @@
 
 ## TEAM GAME DATA CENTER
 
--Gautier Simonin
--Charles Crepin
+- Charles Crepin
+- Robin Guerre
+- Michel Descotes
+- Gautier Simonin
+
