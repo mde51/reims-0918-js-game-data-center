@@ -8,6 +8,29 @@ import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      gamesList: [
+        {
+          name: "Mario Kart",
+          cover:
+            "https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/super_nintendo_5/H2x1_SNES_SuperMarioKart_image1600w.jpg"
+        },
+        {
+          name: "Mario Kart",
+          cover:
+            "https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/super_nintendo_5/H2x1_SNES_SuperMarioKart_image1600w.jpg"
+        },
+        {
+          name: "Mario Kart",
+          cover:
+            "https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/super_nintendo_5/H2x1_SNES_SuperMarioKart_image1600w.jpg"
+        }
+      ]
+    };
+  }
+
   render() {
     return (
       <div className="App">
@@ -16,7 +39,7 @@ class App extends Component {
           <ResearchBar />
         </header>
         <Container>
-          <GamesList />
+          <GamesList list={this.state.gamesList} />
         </Container>
       </div>
     );

@@ -1,26 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import { CardColumns } from "reactstrap"
+import { CardColumns } from "reactstrap";
 
-import GameThumbnail from "./GameThumbnail"
+import GameThumbnail from "./GameThumbnail";
 
-const GamesList = () => (
-    <section>
-      <CardColumns className="mt-3">
+const GamesList = ({ list }) => (
+  <section>
+    <CardColumns className="mt-3">
+      {list.map(game => (
         <GameThumbnail />
-        <GameThumbnail />
-        <GameThumbnail />
-        <GameThumbnail />
-        <GameThumbnail />
-        <GameThumbnail />
-        <GameThumbnail />
-        <GameThumbnail />
-        <GameThumbnail />
-        <GameThumbnail />
-        <GameThumbnail />
-        <GameThumbnail />
-      </CardColumns>
-    </section>
+      ))}
+    </CardColumns>
+  </section>
 );
 
 export default GamesList;
