@@ -1,7 +1,7 @@
 import React from "react";
 import { Jumbotron, Button, Container, Row, Col } from "reactstrap";
 
-const Example = () => {
+const MainJumbotron = () => {
   return (
     <Jumbotron>
       <Container>
@@ -19,4 +19,4 @@ const Example = () => {
   );
 };
 
-export default Example;
+export default MainJumbotron;
