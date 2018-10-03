@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 
-const Example = () => {
+const ResearchBar = () => {
   return (
     <Form>
       <FormGroup>
@@ -17,4 +17,4 @@ const Example = () => {
   );
 };
 
-export default Example;
+export default ResearchBar;
