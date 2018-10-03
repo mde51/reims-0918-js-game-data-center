@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import Jumbotron from './Jumbotron'
+import Jumbotron from './Jumbotron';
+import Form from './Research.js';
 
 class App extends Component {
   render() {
@@ -9,6 +10,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <Jumbotron />
+          <Form />
         </header>
       </div>
     );
