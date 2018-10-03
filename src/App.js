@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from "react";
+import { Container } from "reactstrap";
 
-import MainJumbotron from './MainJumbotron';
-import ResearchBar from './ResearchBar';
+import "./App.css";
+
+import GamesList from "./GamesList";
+import MainJumbotron from "./MainJumbotron";
+import ResearchBar from "./ResearchBar";
 
 class App extends Component {
   render() {
@@ -12,6 +15,9 @@ class App extends Component {
           <MainJumbotron />
           <ResearchBar />
         </header>
+        <Container>
+          <GamesList />
+        </Container>
       </div>
     );
   }
