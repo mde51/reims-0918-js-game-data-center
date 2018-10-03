@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import MainJumbotron from './Jumbotron';
-import ResearchBar from './Research.js';
+import MainJumbotron from './MainJumbotron';
+import ResearchBar from './ResearchBar';
 
 class App extends Component {
   render() {
