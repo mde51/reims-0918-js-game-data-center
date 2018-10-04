@@ -35,7 +35,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <MainJumbotron />
+          <MainJumbotron className="App-jumbotron"/>
           <ResearchBar />
         </header>
         <Container>
