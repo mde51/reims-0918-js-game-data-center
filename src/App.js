@@ -7,6 +7,7 @@ import GamesList from "./GamesList";
 import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
 import Table from "./Table";
+import UserName from "./UserName"
 
 class App extends Component {
   constructor(props) {
@@ -41,6 +42,7 @@ class App extends Component {
         </header>
         <Container>
           <GamesList list={this.state.gamesList} />
+          <UserName />
           <Table />
         </Container>
       </div>
