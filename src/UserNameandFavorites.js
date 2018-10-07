@@ -17,11 +17,20 @@ export default class Example extends React.Component {
           <Container>
             <Row>
               <Col>
-                <InputGroupAddon addonType="prepend" />
-                <Input />
+                <Input
+                  type="username"
+                  name="addUserName"
+                  id="idUserName"
+                  placeholder="Write your username here !"
+                />
               </Col>
               <Col>
-                <Button>I'm a button</Button>
+                <InputGroupAddon addonType="prepend">
+                  <Button>Accept</Button>
+                </InputGroupAddon>
+              </Col>
+              <Col>
+                <Button>add this game to your favorites!</Button>
               </Col>
             </Row>
           </Container>
