@@ -7,7 +7,7 @@ import GamesList from "./GamesList";
 import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
 import Table from "./Table";
-import NextroundAndNewmatch from "./NextroundAndNewmatch"
+import GameMenu from "./GameMenu"
 
 
 class App extends Component {
@@ -44,7 +44,7 @@ class App extends Component {
         <Container>
           <GamesList list={this.state.gamesList} />
           <Table />
-          <NextroundAndNewmatch />
+          <GameMenu />
         </Container>
       </div>
     );
