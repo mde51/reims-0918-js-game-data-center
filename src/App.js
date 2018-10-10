@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
 import "./App.css";
 
@@ -41,6 +41,12 @@ class App extends Component {
         </header>
         <Container>
           <GamesList list={this.state.gamesList} />
+          <Row>
+            <Col>
+            </Col>
+            <Col>
+            </Col>
+          </Row>
           <Table />
         </Container>
       </div>
