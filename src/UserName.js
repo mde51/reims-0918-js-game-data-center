@@ -9,7 +9,7 @@ import {
   Button
 } from "reactstrap";
 
-export default class Example extends React.Component {
+export default class UserName extends React.Component {
   render() {
     return (
       <div>
