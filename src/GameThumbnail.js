@@ -5,9 +5,9 @@ import { Card, CardImg, CardBody,
   const GameThumbnail = () => (
       <div>
         <Card>
-          <CardImg src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+          <CardImg src="http://www.cosplayersandco.fr/sinmanga/sinmanga2017exposant%20(2).jpg" />
           <CardBody>
-            <CardTitle>Game title</CardTitle>
+            <CardTitle>Mario Kart</CardTitle>
           </CardBody>
         </Card>
       </div>
