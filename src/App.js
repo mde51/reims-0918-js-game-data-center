@@ -35,7 +35,7 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      .get("https://api-endpoint.igdb.com", {
+      .get("https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com", {
         headers: {
           "user-key": "e8c209a8f793f520e4ab897c31356bcf",
           Accept: "application/json"
