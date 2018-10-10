@@ -7,6 +7,7 @@ import GamesList from "./GamesList";
 import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
 import Table from "./Table";
+const axios = require("axios");
 
 class App extends Component {
   constructor(props) {
@@ -32,6 +33,22 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    axios
+      .get("https://api-endpoint.igdb.com", {
+        headers: {
+          "user-key": "e8c209a8f793f520e4ab897c31356bcf",
+          Accept: "application/json"
+        }
+      })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log("error", e);
+      });
+  }
+
   render() {
     return (
       <div className="App">
@@ -42,10 +59,8 @@ class App extends Component {
         <Container>
           <GamesList list={this.state.gamesList} />
           <Row>
-            <Col>
-            </Col>
-            <Col>
-            </Col>
+            <Col />
+            <Col />
           </Row>
           <Table />
         </Container>
