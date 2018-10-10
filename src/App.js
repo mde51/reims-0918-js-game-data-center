@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
 import "./App.css";
 
@@ -7,6 +7,8 @@ import GamesList from "./GamesList";
 import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
 import Table from "./Table";
+import UserName from "./UserName";
+import AddToFav from "./AddToFav";
 
 class App extends Component {
   constructor(props) {
@@ -41,6 +43,14 @@ class App extends Component {
         </header>
         <Container>
           <GamesList list={this.state.gamesList} />
+          <Row>
+            <Col>
+              <UserName />
+            </Col>
+            <Col>
+              <AddToFav />
+            </Col>
+          </Row>
           <Table />
         </Container>
       </div>
