@@ -3,12 +3,11 @@ import { Container } from "reactstrap";
 
 import "./App.css";
 
-import GamesList from "./GamesList";
 import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
+import GamesList from "./GamesList";
 import Table from "./Table";
-import GameMenu from "./GameMenu"
-
+import GameMenu from "./GameMenu";
 
 class App extends Component {
   constructor(props) {
