@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
 import "./App.css";
 
@@ -7,6 +7,9 @@ import GamesList from "./GamesList";
 import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
 import Table from "./Table";
+const axios = require("axios");
+
+const sampleGame = "Nothing from API";
 
 class App extends Component {
   constructor(props) {
@@ -28,8 +31,29 @@ class App extends Component {
           cover:
             "https://www.crazy-stuff.net/crazy-img/content/flash/350x200/48-348ecf74-dinostrikescreen9.jpg"
         }
-      ]
+      ],
+      test: sampleGame
     };
+  }
+
+  componentDidMount() {
+    axios
+      .get(
+        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/1942?fields=*",
+        {
+          headers: {
+            "user-key": "e8c209a8f793f520e4ab897c31356bcf",
+            Accept: "application/json"
+          }
+        }
+      )
+      .then(response => {
+        console.log(response.data[0]);
+        return this.setState({ test: response.data[0].cover.url });
+      })
+      .catch(e => {
+        console.log("error", e);
+      });
   }
 
   render() {
@@ -40,11 +64,16 @@ class App extends Component {
           <ResearchBar />
         </header>
         <Container>
-          
-        <GamesList list={this.state.gamesList}/>
-       
+          <GamesList list={this.state.gamesList} />
+          <Row>
+            <Col />
+            <Col />
+          </Row>
           <Table />
         </Container>
+        <p>
+          Test API image : <img src={this.state.test} />
+        </p>
       </div>
     );
   }
