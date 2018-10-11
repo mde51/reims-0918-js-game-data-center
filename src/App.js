@@ -47,9 +47,11 @@ class App extends Component {
           }
         }
       )
-      .then(response => 
+      .then(response =>
         // console.log(response.data)
-        {this.setState({test: response.data});}
+        {
+          this.setState({ test: response.data });
+        }
       )
       .catch(e => {
         console.log("error", e);
