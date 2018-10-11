@@ -3,8 +3,8 @@ import { CardImg, Jumbotron, Button, Container, Row, Col } from "reactstrap";
 
 const MainJumbotron = () => {
   return (
-    <Jumbotron className="mt-4">
-      <Container>
+    <Jumbotron className="mt-4" className="opacity">
+      <Container >
         
         <Row><h1 className="display-3" >GAME DATA CENTER</h1></Row>
         <Row>
