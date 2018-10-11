@@ -41,7 +41,7 @@ class App extends Component {
   componentDidMount() {
     axios
       .get(
-        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/",
+        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/1942?fields=*",
         {
           headers: {
             "user-key": "e8c209a8f793f520e4ab897c31356bcf",
@@ -51,7 +51,7 @@ class App extends Component {
       )
       .then(response => {
         console.log(response);
-        // return this.setState({ test: response.data[0].cover.url });
+        return this.setState({ test: response.data[0].cover.url });
       })
       .catch(e => {
         console.log("error", e);
