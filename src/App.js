@@ -9,7 +9,7 @@ import ResearchBar from "./ResearchBar";
 import Table from "./Table";
 const axios = require("axios");
 
-const sampleGame = "coucou";
+const sampleGame = "Nothing from API";
 
 class App extends Component {
   constructor(props) {
@@ -39,7 +39,7 @@ class App extends Component {
   componentDidMount() {
     axios
       .get(
-        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/",
+        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/1942?fields=*",
         {
           headers: {
             "user-key": "e8c209a8f793f520e4ab897c31356bcf",
@@ -48,8 +48,8 @@ class App extends Component {
         }
       )
       .then(response => {
-          console.log(response.data);
-          // return this.setState({ test: response.data });
+        console.log(response.data[0]);
+        return this.setState({ test: response.data[0].cover.url });
       })
       .catch(e => {
         console.log("error", e);
@@ -71,7 +71,9 @@ class App extends Component {
           </Row>
           <Table />
         </Container>
-        <p>Test API : {this.state.test}</p>
+        <p>
+          Test API image : <img src={this.state.test} />
+        </p>
       </div>
     );
   }
