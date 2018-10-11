@@ -36,9 +36,19 @@ class App extends Component {
             "https://www.crazy-stuff.net/crazy-img/content/flash/350x200/48-348ecf74-dinostrikescreen9.jpg"
         }
       ],
-      test: sampleGame
+      test: sampleGame,
+      value: ""
     };
+    this.onChange = this.onChange.bind(this);
   }
+
+  onChange(event) {
+    this.setState({
+      value: event.target.value
+    });
+  }
+
+  onClick
 
   componentDidMount() {
     axios
