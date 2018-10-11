@@ -6,8 +6,10 @@ import "./App.css";
 import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
 import GamesList from "./GamesList";
+import UserName from "./UserName";
+import AddToFav from "./AddToFav";
 import Table from "./Table";
-import GameMenu from "./GameMenu"
+import GameMenu from "./GameMenu";
 
 const axios = require("axios");
 
@@ -68,8 +70,12 @@ class App extends Component {
         <Container>
           <GamesList list={this.state.gamesList} />
           <Row>
-            <Col />
-            <Col />
+            <Col>
+              <UserName />
+            </Col>
+            <Col>
+              <AddToFav />
+            </Col>
           </Row>
           <Table />
           <GameMenu />
