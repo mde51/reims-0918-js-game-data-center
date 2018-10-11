@@ -1,9 +1,6 @@
 import React from "react";
 import {
   InputGroup,
-  Container,
-  Row,
-  Col,
   InputGroupAddon,
   Input,
   Button
