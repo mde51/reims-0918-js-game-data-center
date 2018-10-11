@@ -9,7 +9,7 @@ import ResearchBar from "./ResearchBar";
 import Table from "./Table";
 const axios = require("axios");
 
-// const sampleGame = {test : "coucou"}
+const sampleGame = "coucou";
 
 class App extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class App extends Component {
             "https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/super_nintendo_5/H2x1_SNES_SuperMarioKart_image1600w.jpg"
         }
       ],
-      test: "sampleGame"
+      test: sampleGame
     };
   }
 
@@ -47,12 +47,10 @@ class App extends Component {
           }
         }
       )
-      .then(response =>
-        // console.log(response.data)
-        {
-          this.setState({ test: response.data });
-        }
-      )
+      .then(response => {
+          console.log(response.data);
+          // return this.setState({ test: response.data });
+      })
       .catch(e => {
         console.log("error", e);
       });
