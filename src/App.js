@@ -9,6 +9,8 @@ import ResearchBar from "./ResearchBar";
 import Table from "./Table";
 const axios = require("axios");
 
+// const sampleGame = {test : "coucou"}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -29,21 +31,26 @@ class App extends Component {
           cover:
             "https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/super_nintendo_5/H2x1_SNES_SuperMarioKart_image1600w.jpg"
         }
-      ]
+      ],
+      test: "sampleGame"
     };
   }
 
   componentDidMount() {
     axios
-      .get("https://api-endpoint.igdb.com", {
-        headers: {
-          "user-key": "e8c209a8f793f520e4ab897c31356bcf",
-          Accept: "application/json"
+      .get(
+        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/",
+        {
+          headers: {
+            "user-key": "e8c209a8f793f520e4ab897c31356bcf",
+            Accept: "application/json"
+          }
         }
-      })
-      .then(response => {
-        console.log(response.data);
-      })
+      )
+      .then(response => 
+        // console.log(response.data)
+        {this.setState({test: response.data});}
+      )
       .catch(e => {
         console.log("error", e);
       });
@@ -64,6 +71,7 @@ class App extends Component {
           </Row>
           <Table />
         </Container>
+        <p>Test API : {this.state.test}</p>
       </div>
     );
   }
