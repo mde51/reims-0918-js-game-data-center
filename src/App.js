@@ -3,9 +3,9 @@ import { Container, Row, Col } from "reactstrap";
 
 import "./App.css";
 
-import GamesList from "./GamesList";
 import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
+import GamesList from "./GamesList";
 import Table from "./Table";
 import GameMenu from "./GameMenu"
 
