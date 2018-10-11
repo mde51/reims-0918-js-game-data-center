@@ -8,8 +8,7 @@ const GamesList = ({ list }) => (
   <section>
     <CardColumns className="mt-3">
       {list.map(game => (
-        <GameThumbnail {...game}/>
-        
+        <GameThumbnail {...game} />
       ))}
     </CardColumns>
   </section>

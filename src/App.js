@@ -3,10 +3,12 @@ import { Container, Row, Col } from "reactstrap";
 
 import "./App.css";
 
-import GamesList from "./GamesList";
 import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
+import GamesList from "./GamesList";
 import Table from "./Table";
+import GameMenu from "./GameMenu"
+
 const axios = require("axios");
 
 const sampleGame = "Nothing from API";
@@ -70,6 +72,7 @@ class App extends Component {
             <Col />
           </Row>
           <Table />
+          <GameMenu />
         </Container>
         <p>
           Test API image : <img src={this.state.test} />
