@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container } from "reactstrap";
 
 import "./App.css";
 
@@ -7,8 +7,6 @@ import GamesList from "./GamesList";
 import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
 import Table from "./Table";
-import UserName from "./UserName";
-import AddToFav from "./AddToFav";
 
 class App extends Component {
   constructor(props) {
@@ -18,17 +16,17 @@ class App extends Component {
         {
           name: "Mario Kart",
           cover:
-            "https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/super_nintendo_5/H2x1_SNES_SuperMarioKart_image1600w.jpg"
+            "https://i2.wp.com/geekirc.me/wp-content/uploads/2018/02/Switch-Mario-Kart-1-768x480.jpg?fit=768%2C480&resize=350%2C200"
         },
         {
-          name: "Mario Kart",
+          name: "FIFA 2019",
           cover:
-            "https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/super_nintendo_5/H2x1_SNES_SuperMarioKart_image1600w.jpg"
+            "https://i1.wp.com/kopitiambot.com/wp-content/uploads/2018/09/httpscdn.mos_.cms_.futurecdn.netLLKcYf2ybsiiqZ5LT9ZvMY-1200-80.jpg?fit=1200%2C675&ssl=1&resize=350%2C200"
         },
         {
-          name: "Mario Kart",
+          name: "Crazy Stuff",
           cover:
-            "https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/super_nintendo_5/H2x1_SNES_SuperMarioKart_image1600w.jpg"
+            "https://www.crazy-stuff.net/crazy-img/content/flash/350x200/48-348ecf74-dinostrikescreen9.jpg"
         }
       ]
     };
@@ -42,15 +40,9 @@ class App extends Component {
           <ResearchBar />
         </header>
         <Container>
-          <GamesList list={this.state.gamesList} />
-          <Row>
-            <Col>
-              <UserName />
-            </Col>
-            <Col>
-              <AddToFav />
-            </Col>
-          </Row>
+          
+        <GamesList list={this.state.gamesList}/>
+       
           <Table />
         </Container>
       </div>
