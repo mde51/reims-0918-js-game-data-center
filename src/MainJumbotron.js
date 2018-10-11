@@ -1,10 +1,11 @@
 import React from "react";
-import { Jumbotron, Button, Container, Row, Col } from "reactstrap";
+import { CardImg, Jumbotron, Button, Container, Row, Col } from "reactstrap";
 
 const MainJumbotron = () => {
   return (
-    <Jumbotron>
+    <Jumbotron className="mt-4">
       <Container>
+        
         <Row><h1 className="display-3" >GAME DATA CENTER</h1></Row>
         <Row>
           <Col>

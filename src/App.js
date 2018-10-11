@@ -34,18 +34,19 @@ class App extends Component {
 
   render() {
     return (
+      <section>
       <div className="App">
         <header className="App-header">
           <MainJumbotron />
           <ResearchBar />
         </header>
         <Container>
-          
-        <GamesList list={this.state.gamesList}/>
-       
+          <GamesList list={this.state.gamesList} />
+
           <Table />
         </Container>
       </div>
+      </section>
     );
   }
 }
