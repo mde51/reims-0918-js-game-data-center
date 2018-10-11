@@ -8,7 +8,7 @@ const GamesList = ({ list }) => (
   <section>
     <CardColumns className="mt-3">
       {list.map(game => (
-        <GameThumbnail />
+        <GameThumbnail image={game.cover} nom={game.name} />
       ))}
     </CardColumns>
   </section>

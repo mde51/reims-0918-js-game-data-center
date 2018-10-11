@@ -20,14 +20,14 @@ class App extends Component {
             "https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/super_nintendo_5/H2x1_SNES_SuperMarioKart_image1600w.jpg"
         },
         {
-          name: "Mario Kart",
+          name: "Fifa",
           cover:
-            "https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/super_nintendo_5/H2x1_SNES_SuperMarioKart_image1600w.jpg"
+            "https://media.contentapi.ea.com/content/www-easports/fr_FR/fifa/news/2018/fifa-19-gameplay/_jcr_content/imageShare.img.jpg"
         },
         {
-          name: "Mario Kart",
+          name: "Brawlhalla",
           cover:
-            "https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/super_nintendo_5/H2x1_SNES_SuperMarioKart_image1600w.jpg"
+            "https://game-guide.fr/wp-content/uploads/2015/09/Brawhalla.png"
         }
       ]
     };
