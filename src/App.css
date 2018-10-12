@@ -1,10 +1,15 @@
 .App {
   text-align: center;
 }
+.jumbotron {
+  background: none;
+}
+
+.tableau {
+  background-color: rgb(187, 179, 179);
+}
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,8 +23,12 @@
 }
 
 h1 {
-  color: blue;
-  font-family: 'Press Start 2P', cursive;
+  background: linear-gradient(to right, #3a0331 0%, #da57d5 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 5px 5px blue;
+  color: #40a49a;
+  font-family: "Press Start 2P", cursive;
 }
 
 @keyframes App-logo-spin {

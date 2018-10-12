@@ -46,6 +46,7 @@ class App extends Component {
 
   render() {
     return (
+      <section>
       <div className="App">
         <header className="App-header">
           <MainJumbotron />
@@ -68,6 +69,7 @@ class App extends Component {
           Test API image : <img src={this.state.test} />
         </p>
       </div>
+      </section>
     );
   }
 }
