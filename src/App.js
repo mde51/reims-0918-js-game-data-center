@@ -37,7 +37,7 @@ class App extends Component {
         }
       ],
       test: sampleGame,
-      value: ""
+      player: ""
     };
     this.onChange = this.onChange.bind(this);
   }
@@ -81,7 +81,7 @@ class App extends Component {
           <GamesList list={this.state.gamesList} />
           <Row>
             <Col>
-              <UserName />
+              <UserName player={this.state.playerName}/>
             </Col>
             <Col>
               <AddToFav />

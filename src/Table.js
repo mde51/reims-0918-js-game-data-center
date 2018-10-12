@@ -17,7 +17,7 @@ export default class Rank extends React.Component {
           <tr>
             <th scope="row">#</th>
             <td>1</td>
-            <td>Teoxane</td>
+            <td></td>
             <td>14</td>
           </tr>
         </tbody>

@@ -6,27 +6,25 @@ import {
   Button
 } from "reactstrap";
 
-export default class UserName extends React.Component {
+class UserName extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: ''
-    }
-    this.onChange = this.onChange.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
+  handleChange(event) {
+  this.setState({ player: event.target.value });
+}
 
-  onChange (event) {
-    this.setState({
-      value: event.target.value
-    })
-  }
   render() {
+    const { player } = this.props;
     return (
       <div>
         <InputGroup>
           <Input
             type="username"
-            value={this.state.value}
+            name="addUserName"
+            id="idUserName"
+            value={player}
             onChange={this.onChange}
             placeholder="Write your username here !"
           />
@@ -39,3 +37,5 @@ export default class UserName extends React.Component {
     );
   }
 }
+
+export default UserName;
