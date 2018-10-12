@@ -23,8 +23,14 @@ class App extends Component {
       test: sampleGame,
       playerName: "cheval"
     };
-    // this.handleChange = this.handleChange.bind(this);
+    // this.onChange = this.onChange.bind(this);
   }
+
+  // onChange(event) {
+  //   this.setState({
+  //     value: event.target.value
+  //   });
+  // }
   
   componentDidMount() {
     axios

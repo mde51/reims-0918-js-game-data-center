@@ -5,10 +5,22 @@ class UserName extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    // this.state = {
+    //   value: ''
+    // }
+    // this.onChange = this.onChange.bind(this)
   }
+
+  // onChange(event) {
+  //   this.setState({
+  //     value: event.target.value
+  //   });
+  // }
+
   handleChange(event) {
     this.setState({ player: event.target.value });
   }
+
   render() {
     const { player } = this.props;
     return (
@@ -16,8 +28,9 @@ class UserName extends Component {
         <InputGroup>
           <Input
             type="username"
-            name="addUserName"
-            id="idUserName"
+            // value={this.state.value}
+            value={this.value}
+            onChange={this.onChange}
             placeholder="Write your username here !"
             value={player}
             onChange={this.handleChange.bind(this)}
