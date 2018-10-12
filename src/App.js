@@ -19,23 +19,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gamesList: [
-        {
-          name: "Mario Kart",
-          cover:
-            "https://i2.wp.com/geekirc.me/wp-content/uploads/2018/02/Switch-Mario-Kart-1-768x480.jpg?fit=768%2C480&resize=350%2C200"
-        },
-        {
-          name: "FIFA 2019",
-          cover:
-            "https://i1.wp.com/kopitiambot.com/wp-content/uploads/2018/09/httpscdn.mos_.cms_.futurecdn.netLLKcYf2ybsiiqZ5LT9ZvMY-1200-80.jpg?fit=1200%2C675&ssl=1&resize=350%2C200"
-        },
-        {
-          name: "Crazy Stuff",
-          cover:
-            "https://www.crazy-stuff.net/crazy-img/content/flash/350x200/48-348ecf74-dinostrikescreen9.jpg"
-        }
-      ],
+      gamesList: [],
       test: sampleGame
     };
   }
@@ -43,7 +27,7 @@ class App extends Component {
   componentDidMount() {
     axios
       .get(
-        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/1942?fields=*",
+        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=rating:desc",
         {
           headers: {
             "user-key": "e8c209a8f793f520e4ab897c31356bcf",
@@ -52,8 +36,8 @@ class App extends Component {
         }
       )
       .then(response => {
-        console.log(response.data[0]);
-        return this.setState({ test: response.data[0].cover.url });
+        console.log(response.data);
+        return this.setState({ gamesList: response.data });
       })
       .catch(e => {
         console.log("error", e);

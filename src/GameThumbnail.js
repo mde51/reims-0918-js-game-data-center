@@ -4,7 +4,7 @@ import { Card, CardImg, CardBody, CardTitle } from "reactstrap";
 const GameThumbnail = ({ name, cover }) => (
   <div>
     <Card>
-      <CardImg src={cover} alt="Card image cap" />
+      <CardImg src={cover.url} alt="Card image cap" />
       <CardBody>
         <CardTitle>{name}</CardTitle>
       </CardBody>
