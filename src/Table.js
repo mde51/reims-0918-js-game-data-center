@@ -4,7 +4,7 @@ import { Table } from 'reactstrap';
 export default class Rank extends React.Component {
   render() {
     return (
-      <Table bordered>
+      <Table bordered className="tableau">
         <thead>
           <tr>
             <th>#</th>
