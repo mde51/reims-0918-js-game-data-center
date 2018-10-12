@@ -8,7 +8,7 @@ import ResearchBar from "./ResearchBar";
 import GamesList from "./GamesList";
 import UserName from "./UserName";
 import AddToFav from "./AddToFav";
-import Table from "./Table";
+import RankTable from "./RankTable";
 import GameMenu from "./GameMenu";
 
 const axios = require("axios");
@@ -20,10 +20,12 @@ class App extends Component {
     super(props);
     this.state = {
       gamesList: [],
-      test: sampleGame
+      test: sampleGame,
+      playerName: "cheval"
     };
+    // this.handleChange = this.handleChange.bind(this);
   }
-
+  
   componentDidMount() {
     axios
       .get(
@@ -55,13 +57,13 @@ class App extends Component {
           <GamesList list={this.state.gamesList} />
           <Row>
             <Col>
-              <UserName />
+              <UserName player={this.state.playerName}/>
             </Col>
             <Col>
               <AddToFav />
             </Col>
           </Row>
-          <Table />
+          <RankTable player={this.state.playerName}/>
           <GameMenu />
         </Container>
         <p>

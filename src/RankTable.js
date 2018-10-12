@@ -1,7 +1,9 @@
-import React from 'react';
-import { Table } from 'reactstrap';
+import React, { Component } from "react";
+import { Table } from "reactstrap";
 
-export default class Rank extends React.Component {
+// const RankTable = ({player}) => (
+
+class RankTable extends Component {
   render() {
     return (
       <Table bordered>
@@ -17,7 +19,7 @@ export default class Rank extends React.Component {
           <tr>
             <th scope="row">#</th>
             <td>1</td>
-            <td>Teoxane</td>
+            <td>{this.props.player}</td>
             <td>14</td>
           </tr>
           <tr>
@@ -67,3 +69,5 @@ export default class Rank extends React.Component {
     );
   }
 }
+
+export default RankTable;
