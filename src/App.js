@@ -27,7 +27,7 @@ class App extends Component {
   componentDidMount() {
     axios
       .get(
-        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=popularity:desc",
+        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=rating:desc",
         {
           headers: {
             "user-key": "e8c209a8f793f520e4ab897c31356bcf",
