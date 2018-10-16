@@ -3,7 +3,7 @@ import { Card, CardImg, CardBody, CardTitle } from "reactstrap";
 
 const changeCoverSize = cover => {
   const urlToArray = cover.split("/");
-  urlToArray[6] = "t_720p";
+  urlToArray[6] = "t_1080p";
   return urlToArray.join("/");
 };
 

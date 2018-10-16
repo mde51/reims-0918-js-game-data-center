@@ -10,18 +10,16 @@ import UserName from "./UserName";
 import AddToFav from "./AddToFav";
 import Table from "./Table";
 import GameMenu from "./GameMenu";
-import SelectedGame from "./SelectedGame";
+import ChosenGame from "./ChosenGame";
 
 const axios = require("axios");
-
-const sampleGame = "Nothing from API";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       gamesList: [],
-      test: sampleGame
+      selectedGame: {}
     };
   }
 
@@ -38,7 +36,10 @@ class App extends Component {
       )
       .then(response => {
         console.log(response.data);
-        return this.setState({ gamesList: response.data });
+        return this.setState({
+          gamesList: response.data,
+          selectedGame: response.data[5]
+        });
       })
       .catch(e => {
         console.log("error", e);
@@ -48,26 +49,26 @@ class App extends Component {
   render() {
     return (
       <section>
-      <div className="App">
-        <header className="App-header">
-          <MainJumbotron />
-          <ResearchBar />
-        </header>
-        <Container>
-          <GamesList list={this.state.gamesList} />
-          <Row>
-            <Col>
-              <UserName />
-            </Col>
-            <Col>
-              <AddToFav />
-            </Col>
-          </Row>
-          <Table />
-          <GameMenu />
-        </Container>
-        <SelectedGame test={this.state.test}/>
-      </div>
+        <div className="App">
+          <header className="App-header">
+            <MainJumbotron />
+            <ResearchBar />
+          </header>
+          <Container>
+            <GamesList list={this.state.gamesList} />
+            <ChosenGame game={this.state.selectedGame} />
+            <Row>
+              <Col>
+                <UserName />
+              </Col>
+              <Col>
+                <AddToFav />
+              </Col>
+            </Row>
+            <Table />
+            <GameMenu />
+          </Container>
+        </div>
       </section>
     );
   }
