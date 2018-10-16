@@ -10,20 +10,25 @@ import UserName from "./UserName";
 import AddToFav from "./AddToFav";
 import Table from "./Table";
 import GameMenu from "./GameMenu";
+import ChosenGame from "./ChosenGame";
 
 const axios = require("axios");
-
-const sampleGame = "Nothing from API";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       gamesList: [],
-      test: sampleGame,
+      selectedGame: {},
       gameSearch: ""
     };
+    this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
+  }
+
+  selectGame(game) {
+    this.setState({ selectedGame: game });
+    console.log(game);
   }
 
   handleGameSearchChange(event) {
@@ -65,7 +70,10 @@ class App extends Component {
       )
       .then(response => {
         console.log(response.data);
-        return this.setState({ gamesList: response.data });
+        return this.setState({
+          gamesList: response.data,
+          selectedGame: response.data[5]
+        });
       })
       .catch(e => {
         console.log("error", e);
@@ -84,7 +92,11 @@ class App extends Component {
             />
           </header>
           <Container>
-            <GamesList list={this.state.gamesList} />
+            <GamesList
+              list={this.state.gamesList}
+              selectGame={this.selectGame}
+            />
+            <ChosenGame game={this.state.selectedGame} />
             <Row>
               <Col>
                 <UserName />
@@ -96,9 +108,6 @@ class App extends Component {
             <Table />
             <GameMenu />
           </Container>
-          <p>
-            Test API image : <img src={this.state.test} />
-          </p>
         </div>
       </section>
     );
