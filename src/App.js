@@ -19,16 +19,43 @@ class App extends Component {
     super(props);
     this.state = {
       gamesList: [],
-      selectedGame: {}
+      selectedGame: {},
+      gameSearch: ""
     };
-    this.selectGame = this.selectGame.bind(this)
+    this.selectGame = this.selectGame.bind(this);
+    this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
   }
 
-  selectGame (game) {
-    this.setState({selectedGame: game})
-    console.log(game)
+  selectGame(game) {
+    this.setState({ selectedGame: game });
+    console.log(game);
   }
 
+  handleGameSearchChange(event) {
+    //appel api ici
+    axios
+      .get(
+        `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
+          event.target.value
+        }&order=popularity:desc&limit=6`,
+        {
+          headers: {
+            "user-key": "e8c209a8f793f520e4ab897c31356bcf",
+            Accept: "application/json"
+          }
+        }
+      )
+      .then(response => {
+        console.log(response.data);
+        return this.setState({ gamesList: response.data });
+      })
+      .catch(e => {
+        console.log("error", e);
+      });
+    this.setState({
+      gameSearch: event.target.value
+    });
+  }
 
   componentDidMount() {
     axios
@@ -53,17 +80,22 @@ class App extends Component {
       });
   }
 
-
   render() {
     return (
       <section>
         <div className="App">
           <header className="App-header">
             <MainJumbotron />
-            <ResearchBar />
+            <ResearchBar
+              value={this.state.gameSearch}
+              onChange={this.handleGameSearchChange}
+            />
           </header>
           <Container>
-            <GamesList list={this.state.gamesList} selectGame={this.selectGame} />
+            <GamesList
+              list={this.state.gamesList}
+              selectGame={this.selectGame}
+            />
             <ChosenGame game={this.state.selectedGame} />
             <Row>
               <Col>
