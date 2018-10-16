@@ -10,6 +10,7 @@ import UserName from "./UserName";
 import AddToFav from "./AddToFav";
 import Table from "./Table";
 import GameMenu from "./GameMenu";
+import SelectedGame from "./SelectedGame";
 
 const axios = require("axios");
 
@@ -65,9 +66,7 @@ class App extends Component {
           <Table />
           <GameMenu />
         </Container>
-        <p>
-          Test API image : <img src={this.state.test} />
-        </p>
+        <SelectedGame test={this.state.test}/>
       </div>
       </section>
     );
