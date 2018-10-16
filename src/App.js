@@ -21,9 +21,16 @@ class App extends Component {
     super(props);
     this.state = {
       gamesList: [],
-      test: sampleGame
+      test: sampleGame,
+      selectedGame: {}
     };
   }
+
+  handleClick = () => {
+  
+  };
+
+
 
   componentDidMount() {
     axios
@@ -38,7 +45,10 @@ class App extends Component {
       )
       .then(response => {
         console.log(response.data);
-        return this.setState({ gamesList: response.data });
+        return this.setState({
+          gamesList: response.data,
+          selectedGame: response.data
+        });
       })
       .catch(e => {
         console.log("error", e);
@@ -48,26 +58,26 @@ class App extends Component {
   render() {
     return (
       <section>
-      <div className="App">
-        <header className="App-header">
-          <MainJumbotron />
-          <ResearchBar />
-        </header>
-        <Container>
-          <GamesList list={this.state.gamesList} />
-          <Row>
-            <Col>
-              <UserName />
-            </Col>
-            <Col>
-              <AddToFav />
-            </Col>
-          </Row>
-          <Table />
-          <GameMenu />
-        </Container>
-        <SelectedGame test={this.state.test}/>
-      </div>
+        <div className="App">
+          <header className="App-header">
+            <MainJumbotron />
+            <ResearchBar />
+          </header>
+          <Container>
+            <GamesList list={this.state.gamesList} />
+            <Row>
+              <Col>
+                <UserName />
+              </Col>
+              <Col>
+                <AddToFav />
+              </Col>
+            </Row>
+            <Table />
+            <GameMenu />
+          </Container>
+          <SelectedGame test={this.state.selectedGame} />
+        </div>
       </section>
     );
   }
