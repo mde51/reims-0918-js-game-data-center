@@ -10,26 +10,24 @@ import UserName from "./UserName";
 import AddToFav from "./AddToFav";
 import Table from "./Table";
 import GameMenu from "./GameMenu";
-import SelectedGame from "./SelectedGame";
+import ChosenGame from "./ChosenGame";
 
 const axios = require("axios");
-
-const sampleGame = "Nothing from API";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       gamesList: [],
-      test: sampleGame,
       selectedGame: {}
     };
+    this.selectGame = this.selectGame.bind(this)
   }
 
-  handleClick = () => {
-  
-  };
-
+  selectGame (game) {
+    this.setState({selectedGame: game})
+    console.log(game)
+  }
 
 
   componentDidMount() {
@@ -47,13 +45,14 @@ class App extends Component {
         console.log(response.data);
         return this.setState({
           gamesList: response.data,
-          selectedGame: response.data
+          selectedGame: response.data[5]
         });
       })
       .catch(e => {
         console.log("error", e);
       });
   }
+
 
   render() {
     return (
@@ -64,7 +63,8 @@ class App extends Component {
             <ResearchBar />
           </header>
           <Container>
-            <GamesList list={this.state.gamesList} />
+            <GamesList list={this.state.gamesList} selectGame={this.selectGame} />
+            <ChosenGame game={this.state.selectedGame} />
             <Row>
               <Col>
                 <UserName />
@@ -76,7 +76,6 @@ class App extends Component {
             <Table />
             <GameMenu />
           </Container>
-          <SelectedGame test={this.state.selectedGame} />
         </div>
       </section>
     );
