@@ -30,7 +30,9 @@ class App extends Component {
     //appel api ici
     axios
       .get(
-        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=rating:desc",
+        `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
+          event.target.value
+        }&order=popularity:desc&limit=6`,
         {
           headers: {
             "user-key": "e8c209a8f793f520e4ab897c31356bcf",
