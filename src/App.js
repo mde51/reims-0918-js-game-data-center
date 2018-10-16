@@ -28,11 +28,27 @@ class App extends Component {
 
   handleGameSearchChange(event) {
     //appel api ici
+    axios
+      .get(
+        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=rating:desc",
+        {
+          headers: {
+            "user-key": "e8c209a8f793f520e4ab897c31356bcf",
+            Accept: "application/json"
+          }
+        }
+      )
+      .then(response => {
+        console.log(response.data);
+        return this.setState({ gamesList: response.data });
+      })
+      .catch(e => {
+        console.log("error", e);
+      });
     this.setState({
       gameSearch: event.target.value
     });
   }
-
 
   componentDidMount() {
     axios
@@ -60,7 +76,10 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <MainJumbotron />
-            <ResearchBar value={this.state.gameSearch} onChange={this.handleGameSearchChange}/>
+            <ResearchBar
+              value={this.state.gameSearch}
+              onChange={this.handleGameSearchChange}
+            />
           </header>
           <Container>
             <GamesList list={this.state.gamesList} />
