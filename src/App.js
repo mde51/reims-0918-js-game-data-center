@@ -20,9 +20,19 @@ class App extends Component {
     super(props);
     this.state = {
       gamesList: [],
-      test: sampleGame
+      test: sampleGame,
+      gameSearch: ""
     };
+    this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
   }
+
+  handleGameSearchChange(event) {
+    //appel api ici
+    this.setState({
+      gameSearch: event.target.value
+    });
+  }
+
 
   componentDidMount() {
     axios
@@ -47,28 +57,28 @@ class App extends Component {
   render() {
     return (
       <section>
-      <div className="App">
-        <header className="App-header">
-          <MainJumbotron />
-          <ResearchBar />
-        </header>
-        <Container>
-          <GamesList list={this.state.gamesList} />
-          <Row>
-            <Col>
-              <UserName />
-            </Col>
-            <Col>
-              <AddToFav />
-            </Col>
-          </Row>
-          <Table />
-          <GameMenu />
-        </Container>
-        <p>
-          Test API image : <img src={this.state.test} />
-        </p>
-      </div>
+        <div className="App">
+          <header className="App-header">
+            <MainJumbotron />
+            <ResearchBar value={this.state.gameSearch} onChange={this.handleGameSearchChange}/>
+          </header>
+          <Container>
+            <GamesList list={this.state.gamesList} />
+            <Row>
+              <Col>
+                <UserName />
+              </Col>
+              <Col>
+                <AddToFav />
+              </Col>
+            </Row>
+            <Table />
+            <GameMenu />
+          </Container>
+          <p>
+            Test API image : <img src={this.state.test} />
+          </p>
+        </div>
       </section>
     );
   }
