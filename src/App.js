@@ -20,8 +20,36 @@ class App extends Component {
     super(props);
     this.state = {
       gamesList: [],
-      test: sampleGame
+      test: sampleGame,
+      gameSearch: ""
     };
+    this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
+  }
+
+  handleGameSearchChange(event) {
+    //appel api ici
+    axios
+      .get(
+        `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
+          event.target.value
+        }&order=popularity:desc&limit=6`,
+        {
+          headers: {
+            "user-key": "e8c209a8f793f520e4ab897c31356bcf",
+            Accept: "application/json"
+          }
+        }
+      )
+      .then(response => {
+        console.log(response.data);
+        return this.setState({ gamesList: response.data });
+      })
+      .catch(e => {
+        console.log("error", e);
+      });
+    this.setState({
+      gameSearch: event.target.value
+    });
   }
 
   componentDidMount() {
@@ -47,28 +75,31 @@ class App extends Component {
   render() {
     return (
       <section>
-      <div className="App">
-        <header className="App-header">
-          <MainJumbotron />
-          <ResearchBar />
-        </header>
-        <Container>
-          <GamesList list={this.state.gamesList} />
-          <Row>
-            <Col>
-              <UserName />
-            </Col>
-            <Col>
-              <AddToFav />
-            </Col>
-          </Row>
-          <Table />
-          <GameMenu />
-        </Container>
-        <p>
-          Test API image : <img src={this.state.test} />
-        </p>
-      </div>
+        <div className="App">
+          <header className="App-header">
+            <MainJumbotron />
+            <ResearchBar
+              value={this.state.gameSearch}
+              onChange={this.handleGameSearchChange}
+            />
+          </header>
+          <Container>
+            <GamesList list={this.state.gamesList} />
+            <Row>
+              <Col>
+                <UserName />
+              </Col>
+              <Col>
+                <AddToFav />
+              </Col>
+            </Row>
+            <Table />
+            <GameMenu />
+          </Container>
+          <p>
+            Test API image : <img src={this.state.test} />
+          </p>
+        </div>
       </section>
     );
   }

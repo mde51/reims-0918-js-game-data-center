@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 
-const ResearchBar = () => {
+const ResearchBar = ({value, onChange}) => {
   return (
     <Form>
       <FormGroup>
@@ -10,9 +10,13 @@ const ResearchBar = () => {
           name="nameSearch"
           id="idSearch"
           placeholder="Write your game here !"
+          value={value}
+          onChange={onChange}
         />
       </FormGroup>
-      <Button class="btn btn-outline-success" type="submit">Search</Button>
+      <Button class="btn btn-outline-success" type="submit">
+        Search
+      </Button>
     </Form>
   );
 };
