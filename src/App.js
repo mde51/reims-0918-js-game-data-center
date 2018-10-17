@@ -20,14 +20,24 @@ class App extends Component {
     this.state = {
       gamesList: [],
       selectedGame: {},
-      gameSearch: ""
+      gameSearch: "",
+      addPlayer: "",
     };
     this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
+    this.handleAddPlayerChange = this.handleAddPlayerChange.bind(this);
   }
 
   selectGame(game) {
     this.setState({ selectedGame: game });
+  }
+
+  addPlayer(player) {
+    this.setState ({addPlayer: player})
+  }
+
+  handleAddPlayerChange(event) {
+    this.setState ({ addPlayer: event.target.value })
   }
 
   handleGameSearchChange(event) {
@@ -39,7 +49,7 @@ class App extends Component {
         }&order=popularity:desc&limit=6`,
         {
           headers: {
-            "user-key": "e8c209a8f793f520e4ab897c31356bcf",
+            "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
             Accept: "application/json"
           }
         }
@@ -61,7 +71,7 @@ class App extends Component {
         "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=rating:desc",
         {
           headers: {
-            "user-key": "e8c209a8f793f520e4ab897c31356bcf",
+            "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
             Accept: "application/json"
           }
         }
@@ -96,13 +106,19 @@ class App extends Component {
             <ChosenGame game={this.state.selectedGame} />
             <Row>
               <Col>
-                <UserName />
+                <UserName 
+                value={this.state.addPlayer}
+                onChange={this.handleAddPlayerChange}
+                />
               </Col>
               <Col>
                 <AddToFav />
               </Col>
             </Row>
-            <Table />
+            <Table 
+            value={this.setState.addPlayer}
+            onChange={this.handleAddPlayerChange}
+            />
             <GameMenu />
           </Container>
         </div>
