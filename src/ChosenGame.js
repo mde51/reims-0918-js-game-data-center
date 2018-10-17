@@ -1,9 +1,9 @@
 import React from "react";
-import ChosenGameThumbnail from "./ChosenGameThumbnail";
+import DisplayChosenGame from "./DisplayChosenGame";
 
 const ChosenGame = ({ game }) => (
   <div>
-    <ChosenGameThumbnail {...game} />
+    <DisplayChosenGame {...game} />
   </div>
 );
 

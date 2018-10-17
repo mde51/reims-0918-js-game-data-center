@@ -7,7 +7,7 @@ const changeCoverSize = cover => {
   return urlToArray.join("/");
 };
 
-const GameThumbnail = ({ name, cover, summary, storyline }) => (
+const DisplayChosenGame = ({ name, cover, summary, storyline }) => (
   <div>
     <Card>
       {cover && (
@@ -22,4 +22,4 @@ const GameThumbnail = ({ name, cover, summary, storyline }) => (
   </div>
 );
 
-export default GameThumbnail;
+export default DisplayChosenGame;
