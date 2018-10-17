@@ -21,7 +21,7 @@ class App extends Component {
       gamesList: [],
       selectedGame: {},
       gameSearch: "",
-      addPlayer: "",
+      newPlayer: ""
     };
     this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
@@ -32,12 +32,12 @@ class App extends Component {
     this.setState({ selectedGame: game });
   }
 
-  addPlayer(player) {
-    this.setState ({addPlayer: player})
+  addPlayer(newPlayer) {
+    this.setState({ newPlayer: newPlayer });
   }
 
   handleAddPlayerChange(event) {
-    this.setState ({ addPlayer: event.target.value })
+    this.setState({ newPlayer: event.target.value });
   }
 
   handleGameSearchChange(event) {
@@ -99,25 +99,26 @@ class App extends Component {
             />
           </header>
           <Container>
-            <GamesList
+            {/* <GamesList
               list={this.state.gamesList}
               selectGame={this.selectGame}
             />
-            <ChosenGame game={this.state.selectedGame} />
+            <ChosenGame game={this.state.selectedGame} /> */}
             <Row>
               <Col>
-                <UserName 
-                value={this.state.addPlayer}
-                onChange={this.handleAddPlayerChange}
+                <UserName
+                  addPlayer={this.addPlayer}
+                  handleAddPlayerChange={this.handleAddPlayerChange}
+                  newPlayer={this.state.newPlayer}
                 />
               </Col>
               <Col>
                 <AddToFav />
               </Col>
             </Row>
-            <Table 
-            value={this.setState.addPlayer}
-            onChange={this.handleAddPlayerChange}
+            <Table
+              value={this.setState.addPlayer}
+              onChange={this.handleAddPlayerChange}
             />
             <GameMenu />
           </Container>
