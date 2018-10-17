@@ -88,10 +88,10 @@ class App extends Component {
             />
           </header>
           <Container>
-            <GamesList
+            {!this.state.selectedGame && <GamesList
               list={this.state.gamesList}
               selectGame={this.selectGame}
-            />
+            />}
             {this.state.selectedGame && (
               <div>
                 <ChosenGame game={this.state.selectedGame} />
