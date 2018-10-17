@@ -89,7 +89,6 @@ class App extends Component {
             <ResearchBar
               value={this.state.gameSearch}
               onChange={this.handleGameSearchChange}
-              // onClick={this.state.gameSearch}
             />
           </header>
           <Container>
