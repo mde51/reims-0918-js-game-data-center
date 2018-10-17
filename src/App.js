@@ -28,7 +28,6 @@ class App extends Component {
 
   selectGame(game) {
     this.setState({ selectedGame: game });
-    console.log(game);
   }
 
   handleGameSearchChange(event) {
@@ -46,7 +45,6 @@ class App extends Component {
         }
       )
       .then(response => {
-        console.log(response.data);
         return this.setState({ gamesList: response.data });
       })
       .catch(e => {
@@ -69,7 +67,6 @@ class App extends Component {
         }
       )
       .then(response => {
-        console.log(response.data);
         return this.setState({
           gamesList: response.data,
           selectedGame: response.data[5]
