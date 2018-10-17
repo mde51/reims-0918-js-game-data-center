@@ -68,7 +68,7 @@ class App extends Component {
       )
       .then(response => {
         return this.setState({
-          gamesList: response.data,
+          gamesList: response.data
         });
       })
       .catch(e => {
