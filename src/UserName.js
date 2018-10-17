@@ -13,7 +13,7 @@ const UserName = ({ test, handleAddPlayerChange, newPlayer }) => (
         onChange={handleAddPlayerChange}
       />
       <InputGroupAddon addonType="prepend">
-        <Button onClick={test}>
+        <Button onClick={() => test({newPlayer: newPlayer})}>
           Add Player
         </Button>
       </InputGroupAddon>

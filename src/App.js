@@ -21,19 +21,21 @@ class App extends Component {
       gamesList: [],
       selectedGame: {},
       gameSearch: "",
-      newPlayer: ""
+      newPlayer: "",
+      testArray: [""]
     };
     this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
     this.handleAddPlayerChange = this.handleAddPlayerChange.bind(this);
+    this.test = this.test.bind(this);
   }
 
   selectGame(game) {
     this.setState({ selectedGame: game });
   }
 
-  addPlayer(newPlayer) {
-    this.setState({ newPlayer: newPlayer });
+  test(newPlayer) {
+    this.setState({testArray : newPlayer});
   }
 
   handleAddPlayerChange(event) {
@@ -109,7 +111,7 @@ class App extends Component {
                 <UserName
                   addPlayer={this.addPlayer}
                   handleAddPlayerChange={this.handleAddPlayerChange}
-                  newPlayer={this.state.newPlayer}
+                  test={this.state.test}
                 />
               </Col>
               <Col>
