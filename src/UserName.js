@@ -1,7 +1,7 @@
 import React from "react";
 import { InputGroup, InputGroupAddon, Input, Button } from "reactstrap";
 
-const UserName = ({ test, handleAddPlayerChange, newPlayer }) => (
+const UserName = ({ handleChange, submit }) => (
   <div>
     <InputGroup>
       <Input
@@ -9,11 +9,10 @@ const UserName = ({ test, handleAddPlayerChange, newPlayer }) => (
         name="addUserName"
         id="idUserName"
         placeholder="Write your username here !"
-        value={newPlayer}
-        onChange={handleAddPlayerChange}
+        onChange={handleChange}
       />
       <InputGroupAddon addonType="prepend">
-        <Button onClick={() => test({newPlayer: newPlayer})}>
+        <Button onClick={submit}>
           Add Player
         </Button>
       </InputGroupAddon>
@@ -21,4 +20,5 @@ const UserName = ({ test, handleAddPlayerChange, newPlayer }) => (
     <br />
   </div>
 );
+
 export default UserName;

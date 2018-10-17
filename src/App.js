@@ -22,24 +22,25 @@ class App extends Component {
       selectedGame: {},
       gameSearch: "",
       newPlayer: "",
-      testArray: [""]
+      testArray: [],
+      temp: ""
     };
     this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
-    this.handleAddPlayerChange = this.handleAddPlayerChange.bind(this);
-    this.test = this.test.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   selectGame(game) {
     this.setState({ selectedGame: game });
   }
 
-  test(newPlayer) {
-    this.setState({testArray : newPlayer});
+  handleChange(event) {
+    this.setState({ temp: event.target.value });
   }
 
-  handleAddPlayerChange(event) {
-    this.setState({ newPlayer: event.target.value });
+  submit() {
+    this.setState({ newPlayer: this.state.temp });
   }
 
   handleGameSearchChange(event) {
@@ -101,17 +102,18 @@ class App extends Component {
             />
           </header>
           <Container>
-            {/* <GamesList
+            <GamesList
               list={this.state.gamesList}
               selectGame={this.selectGame}
             />
-            <ChosenGame game={this.state.selectedGame} /> */}
+            <ChosenGame game={this.state.selectedGame} />
             <Row>
               <Col>
                 <UserName
-                  addPlayer={this.addPlayer}
-                  handleAddPlayerChange={this.handleAddPlayerChange}
-                  test={this.state.test}
+                  temp={this.state.temp}
+                  newPlayer={this.state.newPlayer}
+                  handleChange={this.handleChange}
+                  submit={this.submit}
                 />
               </Col>
               <Col>
@@ -119,8 +121,7 @@ class App extends Component {
               </Col>
             </Row>
             <Table
-              value={this.setState.addPlayer}
-              onChange={this.handleAddPlayerChange}
+              value={this.state.newPlayer}
             />
             <GameMenu />
           </Container>
