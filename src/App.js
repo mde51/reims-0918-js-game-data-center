@@ -18,16 +18,20 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gamesList: [],
-      selectedGame: {},
-      gameSearch: ""
+      gamesList: null,
+      selectedGame: null,
+      gameSearch: null
     };
     this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
   }
 
   selectGame(game) {
-    this.setState({ selectedGame: game });
+    this.setState({
+      selectedGame: game,
+      gameSearch: null,
+      gamesList: null
+    });
   }
 
   handleGameSearchChange(event) {
@@ -39,7 +43,7 @@ class App extends Component {
         }&order=popularity:desc&limit=6`,
         {
           headers: {
-            "user-key": "e8c209a8f793f520e4ab897c31356bcf",
+            "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
             Accept: "application/json"
           }
         }
@@ -57,18 +61,17 @@ class App extends Component {
   componentDidMount() {
     axios
       .get(
-        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=rating:desc",
+        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=rating:desc&limit=6",
         {
           headers: {
-            "user-key": "e8c209a8f793f520e4ab897c31356bcf",
+            "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
             Accept: "application/json"
           }
         }
       )
       .then(response => {
         return this.setState({
-          gamesList: response.data,
-          selectedGame: response.data[5]
+          gamesList: response.data
         });
       })
       .catch(e => {
@@ -87,21 +90,27 @@ class App extends Component {
             />
           </header>
           <Container>
-            <GamesList
-              list={this.state.gamesList}
-              selectGame={this.selectGame}
-            />
-            <ChosenGame game={this.state.selectedGame} />
-            <Row>
-              <Col>
-                <UserName />
-              </Col>
-              <Col>
-                <AddToFav />
-              </Col>
-            </Row>
-            <Table />
-            <GameMenu />
+            {this.state.gamesList && (
+              <GamesList
+                list={this.state.gamesList}
+                selectGame={this.selectGame}
+              />
+            )}
+            {this.state.selectedGame && (
+              <div>
+                <ChosenGame game={this.state.selectedGame} />
+                <Row>
+                  <Col>
+                    <UserName />
+                  </Col>
+                  <Col>
+                    <AddToFav />
+                  </Col>
+                </Row>
+                <Table />
+                <GameMenu />
+              </div>
+            )}
           </Container>
         </div>
       </section>
