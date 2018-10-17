@@ -19,7 +19,7 @@ class App extends Component {
     super(props);
     this.state = {
       gamesList: [],
-      selectedGame: {},
+      selectedGame: null,
       gameSearch: ""
     };
     this.selectGame = this.selectGame.bind(this);
@@ -69,7 +69,6 @@ class App extends Component {
       .then(response => {
         return this.setState({
           gamesList: response.data,
-          selectedGame: response.data[5]
         });
       })
       .catch(e => {
@@ -93,17 +92,21 @@ class App extends Component {
               list={this.state.gamesList}
               selectGame={this.selectGame}
             />
-            <ChosenGame game={this.state.selectedGame} />
-            <Row>
-              <Col>
-                <UserName />
-              </Col>
-              <Col>
-                <AddToFav />
-              </Col>
-            </Row>
-            <Table />
-            <GameMenu />
+            {this.state.selectedGame && (
+              <div>
+                <ChosenGame game={this.state.selectedGame} />
+                <Row>
+                  <Col>
+                    <UserName />
+                  </Col>
+                  <Col>
+                    <AddToFav />
+                  </Col>
+                </Row>
+                <Table />
+                <GameMenu />
+              </div>
+            )}
           </Container>
         </div>
       </section>
