@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardImg, CardBody, CardTitle, CardText } from "reactstrap";
+import { Card, CardImg, CardBody, CardTitle, CardText, Button } from "reactstrap";
 
 const changeCoverSize = cover => {
   const urlToArray = cover.split("/");
@@ -17,6 +17,8 @@ const ChosenGame = ({ game }) => (
         <CardTitle>{game.name}</CardTitle>
         <CardText>{game.summary}</CardText>
         <CardText>{game.storyline}</CardText>
+
+        <Button>add this game to your favorites!</Button>
       </CardBody>
     </Card>
   </div>

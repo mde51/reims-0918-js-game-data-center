@@ -12,7 +12,7 @@ export default class UserName extends React.Component {
       <div>
         <InputGroup>
           <Input
-            type="username"
+            type="text"
             name="addUserName"
             id="idUserName"
             placeholder="Write your username here !"
