@@ -1,5 +1,5 @@
 import React from "react";
-import { CardImg, Jumbotron, Button, Container, Row, Col } from "reactstrap";
+import { Jumbotron, Button, Container, Row, Col } from "reactstrap";
 
 const MainJumbotron = () => {
   return (
