@@ -7,7 +7,6 @@ import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
 import GamesList from "./GamesList";
 import UserName from "./UserName";
-import AddToFav from "./AddToFav";
 import Table from "./Table";
 import GameMenu from "./GameMenu";
 import ChosenGame from "./ChosenGame";
@@ -51,9 +50,7 @@ class App extends Component {
       .then(response => {
         return this.setState({ gamesList: response.data });
       })
-      .catch(e => {
-        console.log("error", e);
-      });
+      .catch(e => {});
     this.setState({
       gameSearch: event.target.value
     });
@@ -75,9 +72,7 @@ class App extends Component {
           gamesList: response.data
         });
       })
-      .catch(e => {
-        console.log("error", e);
-      });
+      .catch(e => {});
   }
 
   render() {
@@ -102,11 +97,8 @@ class App extends Component {
               <div>
                 <ChosenGame game={this.state.selectedGame} />
                 <Row>
-                  <Col>
+                  <Col xs="12" sm="6" className="mt-4">
                     <UserName />
-                  </Col>
-                  <Col>
-                    <AddToFav />
                   </Col>
                 </Row>
                 <Table />
