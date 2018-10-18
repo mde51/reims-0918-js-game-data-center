@@ -3,76 +3,126 @@ import { Container, Row, Col } from "reactstrap";
 
 import "./App.css";
 
-import GamesList from "./GamesList";
 import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
+import GamesList from "./GamesList";
+import UserName from "./UserName";
 import Table from "./Table";
-const axios = require("axios");
+import GameMenu from "./GameMenu";
+import ChosenGame from "./ChosenGame";
 
-const sampleGame = "coucou";
+const axios = require("axios");
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gamesList: [
-        {
-          name: "Mario Kart",
-          cover:
-            "https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/super_nintendo_5/H2x1_SNES_SuperMarioKart_image1600w.jpg"
-        },
-        {
-          name: "Mario Kart",
-          cover:
-            "https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/super_nintendo_5/H2x1_SNES_SuperMarioKart_image1600w.jpg"
-        },
-        {
-          name: "Mario Kart",
-          cover:
-            "https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/super_nintendo_5/H2x1_SNES_SuperMarioKart_image1600w.jpg"
-        }
-      ],
-      test: sampleGame
+      tempPlayer: null,
+      newPlayer: null,
+      gamesList: null,
+      selectedGame: null,
+      gameSearch: null
     };
+    this.selectGame = this.selectGame.bind(this);
+    this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
+    this.handleNewPlayerChange = this.handleNewPlayerChange.bind(this);
+    this.submitNewPlayer = this.submitNewPlayer.bind(this);
   }
 
-  componentDidMount() {
+  selectGame(game) {
+    this.setState({
+      selectedGame: game,
+      gameSearch: null,
+      gamesList: null
+    });
+  }
+
+  handleNewPlayerChange(event) {
+    this.setState({ tempPlayer: event.target.value });
+  }
+
+  submitNewPlayer() {
+    this.setState({ newPlayer: this.state.tempPlayer });
+  }
+
+  handleGameSearchChange(event) {
+    //appel api ici
     axios
       .get(
-        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/",
+        `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
+          event.target.value
+        }&order=popularity:desc&limit=6`,
         {
           headers: {
-            "user-key": "e8c209a8f793f520e4ab897c31356bcf",
+            "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
             Accept: "application/json"
           }
         }
       )
       .then(response => {
-          console.log(response);
-          // return this.setState({ test: response.data[0].cover.url });
+        return this.setState({ gamesList: response.data });
       })
-      .catch(e => {
-        console.log("error", e);
-      });
+      .catch(e => {});
+    this.setState({
+      gameSearch: event.target.value
+    });
+  }
+
+  componentDidMount() {
+    axios
+      .get(
+        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=rating:desc&limit=6",
+        {
+          headers: {
+            "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
+            Accept: "application/json"
+          }
+        }
+      )
+      .then(response => {
+        return this.setState({
+          gamesList: response.data
+        });
+      })
+      .catch(e => {});
   }
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <MainJumbotron />
-          <ResearchBar />
-        </header>
-        <Container>
-          <GamesList list={this.state.gamesList} />
-          <Row>
-            <Col />
-            <Col />
-          </Row>
-          <Table />
-        </Container>
-        <p>Test API image: <img src={this.state.test} /></p>
-      </div>
+      <section>
+        <div className="App">
+          <header className="App-header">
+            <MainJumbotron />
+            <ResearchBar
+              value={this.state.gameSearch}
+              onChange={this.handleGameSearchChange}
+            />
+          </header>
+          <Container>
+            {this.state.gamesList && (
+              <GamesList
+                list={this.state.gamesList}
+                selectGame={this.selectGame}
+              />
+            )}
+            {this.state.selectedGame && (
+              <div>
+                <ChosenGame game={this.state.selectedGame} />
+                <Row>
+                  <Col xs="12" sm="6" className="mt-4">
+                    <UserName
+                      handleChange={this.handleNewPlayerChange}
+                      submit={this.submitNewPlayer}
+                    />
+                  </Col>
+                </Row>
+                <Table value={this.state.newPlayer} />
+                <GameMenu />
+              </div>
+            )}
+          </Container>
+        </div>
+      </section>
     );
   }
 }

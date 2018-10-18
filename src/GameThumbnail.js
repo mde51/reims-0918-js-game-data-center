@@ -1,16 +1,32 @@
-import React from 'react'
-import { Card, CardImg, CardBody,
-    CardTitle } from 'reactstrap';
-  
-  const GameThumbnail = () => (
-      <div>
-        <Card>
-          <CardImg src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
-          <CardBody>
-            <CardTitle>Game title</CardTitle>
-          </CardBody>
-        </Card>
-      </div>
-  );
+import React from "react";
+import { Card, CardImg, CardBody, CardTitle, } from "reactstrap";
+
+const changeCoverSize = cover => {
+  const urlToArray = cover.split("/");
+  urlToArray[6] = "t_720p";
+  return urlToArray.join("/");
+};
+
+const GameThumbnail = ({ name, cover, summary, storyline, selectGame }) => (
+  <div>
+    <Card
+      onClick={() =>
+        selectGame({
+          name: name,
+          cover: cover,
+          summary: summary,
+          storyline: storyline
+        })
+      }
+    >
+      {cover && (
+        <CardImg src={changeCoverSize(cover.url)} alt="Card image cap" />
+      )}
+      <CardBody>
+        <CardTitle>{name}</CardTitle>
+      </CardBody>
+    </Card>
+  </div>
+);
 
 export default GameThumbnail;

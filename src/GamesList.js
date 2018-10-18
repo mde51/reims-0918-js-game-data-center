@@ -4,11 +4,11 @@ import { CardColumns } from "reactstrap";
 
 import GameThumbnail from "./GameThumbnail";
 
-const GamesList = ({ list }) => (
+const GamesList = ({ list, selectGame }) => (
   <section>
     <CardColumns className="mt-3">
       {list.map(game => (
-        <GameThumbnail />
+        <GameThumbnail {...game} selectGame={selectGame} />
       ))}
     </CardColumns>
   </section>
