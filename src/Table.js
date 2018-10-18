@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "reactstrap";
 
-const rankingTable = ({ value }) => {
+const RankingTable = ({ Players }) => {
   return (
     <div>
       <Table bordered className="tableau">
@@ -17,7 +17,7 @@ const rankingTable = ({ value }) => {
           <tr>
             <th scope="row">#</th>
             <td>1</td>
-            <td>{value}</td>
+            <td>z</td>
             <td>14</td>
           </tr>
         </tbody>
@@ -26,4 +26,4 @@ const rankingTable = ({ value }) => {
   );
 };
 
-export default rankingTable;
+export default RankingTable;
