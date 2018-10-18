@@ -17,12 +17,16 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      tempPlayer: null,
+      newPlayer: null,
       gamesList: null,
       selectedGame: null,
       gameSearch: null
     };
     this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
+    this.handleNewPlayerChange = this.handleNewPlayerChange.bind(this);
+    this.submitNewPlayer = this.submitNewPlayer.bind(this);
   }
 
   selectGame(game) {
@@ -31,6 +35,14 @@ class App extends Component {
       gameSearch: null,
       gamesList: null
     });
+  }
+
+  handleNewPlayerChange(event) {
+    this.setState({ tempPlayer: event.target.value });
+  }
+
+  submitNewPlayer() {
+    this.setState({ newPlayer: this.state.tempPlayer });
   }
 
   handleGameSearchChange(event) {
@@ -98,10 +110,13 @@ class App extends Component {
                 <ChosenGame game={this.state.selectedGame} />
                 <Row>
                   <Col xs="12" sm="6" className="mt-4">
-                    <UserName />
+                    <UserName
+                      handleChange={this.handleNewPlayerChange}
+                      submit={this.submitNewPlayer}
+                    />
                   </Col>
                 </Row>
-                <Table />
+                <Table value={this.state.newPlayer} />
                 <GameMenu />
               </div>
             )}
