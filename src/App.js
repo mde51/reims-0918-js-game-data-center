@@ -7,9 +7,10 @@ import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
 import GamesList from "./GamesList";
 import UserName from "./UserName";
-import Table from "./Table";
+import RankingTable from "./RankingTable";
 import GameMenu from "./GameMenu";
 import ChosenGame from "./ChosenGame";
+import PlayersList from "./PlayersList";
 
 const axios = require("axios");
 
@@ -126,7 +127,7 @@ class App extends Component {
                   </Col>
                 </Row>
                 <GameMenu />
-                <Table />
+                <PlayersList list={this.state.players} />
               </div>
             )}
           </Container>
