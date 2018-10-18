@@ -21,7 +21,8 @@ class App extends Component {
       newPlayer: null,
       gamesList: null,
       selectedGame: null,
-      gameSearch: null
+      gameSearch: null,
+      players: []
     };
     this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
@@ -42,7 +43,11 @@ class App extends Component {
   }
 
   submitNewPlayer() {
-    this.setState({ newPlayer: this.state.tempPlayer });
+    this.setState({
+      players: [...this.state.players, {
+        name: this.state.tempPlayer,
+      }]
+    });
   }
 
   handleGameSearchChange(event) {
