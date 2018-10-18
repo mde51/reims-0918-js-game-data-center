@@ -7,7 +7,6 @@ import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
 import GamesList from "./GamesList";
 import UserName from "./UserName";
-import AddToFav from "./AddToFav";
 import Table from "./Table";
 import GameMenu from "./GameMenu";
 import ChosenGame from "./ChosenGame";
@@ -18,11 +17,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gamesList: [],
-      selectedGame: {},
-      gameSearch: "",
       tempPlayer: null,
-      newPlayer: null
+      newPlayer: null,
+      gamesList: null,
+      selectedGame: null,
+      gameSearch: null
     };
     this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
@@ -31,7 +30,11 @@ class App extends Component {
   }
 
   selectGame(game) {
-    this.setState({ selectedGame: game });
+    this.setState({
+      selectedGame: game,
+      gameSearch: null,
+      gamesList: null
+    });
   }
 
   handleNewPlayerChange(event) {
@@ -59,9 +62,7 @@ class App extends Component {
       .then(response => {
         return this.setState({ gamesList: response.data });
       })
-      .catch(e => {
-        console.log("error", e);
-      });
+      .catch(e => {});
     this.setState({
       gameSearch: event.target.value
     });
@@ -70,7 +71,7 @@ class App extends Component {
   componentDidMount() {
     axios
       .get(
-        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=rating:desc",
+        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=rating:desc&limit=6",
         {
           headers: {
             "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
@@ -80,13 +81,10 @@ class App extends Component {
       )
       .then(response => {
         return this.setState({
-          gamesList: response.data,
-          selectedGame: response.data[5]
+          gamesList: response.data
         });
       })
-      .catch(e => {
-        console.log("error", e);
-      });
+      .catch(e => {});
   }
 
   render() {
@@ -101,26 +99,27 @@ class App extends Component {
             />
           </header>
           <Container>
-            <GamesList
-              list={this.state.gamesList}
-              selectGame={this.selectGame}
-            />
-            <ChosenGame game={this.state.selectedGame} />
-            <Row>
-              <Col>
-                <UserName
-                  handleChange={this.handleNewPlayerChange}
-                  submit={this.submitNewPlayer}
-                />
-              </Col>
-              <Col>
-                <AddToFav />
-              </Col>
-            </Row>
-            <Table
-              value={this.state.newPlayer}
-            />
-            <GameMenu />
+            {this.state.gamesList && (
+              <GamesList
+                list={this.state.gamesList}
+                selectGame={this.selectGame}
+              />
+            )}
+            {this.state.selectedGame && (
+              <div>
+                <ChosenGame game={this.state.selectedGame} />
+                <Row>
+                  <Col xs="12" sm="6" className="mt-4">
+                    <UserName
+                      handleChange={this.handleNewPlayerChange}
+                      submit={this.submitNewPlayer}
+                    />
+                  </Col>
+                </Row>
+                <Table value={this.state.newPlayer} />
+                <GameMenu />
+              </div>
+            )}
           </Container>
         </div>
       </section>

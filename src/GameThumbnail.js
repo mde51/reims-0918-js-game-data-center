@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardImg, CardBody, CardTitle } from "reactstrap";
+import { Card, CardImg, CardBody, CardTitle, } from "reactstrap";
 
 const changeCoverSize = cover => {
   const urlToArray = cover.split("/");

@@ -12,9 +12,7 @@ const UserName = ({ handleChange, submit }) => (
         onChange={handleChange}
       />
       <InputGroupAddon addonType="prepend">
-        <Button onClick={submit}>
-          Add Player
-        </Button>
+        <Button onClick={submit}>Add Player</Button>
       </InputGroupAddon>
     </InputGroup>
     <br />
