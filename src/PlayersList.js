@@ -1,8 +1,8 @@
 import React from "react";
-import RankingTable from "./RankingTable";
+import RankingPlayer from "./RankingPlayer";
 import { Table } from "reactstrap";
 
-const PlayersList = ({ list, players }) => (
+const PlayersList = ({ list }) => (
   <section className="mt-4">
     <Table bordered className="tableau">
       <thead>
@@ -12,11 +12,12 @@ const PlayersList = ({ list, players }) => (
           <th>Score</th>
         </tr>
       </thead>
+      <tbody>
+        {list.map(player => (
+          <RankingPlayer {...player} />
+        ))}
+      </tbody>
     </Table>
-    {list.map(player => (
-      <RankingTable {...player} players={players} />
-    ))}
-    ;
   </section>
 );
 
