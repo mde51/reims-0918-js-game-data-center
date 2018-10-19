@@ -17,6 +17,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      newPlayer: null,
+      tempPlayer: null,
       gamesList: null,
       selectedGame: null,
       gameSearch: null,
@@ -25,6 +27,8 @@ class App extends Component {
 
     this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
+    this.handleNewPlayerChange = this.handleNewPlayerChange.bind(this);
+    this.submitNewPlayer = this.submitNewPlayer.bind(this);
   }
 
   selectGame(game) {
@@ -42,7 +46,7 @@ class App extends Component {
   submitNewPlayer() {
     this.setState({
       players: [...this.state.players, {
-        name: this.state.tempPlayer,
+        name: this.state.tempPlayers,
       }]
     });
   }
@@ -117,7 +121,10 @@ class App extends Component {
                 <ChosenGame game={this.state.selectedGame} />
                 <Row>
                   <Col>
-                    <UserName />
+                    <UserName
+                    handleChange={this.handleNewPlayerChange}
+                    submit={this.submitNewPlayer}
+                     />
                   </Col>
                 </Row>
                 <GameMenu />
