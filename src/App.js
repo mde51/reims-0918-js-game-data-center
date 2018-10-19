@@ -46,7 +46,7 @@ class App extends Component {
   submitNewPlayer() {
     this.setState({
       players: [...this.state.players, {
-        name: this.state.tempPlayers,
+        name: this.state.tempPlayer,
       }]
     });
   }
