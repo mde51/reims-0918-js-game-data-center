@@ -7,9 +7,9 @@ import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
 import GamesList from "./GamesList";
 import UserName from "./UserName";
-import Table from "./Table";
 import GameMenu from "./GameMenu";
 import ChosenGame from "./ChosenGame";
+import PlayersList from "./PlayersList";
 
 const axios = require("axios");
 
@@ -17,16 +17,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tempPlayer: null,
-      newPlayer: null,
       gamesList: null,
       selectedGame: null,
-      gameSearch: null
+      gameSearch: null,
+      players: []
     };
+
     this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
-    this.handleNewPlayerChange = this.handleNewPlayerChange.bind(this);
-    this.submitNewPlayer = this.submitNewPlayer.bind(this);
   }
 
   selectGame(game) {
@@ -42,7 +40,11 @@ class App extends Component {
   }
 
   submitNewPlayer() {
-    this.setState({ newPlayer: this.state.tempPlayer });
+    this.setState({
+      players: [...this.state.players, {
+        name: this.state.tempPlayer,
+      }]
+    });
   }
 
   handleGameSearchChange(event) {
@@ -62,7 +64,9 @@ class App extends Component {
       .then(response => {
         return this.setState({ gamesList: response.data });
       })
-      .catch(e => {});
+      .catch(e => {
+        console.log("error", e);
+      });
     this.setState({
       gameSearch: event.target.value
     });
@@ -84,7 +88,9 @@ class App extends Component {
           gamesList: response.data
         });
       })
-      .catch(e => {});
+      .catch(e => {
+        console.log("error", e);
+      });
   }
 
   render() {
@@ -93,6 +99,7 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <MainJumbotron />
+
             <ResearchBar
               value={this.state.gameSearch}
               onChange={this.handleGameSearchChange}
@@ -109,15 +116,12 @@ class App extends Component {
               <div>
                 <ChosenGame game={this.state.selectedGame} />
                 <Row>
-                  <Col xs="12" sm="6" className="mt-4">
-                    <UserName
-                      handleChange={this.handleNewPlayerChange}
-                      submit={this.submitNewPlayer}
-                    />
+                  <Col>
+                    <UserName />
                   </Col>
                 </Row>
-                <Table value={this.state.newPlayer} />
                 <GameMenu />
+                <PlayersList list={this.state.players} />
               </div>
             )}
           </Container>
