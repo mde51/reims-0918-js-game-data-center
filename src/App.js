@@ -22,6 +22,7 @@ class App extends Component {
       gamesList: null,
       selectedGame: null,
       gameSearch: null,
+      loading: false,
       players: []
     };
 
@@ -53,6 +54,7 @@ class App extends Component {
 
   handleGameSearchChange(event) {
     //appel api ici
+    this.setState({ loading: true });
     axios
       .get(
         `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
@@ -66,7 +68,7 @@ class App extends Component {
         }
       )
       .then(response => {
-        return this.setState({ gamesList: response.data });
+        return this.setState({ gamesList: response.data, loading: false });
       })
       .catch(e => {
         console.log("error", e);
@@ -77,6 +79,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.setState({ loading: true });
     axios
       .get(
         "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=rating:desc&limit=6",
@@ -89,7 +92,8 @@ class App extends Component {
       )
       .then(response => {
         return this.setState({
-          gamesList: response.data
+          gamesList: response.data,
+          loading: false
         });
       })
       .catch(e => {
@@ -103,12 +107,15 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <MainJumbotron />
-
+            {this.state.loading && (
+              <div id="loader" />
+            )}
             <ResearchBar
               value={this.state.gameSearch}
               onChange={this.handleGameSearchChange}
             />
           </header>
+
           <Container>
             {this.state.gamesList && (
               <GamesList
