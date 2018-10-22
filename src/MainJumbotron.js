@@ -11,7 +11,7 @@ const MainJumbotron = () => {
             <Button color="primary">Recently played</Button>
           </Col>
           <Col>
-            <Button color="secondary">Favorites</Button>
+            <Button color="primary">Favorites</Button>
           </Col>
         </Row>
       </Container>

@@ -11,7 +11,7 @@ export default class Example extends React.Component {
               <Button color="primary">Next round</Button>{" "}
             </Col>
             <Col>
-              <Button color="warning">New game</Button>{" "}
+              <Button color="primary">New game</Button>{" "}
             </Col>
           </Row>
         </Container>
