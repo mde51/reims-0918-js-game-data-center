@@ -7,9 +7,9 @@ import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
 import GamesList from "./GamesList";
 import UserName from "./UserName";
-import Table from "./Table";
 import GameMenu from "./GameMenu";
 import ChosenGame from "./ChosenGame";
+import PlayersList from "./PlayersList";
 
 const axios = require("axios");
 
@@ -17,13 +17,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tempPlayer: null,
       newPlayer: null,
+      tempPlayer: null,
       gamesList: null,
       selectedGame: null,
       gameSearch: null,
-      loading: false
+      loading: false,
+      players: []
     };
+
     this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
     this.handleNewPlayerChange = this.handleNewPlayerChange.bind(this);
@@ -43,7 +45,11 @@ class App extends Component {
   }
 
   submitNewPlayer() {
-    this.setState({ newPlayer: this.state.tempPlayer });
+    this.setState({
+      players: [...this.state.players, {
+        name: this.state.tempPlayer,
+      }]
+    });
   }
 
   handleGameSearchChange(event) {
@@ -64,7 +70,9 @@ class App extends Component {
       .then(response => {
         return this.setState({ gamesList: response.data, loading: false });
       })
-      .catch(e => {});
+      .catch(e => {
+        console.log("error", e);
+      });
     this.setState({
       gameSearch: event.target.value
     });
@@ -88,7 +96,9 @@ class App extends Component {
           loading: false
         });
       })
-      .catch(e => {});
+      .catch(e => {
+        console.log("error", e);
+      });
   }
 
   render() {
@@ -117,15 +127,15 @@ class App extends Component {
               <div>
                 <ChosenGame game={this.state.selectedGame} />
                 <Row>
-                  <Col xs="12" sm="6" className="mt-4">
+                  <Col>
                     <UserName
-                      handleChange={this.handleNewPlayerChange}
-                      submit={this.submitNewPlayer}
-                    />
+                    handleChange={this.handleNewPlayerChange}
+                    submit={this.submitNewPlayer}
+                     />
                   </Col>
                 </Row>
-                <Table value={this.state.newPlayer} />
                 <GameMenu />
+                <PlayersList list={this.state.players} />
               </div>
             )}
           </Container>

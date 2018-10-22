@@ -7,7 +7,9 @@
 
 .tableau {
   background-color: rgb(187, 179, 179);
+  text-align: center;
 }
+
 
 .App-header {
   display: flex;
