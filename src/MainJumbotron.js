@@ -5,14 +5,13 @@ const MainJumbotron = () => {
   return (
     <Jumbotron className="mt-4" className="opacity">
       <Container >
-        
-        <Row><h1 className="display-3" >GAME DATA CENTER</h1></Row>
+        <section><img src={require('./Logo.png')}/></section>
         <Row>
           <Col>
             <Button color="primary">Recently played</Button>
           </Col>
           <Col>
-            <Button color="primary">Favorites</Button>
+            <Button color="secondary">Favorites</Button>
           </Col>
         </Row>
       </Container>

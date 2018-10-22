@@ -1,6 +1,19 @@
 .App {
   text-align: center;
 }
+
+.btn-primary {
+  color: #fff;
+  background-image: linear-gradient(to bottom, #99b3e6, #1f3d7a);
+  border-color: black;
+}
+
+.btn-secondary {
+  color: #fff;
+  background-image: linear-gradient(to bottom, #99b3e6, #1f3d7a);
+  border-color: black;
+}
+
 .jumbotron {
   background: none;
 }
@@ -9,7 +22,6 @@
   background-color: rgb(187, 179, 179);
   text-align: center;
 }
-
 
 .App-header {
   display: flex;
