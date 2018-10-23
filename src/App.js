@@ -28,7 +28,9 @@ class App extends Component {
     this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
     this.handleNewPlayerChange = this.handleNewPlayerChange.bind(this);
+    this.handleNewScoreChange = this.handleNewScoreChange.bind(this);
     this.submitNewPlayer = this.submitNewPlayer.bind(this);
+    this.submitScorePlayer = this.submitScorePlayer.bind(this);
   }
 
   selectGame(game) {
@@ -43,11 +45,34 @@ class App extends Component {
     this.setState({ tempPlayer: event.target.value });
   }
 
+  handleNewScoreChange(name, score) {
+    console.log(name, score);
+    this.setState({
+      players: this.state.players.map(
+        player => (player.name === name ? { ...player, score: score } : player)
+      )
+    });
+  }
+
   submitNewPlayer() {
     this.setState({
-      players: [...this.state.players, {
-        name: this.state.tempPlayer,
-      }]
+      players: [
+        ...this.state.players,
+        {
+          name: this.state.tempPlayer
+        }
+      ]
+    });
+  }
+
+  submitScorePlayer() {
+    this.setState({
+      players: [
+        ...this.state.players,
+        {
+          score: this.state.scorePlayer
+        }
+      ]
     });
   }
 
@@ -122,13 +147,16 @@ class App extends Component {
                 <Row>
                   <Col>
                     <UserName
-                    handleChange={this.handleNewPlayerChange}
-                    submit={this.submitNewPlayer}
-                     />
+                      handleChange={this.handleNewPlayerChange}
+                      submitNewPlayers={this.submitNewPlayer}
+                    />
                   </Col>
                 </Row>
                 <GameMenu />
-                <PlayersList list={this.state.players} />
+                <PlayersList
+                  list={this.state.players}
+                  handleNewScoreChange={this.handleNewScoreChange}
+                />
               </div>
             )}
           </Container>

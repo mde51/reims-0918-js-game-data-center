@@ -1,7 +1,7 @@
 import React from "react";
 import { InputGroup, InputGroupAddon, Input, Button } from "reactstrap";
 
-const UserName = ({ handleChange, submit }) => (
+const UserName = ({ handleChange, submitNewPlayers }) => (
   <div>
     <InputGroup>
       <Input
@@ -12,7 +12,7 @@ const UserName = ({ handleChange, submit }) => (
         onChange={handleChange}
       />
       <InputGroupAddon addonType="prepend">
-        <Button onClick={submit}>Add Player</Button>
+        <Button onClick={submitNewPlayers}>Add Player</Button>
       </InputGroupAddon>
     </InputGroup>
     <br />

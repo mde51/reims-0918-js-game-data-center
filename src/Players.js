@@ -6,7 +6,7 @@ const Players = ({}) => (
       {Players.map(Player => (
         <Players
           name={Player.name}
-          point={Player.score}
+          score={Player.score}
          
         />
       ))}
