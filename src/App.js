@@ -35,7 +35,7 @@ class App extends Component {
   selectGame(game) {
     this.setState({
       selectedGame: game,
-      gameSearch: null,
+      gameSearch: "",
       gamesList: null
     });
   }
