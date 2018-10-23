@@ -21,7 +21,7 @@ class App extends Component {
       tempPlayer: null,
       gamesList: null,
       selectedGame: null,
-      gameSearch: null,
+      gameSearch: "",
       loading: false,
       players: []
     };
