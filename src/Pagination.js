@@ -5,7 +5,8 @@ import {
   PaginationLink,
   Row,
   Col,
-  Container
+  Container,
+  Button
 } from "reactstrap";
 
 const PreviousNext = ({ handleNextPage, handlePreviousPage, page }) => (
@@ -15,13 +16,17 @@ const PreviousNext = ({ handleNextPage, handlePreviousPage, page }) => (
         <Col>
           {page !== 0 && (
             <PaginationItem>
-              <PaginationLink onClick={handlePreviousPage} previous />
+              <Button color="primary">
+                <PaginationLink onClick={handlePreviousPage} previous />
+              </Button>
             </PaginationItem>
           )}
         </Col>
         <Col>
           <PaginationItem>
-            <PaginationLink onClick={handleNextPage} next />
+            <Button color="primary">
+              <PaginationLink onClick={handleNextPage} next />
+            </Button>
           </PaginationItem>
         </Col>
       </Pagination>
