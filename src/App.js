@@ -10,6 +10,7 @@ import UserName from "./UserName";
 import GameMenu from "./GameMenu";
 import ChosenGame from "./ChosenGame";
 import PlayersList from "./PlayersList";
+import PreviousNext from "./Pagination";
 
 const axios = require("axios");
 
@@ -17,20 +18,28 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      newPlayer: null,
+      tempPlayer: null,
       gamesList: null,
       selectedGame: null,
-      gameSearch: null,
-      players: []
+      gameSearch: "",
+      loading: false,
+      players: [],
+      page: 0
     };
 
     this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
+    this.handleNewPlayerChange = this.handleNewPlayerChange.bind(this);
+    this.submitNewPlayer = this.submitNewPlayer.bind(this);
+    this.handleNextPage = this.handleNextPage.bind(this);
+    this.handlePreviousPage = this.handlePreviousPage.bind(this);
   }
 
   selectGame(game) {
     this.setState({
       selectedGame: game,
-      gameSearch: null,
+      gameSearch: "",
       gamesList: null
     });
   }
@@ -41,14 +50,64 @@ class App extends Component {
 
   submitNewPlayer() {
     this.setState({
-      players: [...this.state.players, {
-        name: this.state.tempPlayer,
-      }]
+      players: [
+        ...this.state.players,
+        {
+          name: this.state.tempPlayer
+        }
+      ]
     });
   }
 
+  handleNextPage = () => {
+    this.setState({ page: this.state.page + 1 }, () =>
+      axios
+        .get(
+          `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
+            this.state.gameSearch
+          }&order=popularity:desc&limit=6&offset=${this.state.page * 6}`,
+          {
+            headers: {
+              "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
+              Accept: "application/json"
+            }
+          }
+        )
+        .then(response => {
+          return this.setState({ gamesList: response.data, loading: false });
+        })
+        .catch(e => {
+          console.log("error", e);
+        })
+    );
+  };
+
+  handlePreviousPage = () => {
+    this.setState({ page: this.state.page - 1 }, () =>
+      axios
+        .get(
+          `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
+            this.state.gameSearch
+          }&order=popularity:desc&limit=6&offset=${this.state.page * 6}`,
+          {
+            headers: {
+              "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
+              Accept: "application/json"
+            }
+          }
+        )
+        .then(response => {
+          return this.setState({ gamesList: response.data, loading: false });
+        })
+        .catch(e => {
+          console.log("error", e);
+        })
+    );
+  };
+
   handleGameSearchChange(event) {
     //appel api ici
+    this.setState({ loading: true });
     axios
       .get(
         `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
@@ -56,13 +115,13 @@ class App extends Component {
         }&order=popularity:desc&limit=6`,
         {
           headers: {
-            "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
+            "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
             Accept: "application/json"
           }
         }
       )
       .then(response => {
-        return this.setState({ gamesList: response.data });
+        return this.setState({ gamesList: response.data, loading: false });
       })
       .catch(e => {
         console.log("error", e);
@@ -73,19 +132,21 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.setState({ loading: true });
     axios
       .get(
         "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=popularity:desc&limit=6",
         {
           headers: {
-            "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
+            "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
             Accept: "application/json"
           }
         }
       )
       .then(response => {
         return this.setState({
-          gamesList: response.data
+          gamesList: response.data,
+          loading: false
         });
       })
       .catch(e => {
@@ -99,25 +160,36 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <MainJumbotron />
-
+            {this.state.loading && <div id="loader" />}
             <ResearchBar
               value={this.state.gameSearch}
               onChange={this.handleGameSearchChange}
             />
           </header>
+
           <Container>
             {this.state.gamesList && (
-              <GamesList
-                list={this.state.gamesList}
-                selectGame={this.selectGame}
-              />
+              <div>
+                <PreviousNext
+                  page={this.state.page}
+                  handleNextPage={this.handleNextPage}
+                  handlePreviousPage={this.handlePreviousPage}
+                />
+                <GamesList
+                  list={this.state.gamesList}
+                  selectGame={this.selectGame}
+                />
+              </div>
             )}
             {this.state.selectedGame && (
               <div>
                 <ChosenGame game={this.state.selectedGame} />
                 <Row>
                   <Col>
-                    <UserName />
+                    <UserName
+                      handleChange={this.handleNewPlayerChange}
+                      submit={this.submitNewPlayer}
+                    />
                   </Col>
                 </Row>
                 <GameMenu />
