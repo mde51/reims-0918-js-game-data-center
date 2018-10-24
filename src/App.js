@@ -24,13 +24,16 @@ class App extends Component {
       selectedGame: null,
       gameSearch: null,
       loading: false,
-      players: []
+      players: [],
+      page: 0
     };
 
     this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
     this.handleNewPlayerChange = this.handleNewPlayerChange.bind(this);
     this.submitNewPlayer = this.submitNewPlayer.bind(this);
+    this.handleNextPage = this.handleNextPage.bind(this);
+    this.handlePreviousPage = this.handlePreviousPage.bind(this);
   }
 
   selectGame(game) {
@@ -55,6 +58,52 @@ class App extends Component {
       ]
     });
   }
+
+  handleNextPage = () => {
+    this.setState({ page: this.state.page + 1 }, () =>
+      axios
+        .get(
+          `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
+            this.state.gameSearch
+          }&order=popularity:desc&limit=6&offset=${this.state.page * 6}`,
+          {
+            headers: {
+              "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
+              Accept: "application/json"
+            }
+          }
+        )
+        .then(response => {
+          return this.setState({ gamesList: response.data, loading: false });
+        })
+        .catch(e => {
+          console.log("error", e);
+        })
+    );
+  };
+
+  handlePreviousPage = () => {
+    this.setState({ page: this.state.page - 1 }, () =>
+      axios
+        .get(
+          `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
+            this.state.gameSearch
+          }&order=popularity:desc&limit=6&offset=${this.state.page * 6}`,
+          {
+            headers: {
+              "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
+              Accept: "application/json"
+            }
+          }
+        )
+        .then(response => {
+          return this.setState({ gamesList: response.data, loading: false });
+        })
+        .catch(e => {
+          console.log("error", e);
+        })
+    );
+  };
 
   handleGameSearchChange(event) {
     //appel api ici
@@ -126,7 +175,10 @@ class App extends Component {
                   selectGame={this.selectGame}
                 />
 
-                <PreviousNext />
+                <PreviousNext
+                  handleNextPage={this.handleNextPage}
+                  handlePreviousPage={this.handlePreviousPage}
+                />
               </div>
             )}
             {this.state.selectedGame && (

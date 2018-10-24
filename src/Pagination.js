@@ -1,14 +1,15 @@
 import React from "react";
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 
-const PreviousNext = () => (
+
+const PreviousNext = ({ handleNextPage, handlePreviousPage}) => (
   <Pagination aria-label="Page navigation example">
     <PaginationItem>
-      <PaginationLink previous href="#" />
+      <PaginationLink onClick={handlePreviousPage} previous href="#" />
     </PaginationItem>
 
     <PaginationItem>
-      <PaginationLink next href="#" />
+      <PaginationLink onClick={handleNextPage} next href="#" />
     </PaginationItem>
   </Pagination>
 );
