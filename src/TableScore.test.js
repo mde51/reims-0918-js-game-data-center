@@ -4,8 +4,8 @@ const scoreByPlayersByRound = round => {
     acc[player.nom] = player.score;
     // console.log(player)
     return acc;
-  }
-  return round.reduce(finalScores, result)
+  };
+  return round.reduce(finalScores, result);
 };
 
 const createTable = game => {
@@ -14,10 +14,9 @@ const createTable = game => {
   const setFinalScores = (acc, round) => {
     const roundScore = scoreByPlayersByRound(round);
     for (let name in roundScore) {
-      if (!(acc[name])) {
+      if (!acc[name]) {
         acc[name] = roundScore[name];
-      }
-      else {
+      } else {
         acc[name] += roundScore[name];
       }
       // console.log(roundScore[name])
@@ -26,7 +25,8 @@ const createTable = game => {
     // console.log(scoreByPlayersByRound(round));
     return acc;
   };
-  return game.reduce(setFinalScores, finalScores);
+  let fli = game.reduce(setFinalScores, finalScores);
+  return Object.keys(fli).map(key => ({ name: key, score: fli[key] }))
 };
 
 it("should return a table of object", () => {
@@ -42,13 +42,43 @@ it("should return a table of object", () => {
       { nom: "Gautier", score: 6 }
     ]
   ];
-  const expected = {
-    Michel: 5,
-    Charles: 10,
-    Gautier: 7
-  };
+  const expected = [
+    {
+      name: "Michel",
+      score: 5
+    },
+    {
+      name: "Charles",
+      score: 10
+    },
+    {
+      name: "Gautier",
+      score: 7
+    }
+  ];
   expect(createTable(gameData)).toEqual(expected);
 });
+
+// it("should return an object with scores of cumulated rounds", () => {
+//   const gameData = [
+//     [
+//       { nom: "Michel", score: 2 },
+//       { nom: "Charles", score: 5 },
+//       { nom: "Gautier", score: 1 }
+//     ],
+//     [
+//       { nom: "Michel", score: 3 },
+//       { nom: "Charles", score: 5 },
+//       { nom: "Gautier", score: 6 }
+//     ]
+//   ];
+//   const expected = {
+//     Michel: 5,
+//     Charles: 10,
+//     Gautier: 7
+//   };
+//   expect(createTable(gameData)).toEqual(expected);
+// });
 
 it("should return an object with score by players for a round", () => {
   const roundData = [
