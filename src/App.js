@@ -68,7 +68,7 @@ class App extends Component {
           }&order=popularity:desc&limit=6&offset=${this.state.page * 6}`,
           {
             headers: {
-              "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
+              "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
               Accept: "application/json"
             }
           }
@@ -91,7 +91,7 @@ class App extends Component {
           }&order=popularity:desc&limit=6&offset=${this.state.page * 6}`,
           {
             headers: {
-              "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
+              "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
               Accept: "application/json"
             }
           }
@@ -115,7 +115,7 @@ class App extends Component {
         }&order=popularity:desc&limit=6`,
         {
           headers: {
-            "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
+            "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
             Accept: "application/json"
           }
         }
@@ -138,7 +138,7 @@ class App extends Component {
         "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=popularity:desc&limit=6",
         {
           headers: {
-            "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
+            "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
             Accept: "application/json"
           }
         }
@@ -170,14 +170,16 @@ class App extends Component {
           <Container>
             {this.state.gamesList && (
               <div>
+                {this.state.gameSearch !== null && (
+                  <PreviousNext
+                    page={this.state.page}
+                    handleNextPage={this.handleNextPage}
+                    handlePreviousPage={this.handlePreviousPage}
+                  />
+                )}
                 <GamesList
                   list={this.state.gamesList}
                   selectGame={this.selectGame}
-                />
-
-                <PreviousNext
-                  handleNextPage={this.handleNextPage}
-                  handlePreviousPage={this.handlePreviousPage}
                 />
               </div>
             )}

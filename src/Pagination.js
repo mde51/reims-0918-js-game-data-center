@@ -1,16 +1,31 @@
 import React from "react";
-import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
+import {
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+  Row,
+  Col,
+  Container
+} from "reactstrap";
 
-
-const PreviousNext = ({ handleNextPage, handlePreviousPage}) => (
-  <Pagination aria-label="Page navigation example">
-    <PaginationItem>
-      <PaginationLink onClick={handlePreviousPage} previous href="#" />
-    </PaginationItem>
-
-    <PaginationItem>
-      <PaginationLink onClick={handleNextPage} next href="#" />
-    </PaginationItem>
-  </Pagination>
+const PreviousNext = ({ handleNextPage, handlePreviousPage, page }) => (
+  <Container>
+    <Row>
+      <Pagination aria-label="Page navigation example">
+        <Col>
+          {page !== 0 && (
+            <PaginationItem>
+              <PaginationLink onClick={handlePreviousPage} previous />
+            </PaginationItem>
+          )}
+        </Col>
+        <Col>
+          <PaginationItem>
+            <PaginationLink onClick={handleNextPage} next />
+          </PaginationItem>
+        </Col>
+      </Pagination>
+    </Row>
+  </Container>
 );
 export default PreviousNext;
