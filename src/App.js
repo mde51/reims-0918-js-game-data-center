@@ -11,7 +11,6 @@ import GameMenu from "./GameMenu";
 import ChosenGame from "./ChosenGame";
 import PlayersList from "./PlayersList";
 
-
 const axios = require("axios");
 
 class App extends Component {
@@ -46,16 +45,17 @@ class App extends Component {
     this.setState({ tempPlayer: event.target.value });
   }
 
-  handleNewScoreChange(name, score) {
-    console.log(name, score);
+  handleNewScoreChange(name, inputScore) {
+    console.log(name, inputScore);
     this.setState({
       players: this.state.players.map(
-        player => (player.name === name ? { ...player, score: score } : player)
+        player => (player.name === name ? { ...player, inputScore: inputScore } : player)
       )
     });
   }
 
   submitNewPlayer() {
+    console.log("player");
     this.setState({
       players: [
         ...this.state.players,
@@ -66,14 +66,12 @@ class App extends Component {
     });
   }
 
-  submitScorePlayer() {
+  submitScorePlayer(name, finalScore) {
+    console.log(finalScore)
     this.setState({
-      players: [
-        ...this.state.players,
-        {
-          score: this.state.scorePlayer
-        }
-      ]
+      players: this.state.players.map(
+        player => (player.name === name ? { ...player, finalScore: player.inputScore } : player)
+      )
     });
   }
 
@@ -86,7 +84,7 @@ class App extends Component {
         }&order=popularity:desc&limit=6`,
         {
           headers: {
-            "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
+            "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
             Accept: "application/json"
           }
         }
@@ -108,7 +106,7 @@ class App extends Component {
         "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=rating:desc&limit=6",
         {
           headers: {
-            "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
+            "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
             Accept: "application/json"
           }
         }
@@ -157,6 +155,7 @@ class App extends Component {
                 <PlayersList
                   list={this.state.players}
                   handleNewScoreChange={this.handleNewScoreChange}
+                  submitScorePlayers={this.submitScorePlayer}
                 />
               </div>
             )}

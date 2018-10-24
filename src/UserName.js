@@ -5,6 +5,7 @@ const UserName = ({ handleChange, submitNewPlayers }) => (
   <div>
     <InputGroup>
       <Input
+        maxlength="10"
         type="username"
         name="addUserName"
         id="idUserName"

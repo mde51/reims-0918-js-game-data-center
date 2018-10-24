@@ -7,7 +7,7 @@ const Players = ({}) => (
         <Players
           name={Player.name}
           score={Player.score}
-         
+          finalScore={Player.score}
         />
       ))}
     </div>
