@@ -21,7 +21,7 @@ class App extends Component {
       tempPlayer: null,
       gamesList: null,
       selectedGame: null,
-      gameSearch: null,
+      gameSearch: "",
       loading: false,
       players: []
     };
@@ -35,7 +35,7 @@ class App extends Component {
   selectGame(game) {
     this.setState({
       selectedGame: game,
-      gameSearch: null,
+      gameSearch: "",
       gamesList: null
     });
   }
