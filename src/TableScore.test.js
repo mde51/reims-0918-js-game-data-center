@@ -1,18 +1,35 @@
-const createTable = game => {
-  // let final = history.map(game => game.map(round => round.map(player => player.score)));
-  // const nbPlayers = game[0].length;
-  const nbRounds = game.length;
-  const result = game[0];
-  const getSum = (total, score) => total + score;
-  for (let i = 0; i < nbRounds.length; i++) {
-    let temp = game.map(players => players[i].score);
-    console.log("HOLAAAAA");
-    result[i].score = temp.reduce(getSum);
+const scoreByPlayersByRound = round => {
+  const result = {};
+  const finalScores = (acc, player) => {
+    acc[player.nom] = player.score;
+    // console.log(player)
+    return acc;
   }
-  return result;
+  return round.reduce(finalScores, result)
 };
 
-it("should return a table of object", arr => {
+const createTable = game => {
+  const finalScores = {};
+  // console.log(game[0]);
+  const setFinalScores = (acc, round) => {
+    const roundScore = scoreByPlayersByRound(round);
+    for (let name in roundScore) {
+      if (!(acc[name])) {
+        acc[name] = roundScore[name];
+      }
+      else {
+        acc[name] += roundScore[name];
+      }
+      // console.log(roundScore[name])
+    }
+    // console.log(acc);
+    // console.log(scoreByPlayersByRound(round));
+    return acc;
+  };
+  return game.reduce(setFinalScores, finalScores);
+};
+
+it("should return a table of object", () => {
   const gameData = [
     [
       { nom: "Michel", score: 2 },
@@ -25,10 +42,25 @@ it("should return a table of object", arr => {
       { nom: "Gautier", score: 6 }
     ]
   ];
-  const expected = [
-    { nom: "Michel", score: 5 },
-    { nom: "Charles", score: 10 },
-    { nom: "Gautier", score: 7 }
-  ];
+  const expected = {
+    Michel: 5,
+    Charles: 10,
+    Gautier: 7
+  };
   expect(createTable(gameData)).toEqual(expected);
+});
+
+it("should return an object with score by players for a round", () => {
+  const roundData = [
+    { nom: "Michel", score: 2 },
+    { nom: "Charles", score: 5 },
+    { nom: "Gautier", score: 1 }
+  ];
+
+  const expected = {
+    Michel: 2,
+    Charles: 5,
+    Gautier: 1
+  };
+  expect(scoreByPlayersByRound(roundData)).toEqual(expected);
 });
