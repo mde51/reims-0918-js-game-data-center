@@ -82,7 +82,7 @@ class App extends Component {
     this.setState({ loading: true });
     axios
       .get(
-        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=rating:desc&limit=6",
+        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=popularity:desc&limit=6",
         {
           headers: {
             "user-key": "a1ddea779ca1b0bd1a8f2525e6bd2711",
