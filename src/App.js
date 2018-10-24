@@ -170,13 +170,11 @@ class App extends Component {
           <Container>
             {this.state.gamesList && (
               <div>
-                {this.state.gameSearch !== null && (
-                  <PreviousNext
-                    page={this.state.page}
-                    handleNextPage={this.handleNextPage}
-                    handlePreviousPage={this.handlePreviousPage}
-                  />
-                )}
+                <PreviousNext
+                  page={this.state.page}
+                  handleNextPage={this.handleNextPage}
+                  handlePreviousPage={this.handlePreviousPage}
+                />
                 <GamesList
                   list={this.state.gamesList}
                   selectGame={this.selectGame}
