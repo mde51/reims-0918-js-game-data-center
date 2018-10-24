@@ -10,6 +10,7 @@ import UserName from "./UserName";
 import GameMenu from "./GameMenu";
 import ChosenGame from "./ChosenGame";
 import PlayersList from "./PlayersList";
+import PreviousNext from "./Pagination";
 
 const axios = require("axios");
 
@@ -46,9 +47,12 @@ class App extends Component {
 
   submitNewPlayer() {
     this.setState({
-      players: [...this.state.players, {
-        name: this.state.tempPlayer,
-      }]
+      players: [
+        ...this.state.players,
+        {
+          name: this.state.tempPlayer
+        }
+      ]
     });
   }
 
@@ -107,9 +111,7 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <MainJumbotron />
-            {this.state.loading && (
-              <div id="loader" />
-            )}
+            {this.state.loading && <div id="loader" />}
             <ResearchBar
               value={this.state.gameSearch}
               onChange={this.handleGameSearchChange}
@@ -118,10 +120,14 @@ class App extends Component {
 
           <Container>
             {this.state.gamesList && (
-              <GamesList
-                list={this.state.gamesList}
-                selectGame={this.selectGame}
-              />
+              <div>
+                <GamesList
+                  list={this.state.gamesList}
+                  selectGame={this.selectGame}
+                />
+
+                <PreviousNext />
+              </div>
             )}
             {this.state.selectedGame && (
               <div>
@@ -129,9 +135,9 @@ class App extends Component {
                 <Row>
                   <Col>
                     <UserName
-                    handleChange={this.handleNewPlayerChange}
-                    submit={this.submitNewPlayer}
-                     />
+                      handleChange={this.handleNewPlayerChange}
+                      submit={this.submitNewPlayer}
+                    />
                   </Col>
                 </Row>
                 <GameMenu />
