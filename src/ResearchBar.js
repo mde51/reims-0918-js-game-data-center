@@ -8,7 +8,7 @@ const ResearchBar = ({ value, onChange }) => {
         type="search"
         name="nameSearch"
         id="idSearch"
-        placeholder="Write your game here !"
+        placeholder="Search a game !"
         value={value}
         onChange={onChange}
       />
