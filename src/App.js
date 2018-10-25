@@ -28,7 +28,8 @@ class App extends Component {
       loading: false,
       players: [],
       page: 0,
-      history: []
+      history: [],
+      endScores: null
     };
 
     this.selectGame = this.selectGame.bind(this);
@@ -85,12 +86,12 @@ class App extends Component {
         ...this.state.players.map(
           player =>
             name === player.name
-              ? { ...player, finalScore: player.inputScore }
+              ? { ...player, finalScore: parseInt(player.inputScore) }
               : player
         )
       ]
     });
-    console.log(this.state.players);
+    // console.log(this.state.players);
   }
 
   handleNextPage = () => {
@@ -137,11 +138,16 @@ class App extends Component {
   }
 
   handleNewRound() {
-    this.setState({ history: newRound(this.state.players, this.state.history)})
+    this.setState({
+      history: newRound(this.state.players, this.state.history)
+    });
   }
 
   handleEndGame() {
-    this.setState({ gameStarted: false });
+    this.setState({
+      gameStarted: false,
+      endScores: scoreTable(this.state.history)
+    });
   }
 
   componentDidMount() {
