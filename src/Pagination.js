@@ -5,28 +5,23 @@ import {
   PaginationLink,
   Row,
   Col,
-  Container,
-  Button
+  Container
 } from "reactstrap";
 
 const PreviousNext = ({ handleNextPage, handlePreviousPage, page }) => (
   <Container>
     <Row>
-      <Pagination aria-label="Page navigation example">
+      <Pagination size="lg" aria-label="Page navigation example">
         <Col>
           {page !== 0 && (
             <PaginationItem>
-              <Button color="primary">
-                <PaginationLink onClick={handlePreviousPage} previous />
-              </Button>
+              <PaginationLink onClick={handlePreviousPage} previous />
             </PaginationItem>
           )}
         </Col>
         <Col>
           <PaginationItem>
-            <Button color="primary">
-              <PaginationLink onClick={handleNextPage} next />
-            </Button>
+            <PaginationLink onClick={handleNextPage} next />
           </PaginationItem>
         </Col>
       </Pagination>
