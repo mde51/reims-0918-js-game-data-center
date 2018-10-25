@@ -1,16 +1,10 @@
-const saveCurrentRound = round => {
-  const savedRound = round.map(player => {
-    player.score = player.finalScore;
-    delete player.inputScore;
-    delete player.finalScore;
-    return player;
-  });
-  return savedRound;
-};
+const saveCurrentRound = players =>
+  players.map(player => ({ name: player.name, score: player.finalScore }));
 
-const toNewRound = (curRound, curHisto) => {
-  return [...curHisto, saveCurrentRound(curRound)];
-};
+const toNewRound = (players, history) => [
+  ...history,
+  saveCurrentRound(players)
+];
 
 it("button New Round", () => {
   const currentRound = [
