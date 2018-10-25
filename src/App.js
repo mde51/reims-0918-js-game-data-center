@@ -31,9 +31,14 @@ class App extends Component {
     this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
     this.handleNewPlayerChange = this.handleNewPlayerChange.bind(this);
+    this.handleNewScoreChange = this.handleNewScoreChange.bind(this);
     this.submitNewPlayer = this.submitNewPlayer.bind(this);
+<<<<<<< HEAD
+    this.submitScorePlayer = this.submitScorePlayer.bind(this);
+=======
     this.handleNextPage = this.handleNextPage.bind(this);
     this.handlePreviousPage = this.handlePreviousPage.bind(this);
+>>>>>>> dev
   }
 
   selectGame(game) {
@@ -48,7 +53,18 @@ class App extends Component {
     this.setState({ tempPlayer: event.target.value });
   }
 
+  handleNewScoreChange(name, inputScore) {
+    // console.log(name, inputScore);
+    this.setState({
+      players: this.state.players.map(
+        player =>
+          player.name === name ? { ...player, inputScore: inputScore } : player
+      )
+    });
+  }
+
   submitNewPlayer() {
+    // console.log("player");
     this.setState({
       players: [
         ...this.state.players,
@@ -59,6 +75,33 @@ class App extends Component {
     });
   }
 
+  submitScorePlayer() {
+    // console.log("player");
+    this.setState({
+      players: [
+<<<<<<< HEAD
+        ...this.state.players.map(player => player.name === player.name ? { ...player, finalScore: player.inputScore} : player),
+=======
+        ...this.state.players,
+        {
+          name: this.state.tempPlayer
+        }
+>>>>>>> dev
+      ]
+    });
+  }
+
+<<<<<<< HEAD
+  // submitScorePlayer(name, inputScore, finalScore) {
+  //   // console.log(finalScore)
+  //   this.setState({
+  //     players: this.state.players.map(
+  //       player =>
+  //         player.name === name ? { ...player, finalScore: player.inputScore} : player
+  //     )
+  //   });
+  // }
+=======
   handleNextPage = () => {
     this.setState({ page: this.state.page + 1 }, () =>
       axios
@@ -104,6 +147,7 @@ class App extends Component {
         })
     );
   };
+>>>>>>> dev
 
   handleGameSearchChange(event) {
     //appel api ici
@@ -188,12 +232,16 @@ class App extends Component {
                   <Col>
                     <UserName
                       handleChange={this.handleNewPlayerChange}
-                      submit={this.submitNewPlayer}
+                      submitNewPlayers={this.submitNewPlayer}
                     />
                   </Col>
                 </Row>
                 <GameMenu />
-                <PlayersList list={this.state.players} />
+                <PlayersList
+                  list={this.state.players}
+                  handleNewScoreChange={this.handleNewScoreChange}
+                  submitScorePlayers={this.submitScorePlayer}
+                />
               </div>
             )}
           </Container>
