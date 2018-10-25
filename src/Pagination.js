@@ -9,7 +9,7 @@ import {
 } from "reactstrap";
 
 const PreviousNext = ({ handleNextPage, handlePreviousPage, page }) => (
-  <Container>
+  <Container className="pagination">
     <Row>
       <Pagination aria-label="Page navigation example">
         <Col>

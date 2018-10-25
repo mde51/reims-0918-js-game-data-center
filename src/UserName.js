@@ -3,8 +3,8 @@ import { InputGroup, InputGroupAddon, Input, Button } from "reactstrap";
 
 const UserName = ({ handleChange, submitNewPlayers }) => (
   <div>
-    <InputGroup>
       <Input
+        className="inputname"
         maxlength="10"
         type="username"
         name="addUserName"
@@ -17,7 +17,6 @@ const UserName = ({ handleChange, submitNewPlayers }) => (
           Add Player
         </Button>
       </InputGroupAddon>
-    </InputGroup>
     <br />
   </div>
 );

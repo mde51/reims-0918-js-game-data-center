@@ -51,7 +51,7 @@ h1 {
 #loader {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 70%;
   z-index: 1;
   width: 150px;
   height: 150px;
@@ -73,4 +73,23 @@ h1 {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.searchbar{
+  margin-top: -50px;
+  margin-bottom: 50px;
+}
+
+.inputscore {
+  width : 200px;
+  display: inline-block;
+  margin-right: 50px;
+}
+
+.inputname{
+  display: inline-block;
+}
+
+.pagination {
+ margin: 0 250px;
 }

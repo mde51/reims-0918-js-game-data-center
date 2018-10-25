@@ -6,15 +6,16 @@ const RankingPlayer = ({ handleInputScoreChange, name, i, handleFinalScorePlayer
     <tr>
       <th>{i=i+1}</th>
       <td>{name}</td>
-      <td>
+      <td width="500px">
         <Input
+          width="30px"
           maxlength="5"
           type=""
           className="inputscore"
           placeholder="Write your score"
           onChange={event => handleInputScoreChange(name, event.target.value)}
         />
-        <Button onClick={event => handleFinalScorePlayer(name)}>Add Score</Button>
+        <Button color="primary" onClick={event => handleFinalScorePlayer(name)}>Add Score</Button>
       </td>
       <td>{finalScore}</td>
     </tr>
