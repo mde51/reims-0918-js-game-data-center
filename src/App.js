@@ -10,6 +10,7 @@ import UserName from "./UserName";
 import GameMenu from "./GameMenu";
 import ChosenGame from "./ChosenGame";
 import PlayersList from "./PlayersList";
+import PreviousNext from "./Pagination";
 
 const axios = require("axios");
 
@@ -21,8 +22,10 @@ class App extends Component {
       tempPlayer: null,
       gamesList: null,
       selectedGame: null,
-      gameSearch: null,
-      players: []
+      gameSearch: "",
+      loading: false,
+      players: [],
+      page: 0
     };
 
     this.selectGame = this.selectGame.bind(this);
@@ -30,13 +33,18 @@ class App extends Component {
     this.handleNewPlayerChange = this.handleNewPlayerChange.bind(this);
     this.handleNewScoreChange = this.handleNewScoreChange.bind(this);
     this.submitNewPlayer = this.submitNewPlayer.bind(this);
+<<<<<<< HEAD
     this.submitScorePlayer = this.submitScorePlayer.bind(this);
+=======
+    this.handleNextPage = this.handleNextPage.bind(this);
+    this.handlePreviousPage = this.handlePreviousPage.bind(this);
+>>>>>>> dev
   }
 
   selectGame(game) {
     this.setState({
       selectedGame: game,
-      gameSearch: null,
+      gameSearch: "",
       gamesList: null
     });
   }
@@ -71,11 +79,19 @@ class App extends Component {
     // console.log("player");
     this.setState({
       players: [
+<<<<<<< HEAD
         ...this.state.players.map(player => player.name === player.name ? { ...player, finalScore: player.inputScore} : player),
+=======
+        ...this.state.players,
+        {
+          name: this.state.tempPlayer
+        }
+>>>>>>> dev
       ]
     });
   }
 
+<<<<<<< HEAD
   // submitScorePlayer(name, inputScore, finalScore) {
   //   // console.log(finalScore)
   //   this.setState({
@@ -85,9 +101,57 @@ class App extends Component {
   //     )
   //   });
   // }
+=======
+  handleNextPage = () => {
+    this.setState({ page: this.state.page + 1 }, () =>
+      axios
+        .get(
+          `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
+            this.state.gameSearch
+          }&order=popularity:desc&limit=6&offset=${this.state.page * 6}`,
+          {
+            headers: {
+              "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
+              Accept: "application/json"
+            }
+          }
+        )
+        .then(response => {
+          return this.setState({ gamesList: response.data, loading: false });
+        })
+        .catch(e => {
+          console.log("error", e);
+        })
+    );
+  };
+
+  handlePreviousPage = () => {
+    this.setState({ page: this.state.page - 1 }, () =>
+      axios
+        .get(
+          `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
+            this.state.gameSearch
+          }&order=popularity:desc&limit=6&offset=${this.state.page * 6}`,
+          {
+            headers: {
+              "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
+              Accept: "application/json"
+            }
+          }
+        )
+        .then(response => {
+          return this.setState({ gamesList: response.data, loading: false });
+        })
+        .catch(e => {
+          console.log("error", e);
+        })
+    );
+  };
+>>>>>>> dev
 
   handleGameSearchChange(event) {
     //appel api ici
+    this.setState({ loading: true });
     axios
       .get(
         `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
@@ -101,7 +165,7 @@ class App extends Component {
         }
       )
       .then(response => {
-        return this.setState({ gamesList: response.data });
+        return this.setState({ gamesList: response.data, loading: false });
       })
       .catch(e => {
         console.log("error", e);
@@ -112,9 +176,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.setState({ loading: true });
     axios
       .get(
-        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=rating:desc&limit=6",
+        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=popularity:desc&limit=6",
         {
           headers: {
             "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
@@ -124,7 +189,8 @@ class App extends Component {
       )
       .then(response => {
         return this.setState({
-          gamesList: response.data
+          gamesList: response.data,
+          loading: false
         });
       })
       .catch(e => {
@@ -138,18 +204,26 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <MainJumbotron />
-
+            {this.state.loading && <div id="loader" />}
             <ResearchBar
               value={this.state.gameSearch}
               onChange={this.handleGameSearchChange}
             />
           </header>
+
           <Container>
             {this.state.gamesList && (
-              <GamesList
-                list={this.state.gamesList}
-                selectGame={this.selectGame}
-              />
+              <div>
+                <PreviousNext
+                  page={this.state.page}
+                  handleNextPage={this.handleNextPage}
+                  handlePreviousPage={this.handlePreviousPage}
+                />
+                <GamesList
+                  list={this.state.gamesList}
+                  selectGame={this.selectGame}
+                />
+              </div>
             )}
             {this.state.selectedGame && (
               <div>
