@@ -11,6 +11,7 @@ import GameMenu from "./GameMenu";
 import ChosenGame from "./ChosenGame";
 import PlayersList from "./PlayersList";
 import PreviousNext from "./Pagination";
+import GamesFavs from "./GamesFavs";
 
 const axios = require("axios");
 
@@ -25,7 +26,8 @@ class App extends Component {
       gameSearch: "",
       loading: false,
       players: [],
-      page: 0
+      page: 0,
+      favs:[]
     };
 
     this.selectGame = this.selectGame.bind(this);
@@ -34,6 +36,7 @@ class App extends Component {
     this.submitNewPlayer = this.submitNewPlayer.bind(this);
     this.handleNextPage = this.handleNextPage.bind(this);
     this.handlePreviousPage = this.handlePreviousPage.bind(this);
+    this.handleAddToFav = this.handleAddToFav.bind(this);
   }
 
   selectGame(game) {
@@ -154,6 +157,11 @@ class App extends Component {
       });
   }
 
+  handleAddToFav(game){
+    console.log(game)
+    this.setState(prevState => ({favs:[...prevState.favs, game]}))
+  }
+
   render() {
     return (
       <section>
@@ -179,11 +187,12 @@ class App extends Component {
                   list={this.state.gamesList}
                   selectGame={this.selectGame}
                 />
+               
               </div>
             )}
             {this.state.selectedGame && (
               <div>
-                <ChosenGame game={this.state.selectedGame} />
+                <ChosenGame game={this.state.selectedGame} onAddToFav={this.handleAddToFav} />
                 <Row>
                   <Col>
                     <UserName
