@@ -1,7 +1,7 @@
 const scoreByPlayersByRound = round => {
   const result = {};
   const finalScores = (acc, player) => {
-    acc[player.nom] = player.score;
+    acc[player.name] = player.score;
     // console.log(player)
     return acc;
   };
@@ -12,31 +12,81 @@ const createTable = game => {
   const finalScores = {};
   const setFinalScores = (acc, round) => {
     const roundScore = scoreByPlayersByRound(round);
+    // console.log(roundScore)
     for (let name in roundScore) {
       if (!acc[name]) {
         acc[name] = roundScore[name];
       } else {
         acc[name] += roundScore[name];
       }
-      // console.log(roundScore[name])
     }
     return acc;
   };
   let objectPlayers = game.reduce(setFinalScores, finalScores);
-  return Object.keys(objectPlayers).map(key => ({ name: key, score: objectPlayers[key] }))
+  return Object.keys(objectPlayers).map(key => ({
+    name: key,
+    score: objectPlayers[key]
+  }));
 };
+
+// const createGame = players => {
+//   const playersInGame = [];
+//   playersInGame.push(players);
+//   playersInGame.map(table => table.map(player => (player.score = 0)));
+//   return playersInGame;
+// };
+
+const saveCurrentRound = round => {
+  const savedRound = round.map(player => {
+    player.score = player.finalScore;
+    delete player.inputScore;
+    delete player.finalScore;
+    return player;
+  });
+  return savedRound;
+};
+
+it("should save last round and go to the next one", () => {
+  const currentRound = [
+    { name: "Michel", finalScore: 2, inputScore: 2 },
+    { name: "Charles", finalScore: 5, inputScore: 5 },
+    { name: "Gautier", finalScore: 1, inputScore: 1 }
+  ];
+  const expected = [
+    { name: "Michel", score: 2 },
+    { name: "Charles", score: 5 },
+    { name: "Gautier", score: 1 }
+  ];
+  expect(saveCurrentRound(currentRound)).toEqual(expected);
+});
+
+// it("should return a table of players with score", () => {
+//   const players = [
+//     { name: "Michel" },
+//     { name: "Charles" },
+//     { name: "Gautier" }
+//   ];
+//   const expected = [
+//     [
+//       { name: "Michel", score: 0 },
+//       { name: "Charles", score: 0 },
+//       { name: "Gautier", score: 0 }
+//     ]
+//   ];
+//   expect(createGame(players)).toEqual(expected);
+// });
 
 it("should return a table of object", () => {
   const gameData = [
     [
-      { nom: "Michel", score: 2 },
-      { nom: "Charles", score: 5 },
-      { nom: "Gautier", score: 1 }
+      { name: "Michel", score: 2 },
+      { name: "Charles", score: 5 },
+      { name: "Gautier", score: 1 }
     ],
     [
-      { nom: "Michel", score: 3 },
-      { nom: "Charles", score: 5 },
-      { nom: "Gautier", score: 6 }
+      { name: "Michel", score: 3 },
+      { name: "Charles", score: 5 },
+      { name: "Gautier", score: 6 }
     ]
   ];
   const expected = [
@@ -59,14 +109,14 @@ it("should return a table of object", () => {
 // it("should return an object with scores of cumulated rounds", () => {
 //   const gameData = [
 //     [
-//       { nom: "Michel", score: 2 },
-//       { nom: "Charles", score: 5 },
-//       { nom: "Gautier", score: 1 }
+//       { name: "Michel", score: 2 },
+//       { name: "Charles", score: 5 },
+//       { name: "Gautier", score: 1 }
 //     ],
 //     [
-//       { nom: "Michel", score: 3 },
-//       { nom: "Charles", score: 5 },
-//       { nom: "Gautier", score: 6 }
+//       { name: "Michel", score: 3 },
+//       { name: "Charles", score: 5 },
+//       { name: "Gautier", score: 6 }
 //     ]
 //   ];
 //   const expected = {
@@ -79,9 +129,9 @@ it("should return a table of object", () => {
 
 it("should return an object with score by players for a round", () => {
   const roundData = [
-    { nom: "Michel", score: 2 },
-    { nom: "Charles", score: 5 },
-    { nom: "Gautier", score: 1 }
+    { name: "Michel", score: 2 },
+    { name: "Charles", score: 5 },
+    { name: "Gautier", score: 1 }
   ];
 
   const expected = {
