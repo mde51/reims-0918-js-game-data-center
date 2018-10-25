@@ -1,13 +1,13 @@
 export const scoreByPlayersByRound = round => {
   const result = {};
   const finalScores = (acc, player) => {
-    acc[player.nom] = player.score;
+    acc[player.name] = player.score;
     return acc;
   };
   return round.reduce(finalScores, result);
 };
 
-export const createScoreTable = game => {
+export const createScoreTable = history => {
   const finalScores = {};
   const setFinalScores = (acc, round) => {
     const roundScore = scoreByPlayersByRound(round);
@@ -20,7 +20,7 @@ export const createScoreTable = game => {
     }
     return acc;
   };
-  let objectPlayers = game.reduce(setFinalScores, finalScores);
+  let objectPlayers = history.reduce(setFinalScores, finalScores);
   return Object.keys(objectPlayers).map(key => ({
     name: key,
     score: objectPlayers[key]

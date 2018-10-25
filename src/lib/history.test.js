@@ -6,6 +6,7 @@ const toNewRound = (players, history) => [
   saveCurrentRound(players)
 ];
 
+
 it("button New Round", () => {
   const currentRound = [
     { name: "Michel", finalScore: 3, inputScore: 3 },
