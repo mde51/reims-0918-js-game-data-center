@@ -1,6 +1,6 @@
 body {
   background-size:cover;
-  background-image:radial-gradient(white, black);
+  background-image:radial-gradient(white, white, black);
   background-size: cover;
   min-height: 100vh;
   margin: 0;
