@@ -31,7 +31,9 @@ class App extends Component {
     this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
     this.handleNewPlayerChange = this.handleNewPlayerChange.bind(this);
+    this.handleNewScoreChange = this.handleNewScoreChange.bind(this);
     this.submitNewPlayer = this.submitNewPlayer.bind(this);
+    this.submitScorePlayer = this.submitScorePlayer.bind(this);
     this.handleNextPage = this.handleNextPage.bind(this);
     this.handlePreviousPage = this.handlePreviousPage.bind(this);
   }
@@ -48,7 +50,17 @@ class App extends Component {
     this.setState({ tempPlayer: event.target.value });
   }
 
+  handleNewScoreChange(name, inputScore) {
+    this.setState({
+      players: this.state.players.map(
+        player =>
+          player.name === name ? { ...player, inputScore: inputScore } : player
+      )
+    });
+  }
+
   submitNewPlayer() {
+    // console.log("player");
     this.setState({
       players: [
         ...this.state.players,
@@ -59,6 +71,29 @@ class App extends Component {
     });
   }
 
+  submitScorePlayer(name) {
+    // console.log("player");
+    this.setState({
+      players: [
+        ...this.state.players.map(
+          player =>
+            name === player.name
+              ? { ...player, finalScore: player.inputScore }
+              : player
+        )
+      ]
+    });
+  }
+
+  // submitScorePlayer(name, inputScore, finalScore) {
+  //   // console.log(finalScore)
+  //   this.setState({
+  //     players: this.state.players.map(
+  //       player =>
+  //         player.name === name ? { ...player, finalScore: player.inputScore} : player
+  //     )
+  //   });
+  // }
   handleNextPage = () => {
     this.setState({ page: this.state.page + 1 }, () =>
       axios
@@ -188,12 +223,16 @@ class App extends Component {
                   <Col>
                     <UserName
                       handleChange={this.handleNewPlayerChange}
-                      submit={this.submitNewPlayer}
+                      submitNewPlayers={this.submitNewPlayer}
                     />
                   </Col>
                 </Row>
                 <GameMenu />
-                <PlayersList list={this.state.players} />
+                <PlayersList
+                  list={this.state.players}
+                  handleNewScoreChange={this.handleNewScoreChange}
+                  submitScorePlayers={this.submitScorePlayer}
+                />
               </div>
             )}
           </Container>
