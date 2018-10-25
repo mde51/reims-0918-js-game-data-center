@@ -1,3 +1,17 @@
+export const saveCurrentRound = round => {
+  const savedRound = round.map(player => {
+    player.score = player.finalScore;
+    delete player.inputScore;
+    delete player.finalScore;
+    return player;
+  });
+  return savedRound;
+};
+
+export const toNewRound = (curRound, curHisto) => {
+  return [...curHisto, saveCurrentRound(curRound)];
+};
+
 export const scoreByPlayersByRound = round => {
   const result = {};
   const finalScores = (acc, player) => {
