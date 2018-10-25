@@ -7,7 +7,7 @@ const RankingPlayer = ({ handleChange, name, inputScore, i, handleScoreChange, f
       <th>{i=i+1}</th>
       <td>{name}</td>
       <td>
-        {inputScore > 0 ? inputScore : 0}{" "}
+        {/* {inputScore > 0 ? inputScore : 0}{" "} */}
         <Input
           maxlength="5"
           type=""

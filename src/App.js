@@ -70,7 +70,7 @@ class App extends Component {
     console.log(finalScore)
     this.setState({
       players: this.state.players.map(
-        player => (player.name === name ? { ...player, finalScore: player.inputScore } : player)
+        player => (player.name === player.name ? { ...player, finalScore: player.inputScore } : player)
       )
     });
   }
