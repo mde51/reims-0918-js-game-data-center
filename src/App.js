@@ -46,16 +46,17 @@ class App extends Component {
   }
 
   handleNewScoreChange(name, inputScore) {
-    console.log(name, inputScore);
+    // console.log(name, inputScore);
     this.setState({
       players: this.state.players.map(
-        player => (player.name === name ? { ...player, inputScore: inputScore } : player)
+        player =>
+          player.name === name ? { ...player, inputScore: inputScore } : player
       )
     });
   }
 
   submitNewPlayer() {
-    console.log("player");
+    // console.log("player");
     this.setState({
       players: [
         ...this.state.players,
@@ -66,14 +67,24 @@ class App extends Component {
     });
   }
 
-  submitScorePlayer(name, finalScore) {
-    console.log(finalScore)
+  submitScorePlayer() {
+    // console.log("player");
     this.setState({
-      players: this.state.players.map(
-        player => (player.name === name ? { ...player, finalScore: player.inputScore } : player)
-      )
+      players: [
+        ...this.state.players.map(player => player.name === player.name ? { ...player, finalScore: player.inputScore} : player),
+      ]
     });
   }
+
+  // submitScorePlayer(name, inputScore, finalScore) {
+  //   // console.log(finalScore)
+  //   this.setState({
+  //     players: this.state.players.map(
+  //       player =>
+  //         player.name === name ? { ...player, finalScore: player.inputScore} : player
+  //     )
+  //   });
+  // }
 
   handleGameSearchChange(event) {
     //appel api ici
