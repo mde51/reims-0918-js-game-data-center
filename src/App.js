@@ -11,6 +11,7 @@ import GameMenu from "./GameMenu";
 import ChosenGame from "./ChosenGame";
 import PlayersList from "./PlayersList";
 import PreviousNext from "./Pagination";
+import { componentDidMount, handleGameSearchChange} from "./api/games"
 
 const axios = require("axios");
 
