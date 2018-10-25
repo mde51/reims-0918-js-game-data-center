@@ -7,39 +7,163 @@ import MainJumbotron from "./MainJumbotron";
 import ResearchBar from "./ResearchBar";
 import GamesList from "./GamesList";
 import UserName from "./UserName";
-import AddToFav from "./AddToFav";
-import Table from "./Table";
 import GameMenu from "./GameMenu";
+import ChosenGame from "./ChosenGame";
+import PlayersList from "./PlayersList";
+import PreviousNext from "./Pagination";
 
 const axios = require("axios");
-
-const sampleGame = "Nothing from API";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gamesList: [
-        {
-          name: "Mario Kart",
-          cover:
-            "https://i2.wp.com/geekirc.me/wp-content/uploads/2018/02/Switch-Mario-Kart-1-768x480.jpg?fit=768%2C480&resize=350%2C200"
-        },
-        {
-          name: "FIFA 2019",
-          cover:
-            "https://i1.wp.com/kopitiambot.com/wp-content/uploads/2018/09/httpscdn.mos_.cms_.futurecdn.netLLKcYf2ybsiiqZ5LT9ZvMY-1200-80.jpg?fit=1200%2C675&ssl=1&resize=350%2C200"
-        },
-        {
-          name: "Crazy Stuff",
-          cover:
-            "https://www.crazy-stuff.net/crazy-img/content/flash/350x200/48-348ecf74-dinostrikescreen9.jpg"
-        }
-      ],
-      test: sampleGame,
-      player: ""
+      newPlayer: null,
+      tempPlayer: null,
+      gamesList: null,
+      selectedGame: null,
+      gameSearch: "",
+      loading: false,
+      players: [],
+      page: 0
     };
-    this.onChange = this.onChange.bind(this);
+
+    this.selectGame = this.selectGame.bind(this);
+    this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
+    this.handleNewPlayerChange = this.handleNewPlayerChange.bind(this);
+    this.handleNewScoreChange = this.handleNewScoreChange.bind(this);
+    this.submitNewPlayer = this.submitNewPlayer.bind(this);
+    this.submitScorePlayer = this.submitScorePlayer.bind(this);
+    this.handleNextPage = this.handleNextPage.bind(this);
+    this.handlePreviousPage = this.handlePreviousPage.bind(this);
+  }
+
+  selectGame(game) {
+    this.setState({
+      selectedGame: game,
+      gameSearch: "",
+      gamesList: null
+    });
+  }
+
+  handleNewPlayerChange(event) {
+    this.setState({ tempPlayer: event.target.value });
+  }
+
+  handleNewScoreChange(name, inputScore) {
+    this.setState({
+      players: this.state.players.map(
+        player =>
+          player.name === name ? { ...player, inputScore: inputScore } : player
+      )
+    });
+  }
+
+  submitNewPlayer() {
+    // console.log("player");
+    this.setState({
+      players: [
+        ...this.state.players,
+        {
+          name: this.state.tempPlayer
+        }
+      ]
+    });
+  }
+
+  submitScorePlayer(name) {
+    // console.log("player");
+    this.setState({
+      players: [
+        ...this.state.players.map(
+          player =>
+            name === player.name
+              ? { ...player, finalScore: player.inputScore }
+              : player
+        )
+      ]
+    });
+  }
+
+  // submitScorePlayer(name, inputScore, finalScore) {
+  //   // console.log(finalScore)
+  //   this.setState({
+  //     players: this.state.players.map(
+  //       player =>
+  //         player.name === name ? { ...player, finalScore: player.inputScore} : player
+  //     )
+  //   });
+  // }
+  handleNextPage = () => {
+    this.setState({ page: this.state.page + 1 }, () =>
+      axios
+        .get(
+          `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
+            this.state.gameSearch
+          }&order=popularity:desc&limit=6&offset=${this.state.page * 6}`,
+          {
+            headers: {
+              "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
+              Accept: "application/json"
+            }
+          }
+        )
+        .then(response => {
+          return this.setState({ gamesList: response.data, loading: false });
+        })
+        .catch(e => {
+          console.log("error", e);
+        })
+    );
+  };
+
+  handlePreviousPage = () => {
+    this.setState({ page: this.state.page - 1 }, () =>
+      axios
+        .get(
+          `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
+            this.state.gameSearch
+          }&order=popularity:desc&limit=6&offset=${this.state.page * 6}`,
+          {
+            headers: {
+              "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
+              Accept: "application/json"
+            }
+          }
+        )
+        .then(response => {
+          return this.setState({ gamesList: response.data, loading: false });
+        })
+        .catch(e => {
+          console.log("error", e);
+        })
+    );
+  };
+
+  handleGameSearchChange(event) {
+    //appel api ici
+    this.setState({ loading: true });
+    axios
+      .get(
+        `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
+          event.target.value
+        }&order=popularity:desc&limit=6`,
+        {
+          headers: {
+            "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
+            Accept: "application/json"
+          }
+        }
+      )
+      .then(response => {
+        return this.setState({ gamesList: response.data, loading: false });
+      })
+      .catch(e => {
+        console.log("error", e);
+      });
+    this.setState({
+      gameSearch: event.target.value
+    });
   }
 
   onChange(event) {
@@ -51,19 +175,22 @@ class App extends Component {
   onClick
 
   componentDidMount() {
+    this.setState({ loading: true });
     axios
       .get(
-        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/1942?fields=*",
+        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=popularity:desc&limit=6",
         {
           headers: {
-            "user-key": "e8c209a8f793f520e4ab897c31356bcf",
+            "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
             Accept: "application/json"
           }
         }
       )
       .then(response => {
-        console.log(response.data[0]);
-        return this.setState({ test: response.data[0].cover.url });
+        return this.setState({
+          gamesList: response.data,
+          loading: false
+        });
       })
       .catch(e => {
         console.log("error", e);
@@ -72,28 +199,53 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <MainJumbotron />
-          <ResearchBar />
-        </header>
-        <Container>
-          <GamesList list={this.state.gamesList} />
-          <Row>
-            <Col>
-              <UserName player={this.state.playerName}/>
-            </Col>
-            <Col>
-              <AddToFav />
-            </Col>
-          </Row>
-          <Table />
-          <GameMenu />
-        </Container>
-        <p>
-          Test API image : <img src={this.state.test} />
-        </p>
-      </div>
+      <section>
+        <div className="App">
+          <header className="App-header">
+            <MainJumbotron />
+            {this.state.loading && <div id="loader" />}
+            <ResearchBar
+              value={this.state.gameSearch}
+              onChange={this.handleGameSearchChange}
+            />
+          </header>
+
+          <Container>
+            {this.state.gamesList && (
+              <div>
+                <PreviousNext
+                  page={this.state.page}
+                  handleNextPage={this.handleNextPage}
+                  handlePreviousPage={this.handlePreviousPage}
+                />
+                <GamesList
+                  list={this.state.gamesList}
+                  selectGame={this.selectGame}
+                />
+              </div>
+            )}
+            {this.state.selectedGame && (
+              <div>
+                <ChosenGame game={this.state.selectedGame} />
+                <Row>
+                  <Col>
+                    <UserName
+                      handleChange={this.handleNewPlayerChange}
+                      submitNewPlayers={this.submitNewPlayer}
+                    />
+                  </Col>
+                </Row>
+                <GameMenu />
+                <PlayersList
+                  list={this.state.players}
+                  handleNewScoreChange={this.handleNewScoreChange}
+                  submitScorePlayers={this.submitScorePlayer}
+                />
+              </div>
+            )}
+          </Container>
+        </div>
+      </section>
     );
   }
 }

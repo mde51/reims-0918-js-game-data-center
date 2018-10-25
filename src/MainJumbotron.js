@@ -3,11 +3,9 @@ import { Jumbotron, Button, Container, Row, Col } from "reactstrap";
 
 const MainJumbotron = () => {
   return (
-    <Jumbotron>
-      <Container>
-        <Row>
-          <h1 className="display-3">GAME DATA CENTER</h1>
-        </Row>
+    <Jumbotron className="mt-4" className="opacity">
+      <Container >
+        <section><img src={require('./Logo.png')}/></section>
         <Row>
           <Col>
             <Button color="primary">Recently played</Button>
@@ -20,5 +18,6 @@ const MainJumbotron = () => {
     </Jumbotron>
   );
 };
+
 
 export default MainJumbotron;
