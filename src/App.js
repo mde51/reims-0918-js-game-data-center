@@ -51,7 +51,6 @@ class App extends Component {
   }
 
   handleNewScoreChange(name, inputScore) {
-    // console.log(name, inputScore);
     this.setState({
       players: this.state.players.map(
         player =>
@@ -72,13 +71,13 @@ class App extends Component {
     });
   }
 
-  submitScorePlayer() {
+  submitScorePlayer(name) {
     // console.log("player");
     this.setState({
       players: [
         ...this.state.players.map(
           player =>
-            player.name === player.name
+            name === player.name
               ? { ...player, finalScore: player.inputScore }
               : player
         )
