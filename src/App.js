@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Button, Container, Row, Col } from "reactstrap";
 
 import "./App.css";
 
@@ -12,6 +12,8 @@ import ChosenGame from "./ChosenGame";
 import PlayersList from "./PlayersList";
 import PreviousNext from "./Pagination";
 import { fetchGames } from "./api/games";
+import { newRound } from "./lib/newRound";
+import { scoreTable } from "./lib/scoreTable";
 
 class App extends Component {
   constructor(props) {
@@ -21,10 +23,12 @@ class App extends Component {
       tempPlayer: null,
       gamesList: null,
       selectedGame: null,
+      gameStarted: false,
       gameSearch: "",
       loading: false,
       players: [],
-      page: 0
+      page: 0,
+      history: []
     };
 
     this.selectGame = this.selectGame.bind(this);
@@ -35,6 +39,9 @@ class App extends Component {
     this.submitFinalScorePlayer = this.submitFinalScorePlayer.bind(this);
     this.handleNextPage = this.handleNextPage.bind(this);
     this.handlePreviousPage = this.handlePreviousPage.bind(this);
+    this.handleGameStart = this.handleGameStart.bind(this);
+    this.handleNewRound = this.handleNewRound.bind(this);
+    this.handleEndGame = this.handleEndGame.bind(this);
   }
 
   selectGame(game) {
@@ -83,7 +90,7 @@ class App extends Component {
         )
       ]
     });
-    console.log(this.state.players)
+    console.log(this.state.players);
   }
 
   handleNextPage = () => {
@@ -123,6 +130,18 @@ class App extends Component {
     this.setState({
       gameSearch: event.target.value
     });
+  }
+
+  handleGameStart() {
+    this.setState({ gameStarted: true });
+  }
+
+  handleNewRound() {
+    this.setState({ history: newRound(this.state.players, this.state.history)})
+  }
+
+  handleEndGame() {
+    this.setState({ gameStarted: false });
   }
 
   componentDidMount() {
@@ -169,15 +188,27 @@ class App extends Component {
             {this.state.selectedGame && (
               <div>
                 <ChosenGame game={this.state.selectedGame} />
-                <Row>
-                  <Col>
-                    <UserName
-                      handleChange={this.handleNewPlayerChange}
-                      submitNewPlayers={this.submitNewPlayer}
-                    />
-                  </Col>
-                </Row>
-                <GameMenu />
+                {!this.state.gameStarted && (
+                  <div>
+                    <Button color="primary" onClick={this.handleGameStart}>
+                      START !
+                    </Button>
+                    <Row>
+                      <Col>
+                        <UserName
+                          handleChange={this.handleNewPlayerChange}
+                          submitNewPlayers={this.submitNewPlayer}
+                        />
+                      </Col>
+                    </Row>
+                  </div>
+                )}
+                {this.state.gameStarted && (
+                  <GameMenu
+                    handleNewRound={this.handleNewRound}
+                    handleEndGame={this.handleEndGame}
+                  />
+                )}
                 <PlayersList
                   list={this.state.players}
                   handleInputScoreChange={this.handleInputScoreChange}
