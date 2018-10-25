@@ -1,11 +1,22 @@
 import React from "react";
+import { Button, Input } from "reactstrap";
 
-const RankingPlayer = ({ name, score }) => {
+const RankingPlayer = ({ handleInputScoreChange, name, i, handleFinalScorePlayer, finalScore}) => {
   return (
     <tr>
-      <th scope="row">1</th>
+      <th>{i=i+1}</th>
       <td>{name}</td>
-      <td>{score}</td>
+      <td>
+        <Input
+          maxlength="5"
+          type=""
+          className="inputscore"
+          placeholder="Write your score"
+          onChange={event => handleInputScoreChange(name, event.target.value)}
+        />
+        <Button onClick={event => handleFinalScorePlayer(name)}>Add Score</Button>
+      </td>
+      <td>{finalScore}</td>
     </tr>
   );
 };
