@@ -33,12 +33,9 @@ class App extends Component {
     this.handleNewPlayerChange = this.handleNewPlayerChange.bind(this);
     this.handleNewScoreChange = this.handleNewScoreChange.bind(this);
     this.submitNewPlayer = this.submitNewPlayer.bind(this);
-<<<<<<< HEAD
     this.submitScorePlayer = this.submitScorePlayer.bind(this);
-=======
     this.handleNextPage = this.handleNextPage.bind(this);
     this.handlePreviousPage = this.handlePreviousPage.bind(this);
->>>>>>> dev
   }
 
   selectGame(game) {
@@ -79,19 +76,16 @@ class App extends Component {
     // console.log("player");
     this.setState({
       players: [
-<<<<<<< HEAD
-        ...this.state.players.map(player => player.name === player.name ? { ...player, finalScore: player.inputScore} : player),
-=======
-        ...this.state.players,
-        {
-          name: this.state.tempPlayer
-        }
->>>>>>> dev
+        ...this.state.players.map(
+          player =>
+            player.name === player.name
+              ? { ...player, finalScore: player.inputScore }
+              : player
+        )
       ]
     });
   }
 
-<<<<<<< HEAD
   // submitScorePlayer(name, inputScore, finalScore) {
   //   // console.log(finalScore)
   //   this.setState({
@@ -101,7 +95,6 @@ class App extends Component {
   //     )
   //   });
   // }
-=======
   handleNextPage = () => {
     this.setState({ page: this.state.page + 1 }, () =>
       axios
@@ -147,7 +140,6 @@ class App extends Component {
         })
     );
   };
->>>>>>> dev
 
   handleGameSearchChange(event) {
     //appel api ici
