@@ -10,7 +10,6 @@ const scoreByPlayersByRound = round => {
 
 const createTable = game => {
   const finalScores = {};
-  // console.log(game[0]);
   const setFinalScores = (acc, round) => {
     const roundScore = scoreByPlayersByRound(round);
     for (let name in roundScore) {
@@ -21,12 +20,10 @@ const createTable = game => {
       }
       // console.log(roundScore[name])
     }
-    // console.log(acc);
-    // console.log(scoreByPlayersByRound(round));
     return acc;
   };
-  let fli = game.reduce(setFinalScores, finalScores);
-  return Object.keys(fli).map(key => ({ name: key, score: fli[key] }))
+  let objectPlayers = game.reduce(setFinalScores, finalScores);
+  return Object.keys(objectPlayers).map(key => ({ name: key, score: objectPlayers[key] }))
 };
 
 it("should return a table of object", () => {
