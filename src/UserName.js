@@ -13,7 +13,9 @@ const UserName = ({ handleChange, submitNewPlayers }) => (
         onChange={handleChange}
       />
       <InputGroupAddon addonType="prepend">
-        <Button onClick={submitNewPlayers}>Add Player</Button>
+        <Button color="primary" onClick={submitNewPlayers}>
+          Add Player
+        </Button>
       </InputGroupAddon>
     </InputGroup>
     <br />
