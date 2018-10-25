@@ -2,7 +2,7 @@ import React from "react";
 import RankingPlayer from "./RankingPlayer";
 import { Table } from "reactstrap";
 
-const PlayersList = ({ list, handleNewScoreChange, submitScorePlayers }) => (
+const PlayersList = ({ list, handleInputScoreChange, submitFinalScorePlayer }) => (
   <section className="mt-4">
     <Table bordered className="tableau">
       <thead>
@@ -17,8 +17,8 @@ const PlayersList = ({ list, handleNewScoreChange, submitScorePlayers }) => (
         {list.map((player, index) => (
           <RankingPlayer
             {...player}
-            handleChange={handleNewScoreChange}
-            handleScoreChange={submitScorePlayers}
+            handleInputScoreChange={handleInputScoreChange}
+            handleFinalScorePlayer={submitFinalScorePlayer}
             i={index}
           />
         ))}
