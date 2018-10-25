@@ -11,20 +11,7 @@ import GameMenu from "./GameMenu";
 import ChosenGame from "./ChosenGame";
 import PlayersList from "./PlayersList";
 import PreviousNext from "./Pagination";
-
-const axios = require("axios");
-
-const fetchGames = (page, gameSearch) =>
-  axios.get(
-    `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${gameSearch}&order=popularity:desc&limit=6&offset=${page *
-      6}`,
-    {
-      headers: {
-        "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
-        Accept: "application/json"
-      }
-    }
-  );
+import { fetchGames } from "./api/games";
 
 class App extends Component {
   constructor(props) {
@@ -133,7 +120,7 @@ class App extends Component {
   handleGameSearchChange(event) {
     //appel api ici
     this.setState({ loading: true });
-    fetchGames (0, event.target.value)
+    fetchGames(0, event.target.value)
       .then(response => {
         return this.setState({ gamesList: response.data, loading: false });
       })
@@ -147,16 +134,7 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({ loading: true });
-    axios
-      .get(
-        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=popularity:desc&limit=6",
-        {
-          headers: {
-            "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
-            Accept: "application/json"
-          }
-        }
-      )
+    fetchGames(0)
       .then(response => {
         return this.setState({
           gamesList: response.data,
