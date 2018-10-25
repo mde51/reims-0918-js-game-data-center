@@ -7,7 +7,7 @@ const RankingPlayer = ({
   inputScore,
   i,
   handleScoreChange,
-  finalScore
+  finalScore,
 }) => {
   return (
     <tr>
@@ -16,7 +16,7 @@ const RankingPlayer = ({
       <td>
         <Input
           value={inputScore}
-          maxlength="5"
+          maxLength="5"
           type=""
           className="inputscore"
           placeholder="Write your score"

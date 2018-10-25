@@ -16,6 +16,7 @@ const PlayersList = ({ list, handleNewScoreChange, submitScorePlayers }) => (
       <tbody>
         {list.map((player, index) => (
           <RankingPlayer
+            key={player.name.toString()}
             {...player}
             handleChange={handleNewScoreChange}
             handleScoreChange={submitScorePlayers}
