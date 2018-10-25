@@ -1,4 +1,4 @@
-export const scoreByPlayersByRound = round => {
+const scoreByPlayersByRound = round => {
   const result = {};
   const finalScores = (acc, player) => {
     acc[player.name] = player.score;
@@ -7,7 +7,7 @@ export const scoreByPlayersByRound = round => {
   return round.reduce(finalScores, result);
 };
 
-export const createScoreTable = history => {
+export const scoreTable = history => {
   const finalScores = {};
   const setFinalScores = (acc, round) => {
     const roundScore = scoreByPlayersByRound(round);

@@ -1,11 +1,4 @@
-const saveCurrentRound = players =>
-  players.map(player => ({ name: player.name, score: player.finalScore }));
-
-const toNewRound = (players, history) => [
-  ...history,
-  saveCurrentRound(players)
-];
-
+import { newRound } from "./newRound.js";
 
 it("button New Round", () => {
   const currentRound = [
@@ -32,5 +25,5 @@ it("button New Round", () => {
       { name: "Gautier", score: 4 }
     ]
   ];
-  expect(toNewRound(currentRound, currentHistory)).toEqual(expectedHistory);
+  expect(newRound(currentRound, currentHistory)).toEqual(expectedHistory);
 });
