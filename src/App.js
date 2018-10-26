@@ -205,9 +205,6 @@ class App extends Component {
                 )}
                 {!this.state.gameStarted && (
                   <div>
-                    <Button color="primary" onClick={this.handleGameStart}>
-                      START !
-                    </Button>
                     <Row>
                       <Col>
                         <UserName
@@ -216,6 +213,9 @@ class App extends Component {
                         />
                       </Col>
                     </Row>
+                    <Button color="primary" onClick={this.handleGameStart}>
+                      START !
+                    </Button>
                   </div>
                 )}
                 {this.state.gameStarted && (

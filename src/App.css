@@ -12,6 +12,11 @@
   background: none;
 }
 
+.gamelist {
+  cursor: pointer;
+  margin-top: 50px;
+}
+
 .tableau {
   background-color: rgb(187, 179, 179);
   text-align: center;
@@ -88,4 +93,9 @@ h1 {
 
 .pagination {
  margin: 0 250px;
+}
+
+.chosengame {
+  margin-top: 50px;
+  margin-bottom: 30px;
 }
