@@ -144,9 +144,12 @@ class App extends Component {
   }
 
   handleEndGame() {
+    const newHistory = newRound(this.state.players, this.state.history);
+    const endScores = scoreTable(newHistory);
     this.setState({
       gameStarted: false,
-      endScores: scoreTable(this.state.history)
+      history: newHistory,
+      endScores: endScores
     });
   }
 
