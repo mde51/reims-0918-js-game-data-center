@@ -3,11 +3,11 @@ import { InputGroup, InputGroupAddon, Input, Button } from "reactstrap";
 
 const UserName = ({ handleChange, submitNewPlayers }) => (
   <div>
-    <InputGroup className ="mt-5">
+    <InputGroup className="mt-5">
       <Input
         width="30px"
         className="inputname"
-        maxlength="10"
+        maxLength="10"
         type="username"
         name="addUserName"
         id="idUserName"
