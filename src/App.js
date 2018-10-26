@@ -27,7 +27,7 @@ class App extends Component {
       loading: false,
       players: [],
       page: 0,
-      favs:[]
+      favs: []
     };
 
     this.selectGame = this.selectGame.bind(this);
@@ -37,6 +37,7 @@ class App extends Component {
     this.handleNextPage = this.handleNextPage.bind(this);
     this.handlePreviousPage = this.handlePreviousPage.bind(this);
     this.handleAddToFav = this.handleAddToFav.bind(this);
+    this.handleDisplayFav = this.handleDisplayFav.bind(this);
   }
 
   selectGame(game) {
@@ -157,17 +158,21 @@ class App extends Component {
       });
   }
 
-  handleAddToFav(game){
-    console.log(game)
-    this.setState(prevState => ({favs:[...prevState.favs, game]}))
+  handleAddToFav(game) {
+    console.log(game);
+    this.setState(prevState => ({ favs: [...prevState.favs, game] }));
   }
+
+  handleDisplayFav(favs){
+    console.log(favs)};
+  
 
   render() {
     return (
       <section>
         <div className="App">
           <header className="App-header">
-            <MainJumbotron />
+            <MainJumbotron favs={this.state.favs}/>
             {this.state.loading && <div id="loader" />}
             <ResearchBar
               value={this.state.gameSearch}
@@ -187,12 +192,15 @@ class App extends Component {
                   list={this.state.gamesList}
                   selectGame={this.selectGame}
                 />
-               
+            
               </div>
             )}
             {this.state.selectedGame && (
               <div>
-                <ChosenGame game={this.state.selectedGame} onAddToFav={this.handleAddToFav} />
+                <ChosenGame
+                  game={this.state.selectedGame}
+                  onAddToFav={this.handleAddToFav}
+                />
                 <Row>
                   <Col>
                     <UserName
