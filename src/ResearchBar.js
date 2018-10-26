@@ -5,6 +5,7 @@ const ResearchBar = ({ value, onChange }) => {
   return (
     <div>
       <Input
+        className="searchbar"
         type="search"
         name="nameSearch"
         id="idSearch"
