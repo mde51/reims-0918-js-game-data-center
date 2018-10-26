@@ -18,7 +18,7 @@ const changeCoverSize = cover => {
 
 const ChosenGame = ({ game }) => (
   <div>
-    <Card className="mt-5">
+    <Card className="chosengame">
       <Row>
         <Col col="6">
           {game.cover && (
