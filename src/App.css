@@ -56,7 +56,7 @@ h1 {
 #loader {
   position: absolute;
   left: 50%;
-  top: 70%;
+  top: 80%;
   z-index: 1;
   width: 150px;
   height: 150px;
@@ -71,31 +71,106 @@ h1 {
 }
 
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.searchbar{
+.searchbar {
   margin-top: -50px;
   margin-bottom: 50px;
 }
 
 .inputscore {
-  width : 200px;
+  width: 200px;
   display: inline-block;
   margin-right: 50px;
 }
 
 .pagination {
- margin: 0 250px;
+  margin: 0 300px;
+  margin-bottom: -40px;
 }
 
 .chosengame {
   margin-top: 50px;
   margin-bottom: 30px;
+}
+
+.inputname {
+  width: 25%;
+  display: inline-block;
+}
+
+.textcardlist {
+  float: left;
+  margin-left: -250px;
+  font-size: 30px;
+  margin-top: -10px;
+  font-family: impact;
+  background: linear-gradient(#1657f5 0%, #1657f5 50%, #163287 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text {
+  font-family: impact;
+  font-size: 30px;
+  background: linear-gradient(#1657f5 0%, #1657f5 50%, #163287 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.favicon {
+  margin-left: 10px;
+}
+
+.start {
+  margin-top: 30px;
+}
+
+.addplayerbutton {
+  margin-left: 20px;
+  margin-top: -3px;
+  margin-bottom: 0px
+}
+
+.footer {
+  background: linear-gradient(to bottom, #99b3e6, #1f3d7a);
+  position: relative;
+  height: 40px;
+  margin-top : 50px;
+  text-align: justify;
+  list-style: none;
+}
+
+.footergame {
+  float: left;
+  margin-left: 715px;
+  list-style: none;
+}
+
+.footermentions {
+  float: left;
+  list-style: none;
+}
+
+.footername {
+  float: right;
+  color: white;
+  list-style: none;
+  margin-top: 10px;
+  margin-right: 10px;
 }

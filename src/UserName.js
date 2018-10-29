@@ -1,9 +1,8 @@
 import React from "react";
-import { InputGroup, InputGroupAddon, Input, Button } from "reactstrap";
+import { Input, Button } from "reactstrap";
 
 const UserName = ({ handleChange, submitNewPlayers }) => (
   <div>
-    <InputGroup className="mt-5">
       <Input
         width="30px"
         className="inputname"
@@ -14,12 +13,9 @@ const UserName = ({ handleChange, submitNewPlayers }) => (
         placeholder="Write your username here !"
         onChange={handleChange}
       />
-      <InputGroupAddon addonType="prepend">
-        <Button color="primary" onClick={submitNewPlayers}>
+        <Button color="primary" className="addplayerbutton" onClick={submitNewPlayers}>
           Add Player
         </Button>
-      </InputGroupAddon>
-    </InputGroup>
     <br />
   </div>
 );

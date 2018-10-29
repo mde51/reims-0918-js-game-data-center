@@ -12,9 +12,11 @@ import ChosenGame from "./ChosenGame";
 import PlayersList from "./PlayersList";
 import PreviousNext from "./Pagination";
 import FinalScores from "./FinalScores";
+import Footer from "./Footer";
 import { fetchGames } from "./api/games";
 import { newRound } from "./lib/newRound";
 import { scoreTable } from "./lib/scoreTable";
+
 
 class App extends Component {
   constructor(props) {
@@ -186,11 +188,13 @@ class App extends Component {
           <Container>
             {this.state.gamesList && (
               <div>
+                <Row>
                 <PreviousNext
                   page={this.state.page}
                   handleNextPage={this.handleNextPage}
                   handlePreviousPage={this.handlePreviousPage}
                 />
+                </Row>
                 <GamesList
                   list={this.state.gamesList}
                   selectGame={this.selectGame}
@@ -204,7 +208,8 @@ class App extends Component {
                   <FinalScores list={this.state.endScores} />
                 )}
                 {!this.state.gameStarted && (
-                  <div>
+                  <div id="table">
+                    <p className="text">Add your usernames !</p>
                     <Row>
                       <Col>
                         <UserName
@@ -213,8 +218,12 @@ class App extends Component {
                         />
                       </Col>
                     </Row>
-                    <Button color="primary" onClick={this.handleGameStart}>
-                      START !
+                    <Button
+                      color="primary"
+                      className="start"
+                      onClick={this.handleGameStart}
+                    >
+                      START!
                     </Button>
                   </div>
                 )}
@@ -224,14 +233,19 @@ class App extends Component {
                     handleEndGame={this.handleEndGame}
                   />
                 )}
+                {this.state.tempPlayer && (
                 <PlayersList
                   list={this.state.players}
                   handleInputScoreChange={this.handleInputScoreChange}
                   submitFinalScorePlayer={this.submitFinalScorePlayer}
                 />
+                )}
               </div>
             )}
           </Container>
+          <footer className="footer">
+            <Footer />
+          </footer>
         </div>
       </section>
     );
