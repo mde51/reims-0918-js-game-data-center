@@ -202,10 +202,7 @@ class App extends Component {
               <div>
                 <ChosenGame game={this.state.selectedGame} />
                 {this.state.displayFinalScores && (
-                  <div>
-                    <FinalScores list={this.state.endScores} />
-                    <HistoryOfRounds list={this.state.history} />
-                  </div>
+                  <FinalScores list={this.state.endScores} />
                 )}
                 {!this.state.gameStarted && (
                   <div>
@@ -223,10 +220,13 @@ class App extends Component {
                   </div>
                 )}
                 {this.state.gameStarted && (
-                  <GameMenu
-                    handleNewRound={this.handleNewRound}
-                    handleEndGame={this.handleEndGame}
-                  />
+                  <div>
+                    <GameMenu
+                      handleNewRound={this.handleNewRound}
+                      handleEndGame={this.handleEndGame}
+                    />
+                    <HistoryOfRounds list={this.state.history} />
+                  </div>
                 )}
                 <PlayersList
                   list={this.state.players}
