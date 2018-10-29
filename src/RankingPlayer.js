@@ -4,8 +4,8 @@ import { Button, Input } from "reactstrap";
 const RankingPlayer = ({ handleInputScoreChange, name, i, handleFinalScorePlayer, finalScore}) => {
   return (
     <tr>
-      <th>{i=i+1}</th>
-      <td>{name}</td>
+      <th className="font">{i=i+1}</th>
+      <td className="font text-uppercase">{name}</td>
       <td width="500px">
         <Input
           width="30px"
@@ -17,7 +17,7 @@ const RankingPlayer = ({ handleInputScoreChange, name, i, handleFinalScorePlayer
         />
         <Button color="primary" onClick={event => handleFinalScorePlayer(name)}>Add Score</Button>
       </td>
-      <td>{finalScore}</td>
+      <td className="font">{finalScore}</td>
     </tr>
   );
 };

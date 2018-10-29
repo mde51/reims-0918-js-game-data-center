@@ -18,9 +18,23 @@
 }
 
 .tableau {
-  background-color: rgb(187, 179, 179);
+  background-color:rgba(94, 131, 146, 0.883);
   text-align: center;
+  border-style: solid;
+  font-family:monospace;
+  font-size: 30px;
+  color:rgb(255, 238, 2);
+  
 }
+
+.font{
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 30px;
+  color:rgb(21, 255, 0);
+}
+
+
 
 .App-header {
   display: flex;

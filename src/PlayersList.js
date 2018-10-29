@@ -4,8 +4,9 @@ import { Table } from "reactstrap";
 
 const PlayersList = ({ list, handleInputScoreChange, submitFinalScorePlayer }) => (
   <section className="mt-4">
-    <Table bordered className="tableau">
-      <thead>
+    <Table>
+    <table class="table table-striped">
+      <thead className="tableau">
         <tr>
           <th>Rank</th>
           <th>Username</th>
@@ -13,7 +14,7 @@ const PlayersList = ({ list, handleInputScoreChange, submitFinalScorePlayer }) =
           <th>Total</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="table tableau">
         {list.map((player, index) => (
           <RankingPlayer
             {...player}
@@ -23,6 +24,7 @@ const PlayersList = ({ list, handleInputScoreChange, submitFinalScorePlayer }) =
           />
         ))}
       </tbody>
+      </table>
     </Table>
   </section>
 );
