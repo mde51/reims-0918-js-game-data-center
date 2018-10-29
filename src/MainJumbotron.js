@@ -6,7 +6,7 @@ const MainJumbotron = () => {
     <Jumbotron className="mt-1">
       <Container>
         <section>
-          <img src={require("./Logo.png")} />
+          <img src={require("./Logo.png")} alt="" />
         </section>
         <Row>
           <Col>
