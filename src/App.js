@@ -27,7 +27,8 @@ class App extends Component {
       loading: false,
       players: [],
       page: 0,
-      favs: []
+      favs: [],
+      listFavs: false
     };
 
     this.selectGame = this.selectGame.bind(this);
@@ -37,6 +38,7 @@ class App extends Component {
     this.handleNextPage = this.handleNextPage.bind(this);
     this.handlePreviousPage = this.handlePreviousPage.bind(this);
     this.handleAddToFav = this.handleAddToFav.bind(this);
+    this.handleDisplayFavs = this.handleDisplayFavs.bind(this);
   }
 
   selectGame(game) {
@@ -163,6 +165,9 @@ class App extends Component {
     console.log(this.state.favs);
   }
 
+  handleDisplayFavs() {
+    this.setState({ listFavs: true });
+  }
   render() {
     return (
       <section>
@@ -201,7 +206,7 @@ class App extends Component {
                 />
               </div>
             )}
-            {this.state.favs && (
+            {this.state.listFavs && (
               <div>
                 <PreviousNext
                   page={this.state.page}
@@ -209,7 +214,7 @@ class App extends Component {
                   handlePreviousPage={this.handlePreviousPage}
                 />
                 <GamesFavsList
-                  favList={this.state.favs}
+                  list={this.state.favs}
                   selectGame={this.selectGame}
                 />
               </div>

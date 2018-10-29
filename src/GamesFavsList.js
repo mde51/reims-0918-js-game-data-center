@@ -4,10 +4,10 @@ import { CardColumns } from "reactstrap";
 
 import GameFavThumbnail from "./GameFavThumbnail";
 
-const GamesFavsList = ({ favList, selectGame}) => (
+const GamesFavsList = ({ list, selectGame}) => (
   <section>
     <CardColumns className="mt-3">
-      {favList.map(game => (
+      {list.map(game => (
         <GameFavThumbnail {...game} selectGame={selectGame} key={game.id} />
       ))}
     </CardColumns>
