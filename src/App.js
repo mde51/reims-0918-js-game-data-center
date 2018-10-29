@@ -11,9 +11,12 @@ import GameMenu from "./GameMenu";
 import ChosenGame from "./ChosenGame";
 import PlayersList from "./PlayersList";
 import PreviousNext from "./Pagination";
+import FinalScores from "./FinalScores";
+import Footer from "./Footer";
 import { fetchGames } from "./api/games";
 import { newRound } from "./lib/newRound";
 import { scoreTable } from "./lib/scoreTable";
+
 
 class App extends Component {
   constructor(props) {
@@ -29,7 +32,8 @@ class App extends Component {
       players: [],
       page: 0,
       history: [],
-      endScores: null
+      endScores: null,
+      displayFinalScores: false
     };
 
     this.selectGame = this.selectGame.bind(this);
@@ -149,7 +153,8 @@ class App extends Component {
     this.setState({
       gameStarted: false,
       history: newHistory,
-      endScores: endScores
+      endScores: endScores,
+      displayFinalScores: true
     });
   }
 
@@ -183,11 +188,13 @@ class App extends Component {
           <Container>
             {this.state.gamesList && (
               <div>
+                <Row>
                 <PreviousNext
                   page={this.state.page}
                   handleNextPage={this.handleNextPage}
                   handlePreviousPage={this.handlePreviousPage}
                 />
+                </Row>
                 <GamesList
                   list={this.state.gamesList}
                   selectGame={this.selectGame}
@@ -197,8 +204,12 @@ class App extends Component {
             {this.state.selectedGame && (
               <div>
                 <ChosenGame game={this.state.selectedGame} />
+                {this.state.displayFinalScores && (
+                  <FinalScores list={this.state.endScores} />
+                )}
                 {!this.state.gameStarted && (
-                  <div>
+                  <div id="table">
+                    <p className="text">Add your usernames !</p>
                     <Row>
                       <Col>
                         <UserName
@@ -207,8 +218,12 @@ class App extends Component {
                         />
                       </Col>
                     </Row>
-                    <Button color="primary" onClick={this.handleGameStart}>
-                      START !
+                    <Button
+                      color="primary"
+                      className="start"
+                      onClick={this.handleGameStart}
+                    >
+                      START!
                     </Button>
                   </div>
                 )}
@@ -218,14 +233,19 @@ class App extends Component {
                     handleEndGame={this.handleEndGame}
                   />
                 )}
+                {this.state.tempPlayer && (
                 <PlayersList
                   list={this.state.players}
                   handleInputScoreChange={this.handleInputScoreChange}
                   submitFinalScorePlayer={this.submitFinalScorePlayer}
                 />
+                )}
               </div>
             )}
           </Container>
+          <footer className="footer">
+            <Footer />
+          </footer>
         </div>
       </section>
     );
