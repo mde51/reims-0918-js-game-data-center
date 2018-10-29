@@ -11,6 +11,7 @@ import GameMenu from "./GameMenu";
 import ChosenGame from "./ChosenGame";
 import PlayersList from "./PlayersList";
 import PreviousNext from "./Pagination";
+import PreviousNextFavs from "./PaginationFavs";
 import GamesFavsList from "./GamesFavsList";
 import FinalScores from "./FinalScores";
 import HistoryOfRounds from "./HistoryOfRounds";
@@ -31,6 +32,7 @@ class App extends Component {
       loading: false,
       players: [],
       page: 0,
+      favPage: 0,
       favs: [],
       listFavs: false,
       history: [],
@@ -51,6 +53,8 @@ class App extends Component {
     this.handleGameStart = this.handleGameStart.bind(this);
     this.handleNewRound = this.handleNewRound.bind(this);
     this.handleEndGame = this.handleEndGame.bind(this);
+    this.handleNextFavsPage = this.handleNextFavsPage.bind(this);
+    this.handlePreviousFavsPage = this.handlePreviousFavsPage.bind(this);
   }
 
   selectGame(game) {
@@ -114,6 +118,10 @@ class App extends Component {
     );
   };
 
+  handleNextFavsPage = ({ handleDisplayFavs }) => {
+    this.setState({ favPage: this.state.favPage + 1 }, { handleDisplayFavs });
+  };
+
   handlePreviousPage = () => {
     this.setState({ page: this.state.page - 1 }, () =>
       fetchGames(this.state.page, this.state.gameSearch)
@@ -124,6 +132,10 @@ class App extends Component {
           console.log("error", e);
         })
     );
+  };
+
+  handlePreviousFavsPage = ({ handleDisplayFavs }) => {
+    this.setState({ favPage: this.state.favPage - 1 }, { handleDisplayFavs });
   };
 
   handleGameSearchChange(event) {
@@ -225,13 +237,13 @@ class App extends Component {
             )}
             {this.state.listFavs && (
               <div>
-                <PreviousNext
-                  page={this.state.page}
-                  handleNextPage={this.handleNextPage}
-                  handlePreviousPage={this.handlePreviousPage}
+                <PreviousNextFavs
+                  favPage={this.state.favPage}
+                  handleNextFavsPage={this.handleNextFavsPage}
+                  handlePreviousFavsPage={this.handlePreviousFavsPage}
                 />
                 <GamesFavsList
-                  list={this.state.favs}
+                  list={this.state.favs.slice(0, 6)}
                   selectGame={this.selectGame}
                 />
               </div>
