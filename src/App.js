@@ -12,6 +12,7 @@ import ChosenGame from "./ChosenGame";
 import PlayersList from "./PlayersList";
 import PreviousNext from "./Pagination";
 import FinalScores from "./FinalScores";
+import HistoryOfRounds from "./HistoryOfRounds";
 import { fetchGames } from "./api/games";
 import { newRound } from "./lib/newRound";
 import { scoreTable } from "./lib/scoreTable";
@@ -201,7 +202,10 @@ class App extends Component {
               <div>
                 <ChosenGame game={this.state.selectedGame} />
                 {this.state.displayFinalScores && (
-                  <FinalScores list={this.state.endScores} />
+                  <div>
+                    <FinalScores list={this.state.endScores} />
+                    <HistoryOfRounds list={this.state.history} />
+                  </div>
                 )}
                 {!this.state.gameStarted && (
                   <div>

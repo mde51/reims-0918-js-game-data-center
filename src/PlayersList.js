@@ -20,6 +20,7 @@ const PlayersList = ({ list, handleInputScoreChange, submitFinalScorePlayer }) =
             handleInputScoreChange={handleInputScoreChange}
             handleFinalScorePlayer={submitFinalScorePlayer}
             i={index}
+            key={index}
           />
         ))}
       </tbody>
