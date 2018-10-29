@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Button, Container, Row, Col } from "reactstrap";
 
 import "./App.css";
 
@@ -12,8 +12,11 @@ import ChosenGame from "./ChosenGame";
 import PlayersList from "./PlayersList";
 import PreviousNext from "./Pagination";
 import GamesFavsList from "./GamesFavsList";
-
-const axios = require("axios");
+import FinalScores from "./FinalScores";
+import HistoryOfRounds from "./HistoryOfRounds";
+import { fetchGames } from "./api/games";
+import { newRound } from "./lib/newRound";
+import { scoreTable } from "./lib/scoreTable";
 
 class App extends Component {
   constructor(props) {
@@ -23,22 +26,31 @@ class App extends Component {
       tempPlayer: null,
       gamesList: null,
       selectedGame: null,
+      gameStarted: false,
       gameSearch: "",
       loading: false,
       players: [],
       page: 0,
       favs: [],
-      listFavs: false
+      listFavs: false,
+      history: [],
+      endScores: null,
+      displayFinalScores: false
     };
 
     this.selectGame = this.selectGame.bind(this);
     this.handleGameSearchChange = this.handleGameSearchChange.bind(this);
     this.handleNewPlayerChange = this.handleNewPlayerChange.bind(this);
+    this.handleInputScoreChange = this.handleInputScoreChange.bind(this);
     this.submitNewPlayer = this.submitNewPlayer.bind(this);
+    this.submitFinalScorePlayer = this.submitFinalScorePlayer.bind(this);
     this.handleNextPage = this.handleNextPage.bind(this);
     this.handlePreviousPage = this.handlePreviousPage.bind(this);
     this.handleAddToFav = this.handleAddToFav.bind(this);
     this.handleDisplayFavs = this.handleDisplayFavs.bind(this);
+    this.handleGameStart = this.handleGameStart.bind(this);
+    this.handleNewRound = this.handleNewRound.bind(this);
+    this.handleEndGame = this.handleEndGame.bind(this);
   }
 
   selectGame(game) {
@@ -53,7 +65,18 @@ class App extends Component {
     this.setState({ tempPlayer: event.target.value });
   }
 
+  handleInputScoreChange(name, inputScore) {
+    // console.log("inputscore")
+    this.setState({
+      players: this.state.players.map(
+        player =>
+          player.name === name ? { ...player, inputScore: inputScore } : player
+      )
+    });
+  }
+
   submitNewPlayer() {
+    // console.log("player");
     this.setState({
       players: [
         ...this.state.players,
@@ -64,20 +87,24 @@ class App extends Component {
     });
   }
 
+  submitFinalScorePlayer(name) {
+    // console.log("finalscore");
+    this.setState({
+      players: [
+        ...this.state.players.map(
+          player =>
+            name === player.name
+              ? { ...player, finalScore: parseInt(player.inputScore) }
+              : player
+        )
+      ]
+    });
+    // console.log(this.state.players);
+  }
+
   handleNextPage = () => {
     this.setState({ page: this.state.page + 1 }, () =>
-      axios
-        .get(
-          `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
-            this.state.gameSearch
-          }&order=popularity:desc&limit=6&offset=${this.state.page * 6}`,
-          {
-            headers: {
-              "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
-              Accept: "application/json"
-            }
-          }
-        )
+      fetchGames(this.state.page, this.state.gameSearch)
         .then(response => {
           return this.setState({ gamesList: response.data, loading: false });
         })
@@ -89,18 +116,7 @@ class App extends Component {
 
   handlePreviousPage = () => {
     this.setState({ page: this.state.page - 1 }, () =>
-      axios
-        .get(
-          `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
-            this.state.gameSearch
-          }&order=popularity:desc&limit=6&offset=${this.state.page * 6}`,
-          {
-            headers: {
-              "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
-              Accept: "application/json"
-            }
-          }
-        )
+      fetchGames(this.state.page, this.state.gameSearch)
         .then(response => {
           return this.setState({ gamesList: response.data, loading: false });
         })
@@ -113,18 +129,7 @@ class App extends Component {
   handleGameSearchChange(event) {
     //appel api ici
     this.setState({ loading: true });
-    axios
-      .get(
-        `https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&search=${
-          event.target.value
-        }&order=popularity:desc&limit=6`,
-        {
-          headers: {
-            "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
-            Accept: "application/json"
-          }
-        }
-      )
+    fetchGames(0, event.target.value)
       .then(response => {
         return this.setState({ gamesList: response.data, loading: false });
       })
@@ -136,18 +141,30 @@ class App extends Component {
     });
   }
 
+  handleGameStart() {
+    this.setState({ gameStarted: true });
+  }
+
+  handleNewRound() {
+    this.setState({
+      history: newRound(this.state.players, this.state.history)
+    });
+  }
+
+  handleEndGame() {
+    const newHistory = newRound(this.state.players, this.state.history);
+    const endScores = scoreTable(newHistory);
+    this.setState({
+      gameStarted: false,
+      history: newHistory,
+      endScores: endScores,
+      displayFinalScores: true
+    });
+  }
+
   componentDidMount() {
     this.setState({ loading: true });
-    axios
-      .get(
-        "https://fathomless-bayou-60427.herokuapp.com/https://api-endpoint.igdb.com/games/?fields=*&order=popularity:desc&limit=6",
-        {
-          headers: {
-            "user-key": "31f397b7994b8d46b0d5aff3b41eb376",
-            Accept: "application/json"
-          }
-        }
-      )
+    fetchGames(0)
       .then(response => {
         return this.setState({
           gamesList: response.data,
@@ -225,16 +242,38 @@ class App extends Component {
                   game={this.state.selectedGame}
                   onAddToFav={this.handleAddToFav}
                 />
-                <Row>
-                  <Col>
-                    <UserName
-                      handleChange={this.handleNewPlayerChange}
-                      submit={this.submitNewPlayer}
-                    />
-                  </Col>
-                </Row>
-                <GameMenu />
-                <PlayersList list={this.state.players} />
+                {this.state.displayFinalScores && (
+                  <FinalScores list={this.state.endScores} />
+                )}
+                {(this.state.gameStarted || this.state.displayFinalScores) && (
+                  <HistoryOfRounds list={this.state.history} />
+                )}
+                {!this.state.gameStarted && (
+                  <div>
+                    <Row>
+                      <Col>
+                        <UserName
+                          handleChange={this.handleNewPlayerChange}
+                          submitNewPlayers={this.submitNewPlayer}
+                        />
+                      </Col>
+                    </Row>
+                    <Button color="primary" onClick={this.handleGameStart}>
+                      START !
+                    </Button>
+                  </div>
+                )}
+                {this.state.gameStarted && (
+                  <GameMenu
+                    handleNewRound={this.handleNewRound}
+                    handleEndGame={this.handleEndGame}
+                  />
+                )}
+                <PlayersList
+                  list={this.state.players}
+                  handleInputScoreChange={this.handleInputScoreChange}
+                  submitFinalScorePlayer={this.submitFinalScorePlayer}
+                />
               </div>
             )}
           </Container>

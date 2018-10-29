@@ -18,7 +18,7 @@ const changeCoverSize = cover => {
 
 const ChosenGame = ({ game, onAddToFav }) => (
   <div>
-    <Card>
+    <Card className="chosengame">
       <Row>
         <Col col="6">
           {game.cover && (
