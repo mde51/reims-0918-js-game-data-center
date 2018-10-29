@@ -1,7 +1,7 @@
 import React from "react";
 import { Jumbotron, Button, Container, Row, Col } from "reactstrap";
 
-const MainJumbotron = ({handleDisplayFavs}) => {
+const MainJumbotron = ({}) => {
   return (
     <Jumbotron className="mt-4" className="opacity">
       <Container >
@@ -11,7 +11,7 @@ const MainJumbotron = ({handleDisplayFavs}) => {
             <Button color="primary">Recently played</Button>
           </Col>
           <Col>
-            <Button color="primary" onClick={handleDisplayFavs}>Favorites</Button>
+            <Button color="primary" >Favorites</Button>
           </Col>
         </Row>
       </Container>
