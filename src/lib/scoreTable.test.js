@@ -1,6 +1,7 @@
 import { scoreTable } from "./scoreTable.js";
 
 it("should return a table of object & global scores", () => {
+  const idGame = "unique_game_id"
   const history = [
     [
       { name: "Michel", score: 2 },
@@ -13,7 +14,8 @@ it("should return a table of object & global scores", () => {
       { name: "Gautier", score: 6 }
     ]
   ];
-  const expected = [
+  const expected = {
+    unique_game_id:[
     {
       name: "Michel",
       score: 5
@@ -26,6 +28,6 @@ it("should return a table of object & global scores", () => {
       name: "Gautier",
       score: 7
     }
-  ];
-  expect(scoreTable(history)).toEqual(expected);
+  ]};
+  expect(scoreTable(history, idGame)).toEqual(expected);
 });
