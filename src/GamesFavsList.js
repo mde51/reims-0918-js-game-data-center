@@ -8,7 +8,7 @@ const GamesFavsList = ({ list, selectGame}) => (
   <section>
     <CardColumns className="mt-3">
       {list.map(game => (
-        <GameFavThumbnail {...game} selectGame={selectGame} key={game.id} />
+        <GameFavThumbnail {...game} selectGame={selectGame} key={game.name} />
       ))}
     </CardColumns>
   </section>
