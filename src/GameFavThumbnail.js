@@ -7,7 +7,7 @@ const changeCoverSize = cover => {
   return urlToArray.join("/");
 };
 
-const GameFavs = ({ name, cover, summary, storyline, selectGame }) => (
+const GameFavThumbnail = ({ name, cover, summary, storyline, selectGame }) => (
   <div>
     <Card
       onClick={() =>
@@ -29,4 +29,4 @@ const GameFavs = ({ name, cover, summary, storyline, selectGame }) => (
   </div>
 );
 
-export default GameFavs;
+export default GameFavThumbnail;

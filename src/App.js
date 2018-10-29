@@ -11,7 +11,7 @@ import GameMenu from "./GameMenu";
 import ChosenGame from "./ChosenGame";
 import PlayersList from "./PlayersList";
 import PreviousNext from "./Pagination";
-import GamesFavs from "./GamesFavs";
+import GamesFavsList from "./GamesFavsList";
 
 const axios = require("axios");
 
@@ -37,7 +37,7 @@ class App extends Component {
     this.handleNextPage = this.handleNextPage.bind(this);
     this.handlePreviousPage = this.handlePreviousPage.bind(this);
     this.handleAddToFav = this.handleAddToFav.bind(this);
-    this.handleDisplayFav = this.handleDisplayFav.bind(this);
+    this.handleDisplayFavs = this.handleDisplayFavs.bind(this);
   }
 
   selectGame(game) {
@@ -159,24 +159,38 @@ class App extends Component {
   }
 
   handleAddToFav(game) {
-    console.log(game);
     this.setState(prevState => ({ favs: [...prevState.favs, game] }));
+
+    console.log(this.state.favs);
   }
 
-  handleDisplayFav(favs){
-    console.log(favs)};
-  
+  handleDisplayFavs(favs) {
+    this.setState({
+      gamesList: favs
+    });
+  }
 
   render() {
     return (
       <section>
         <div className="App">
           <header className="App-header">
-            <MainJumbotron favs={this.state.favs}/>
+            <MainJumbotron
+              favs={this.state.favs}
+              handleDisplayFavs={this.handleDisplayFavs}
+            />
             {this.state.loading && <div id="loader" />}
             <ResearchBar
               value={this.state.gameSearch}
               onChange={this.handleGameSearchChange}
+              onClick={(name, cover, summary, storyline, selectGame) =>
+                selectGame({
+                  name: name,
+                  cover: cover,
+                  summary: summary,
+                  storyline: storyline
+                })
+              }
             />
           </header>
 
@@ -192,9 +206,21 @@ class App extends Component {
                   list={this.state.gamesList}
                   selectGame={this.selectGame}
                 />
-            
               </div>
             )}
+            {/* {this.state. && (
+              <div>
+                <PreviousNext
+                  page={this.state.page}
+                  handleNextPage={this.handleNextPage}
+                  handlePreviousPage={this.handlePreviousPage}
+                />
+                <GamesFavsList
+                  favList={this.state.favs}
+                  selectGame={this.selectGame}
+                />
+              </div>
+            )} */}
             {this.state.selectedGame && (
               <div>
                 <ChosenGame

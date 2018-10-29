@@ -32,7 +32,7 @@ const ChosenGame = ({ game, onAddToFav }) => (
           <CardBody>
             <CardTitle>{game.name}</CardTitle>
             <CardText>{game.summary}</CardText>
-            <Button color="primary" onClick={() => onAddToFav(game.name)}>
+            <Button color="primary" onClick={() => onAddToFav(game)}>
               add this game to your favorites!
             </Button>
           </CardBody>
