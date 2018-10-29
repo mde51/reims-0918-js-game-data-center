@@ -4,7 +4,13 @@ import OneRound from "./OneRound";
 const HistoryOfRounds = ({ list }) => (
   <div>
     {list.map((round, indexRound) => (
-      <OneRound round={round} key={indexRound} />
+      <div key={indexRound}>
+        <p>
+          Round n°
+          {indexRound + 1}
+        </p>
+        <OneRound round={round} />
+      </div>
     ))}
   </div>
 );
