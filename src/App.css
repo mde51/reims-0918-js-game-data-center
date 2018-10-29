@@ -18,23 +18,19 @@
 }
 
 .tableau {
-  background-color:rgba(94, 131, 146, 0.883);
+  background-color: rgba(94, 131, 146, 0.883);
   text-align: center;
   border-style: solid;
-  font-family:monospace;
-  font-size: 30px;
-  color:rgb(255, 238, 2);
-  
+  font-family: "Audiowide", cursive;
+  font-size: 25px;
+  color: black;
 }
 
-.font{
-  font-family: monospace;
-  font-weight: bold;
+.font {
+  font-family: "Audiowide", cursive;
   font-size: 30px;
-  color:rgb(21, 255, 0);
+  color: black;
 }
-
-
 
 .App-header {
   display: flex;
@@ -85,28 +81,36 @@ h1 {
 }
 
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.searchbar{
+.searchbar {
   margin-top: -50px;
   margin-bottom: 50px;
 }
 
 .inputscore {
-  width : 200px;
+  width: 200px;
   display: inline-block;
   margin-right: 50px;
 }
 
 .pagination {
- margin: 0 250px;
+  margin: 0 250px;
 }
 
 .chosengame {

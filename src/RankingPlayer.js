@@ -5,7 +5,7 @@ const RankingPlayer = ({ handleInputScoreChange, name, i, handleFinalScorePlayer
   return (
     <tr>
       <th className="font">{i=i+1}</th>
-      <td className="font text-uppercase">{name}</td>
+      <td className="font text-capitalize">{name}</td>
       <td width="500px">
         <Input
           width="30px"

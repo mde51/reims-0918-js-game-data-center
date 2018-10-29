@@ -14,7 +14,7 @@ const PlayersList = ({ list, handleInputScoreChange, submitFinalScorePlayer }) =
           <th>Total</th>
         </tr>
       </thead>
-      <tbody class="table tableau">
+      <tbody class="table-striped">
         {list.map((player, index) => (
           <RankingPlayer
             {...player}
