@@ -1,21 +1,23 @@
 import React from "react";
 import { Button, Container, Row, Col } from "reactstrap";
 
-export default class Example extends React.Component {
-  render() {
-    return (
-      <div>
-        <Container>
-          <Row>
-            <Col>
-              <Button color="primary">Next round</Button>{" "}
-            </Col>
-            <Col>
-              <Button color="primary">New game</Button>{" "}
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    );
-  }
-}
+const GameMenu = ({ handleNewRound, handleEndGame }) => (
+  <div>
+    <Container>
+      <Row>
+        <Col>
+          <Button color="primary" onClick={handleNewRound}>
+            Next round
+          </Button>
+        </Col>
+        <Col>
+          <Button color="primary" onClick={handleEndGame}>
+            End game
+          </Button>
+        </Col>
+      </Row>
+    </Container>
+  </div>
+);
+
+export default GameMenu;
