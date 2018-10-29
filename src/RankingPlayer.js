@@ -9,7 +9,7 @@ const RankingPlayer = ({ handleInputScoreChange, name, i, handleFinalScorePlayer
       <td width="500px">
         <Input
           width="30px"
-          maxlength="5"
+          maxLength="5"
           type=""
           className="inputscore"
           placeholder="Write your score"
