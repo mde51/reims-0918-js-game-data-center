@@ -2,6 +2,7 @@ import React from "react";
 
 const Footer = ({}) => {
   return (
+    <footer>
     <div>
         <ul>
           <li className="footergame">
@@ -19,6 +20,7 @@ const Footer = ({}) => {
           </li>
         </ul>
     </div>
+    </footer>
   );
 };
 

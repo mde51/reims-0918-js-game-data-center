@@ -243,9 +243,7 @@ class App extends Component {
               </div>
             )}
           </Container>
-          <footer className="footer">
             <Footer />
-          </footer>
         </div>
       </section>
     );
