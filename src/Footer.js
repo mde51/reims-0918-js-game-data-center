@@ -6,7 +6,6 @@ const Footer = () => {
       <ul>
         <li className="footergame">
           <a class="nav-link text-white" href="#">
-            {" "}
             ©Game Date Center
           </a>
         </li>

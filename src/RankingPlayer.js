@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Input } from "reactstrap";
 
-const RankingPlayer = ({ handleInputScoreChange, name, i, handleFinalScorePlayer, finalScore}) => {
+const RankingPlayer = ({ handleInputScoreChange, name, rank, handleFinalScorePlayer, finalScore}) => {
   return (
     <tr>
-      <th className="font">{i=i+1}</th>
+      <th className="font">{rank+1}</th>
       <td className="font text-capitalize">{name}</td>
       <td width="500px">
         <Input
