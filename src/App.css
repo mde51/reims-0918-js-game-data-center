@@ -32,6 +32,14 @@
   color: black;
 }
 
+.title {
+  font-family: "Audiowide", cursive;
+  font-size: 30px;
+  background: linear-gradient(#1657f5 0%, #1657f5 50%, #163287 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .App-header {
   display: flex;
   flex-direction: column;
