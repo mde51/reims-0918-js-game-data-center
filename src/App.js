@@ -55,6 +55,7 @@ class App extends Component {
     this.handleXClick = this.handleXClick.bind(this);
   }
 
+
   selectGame(game) {
     this.setState({
       selectedGame: game,
@@ -118,6 +119,7 @@ class App extends Component {
     );
   };
 
+
   handlePreviousPage = () => {
     this.setState({ page: this.state.page - 1 }, () =>
       fetchGames(this.state.page, this.state.gameSearch)
@@ -129,6 +131,7 @@ class App extends Component {
         })
     );
   };
+
 
   handleGameSearchChange(event) {
     //appel api ici
@@ -250,13 +253,8 @@ class App extends Component {
             )}
             {this.state.listFavs && (
               <div>
-                <PreviousNext
-                  page={this.state.page}
-                  handleNextPage={this.handleNextPage}
-                  handlePreviousPage={this.handlePreviousPage}
-                />
                 <GamesFavsList
-                  list={this.state.favs}
+                  listFavs={this.state.favs.slice(0, 6)}
                   selectGame={this.selectGame}
                 />
               </div>
