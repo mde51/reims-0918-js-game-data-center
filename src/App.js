@@ -33,7 +33,7 @@ class App extends Component {
       page: 0,
       favs: [],
       listFavs: false,
-      history: [],
+      history: {},
       endScores: null,
       displayFinalScores: false
     };
@@ -147,13 +147,13 @@ class App extends Component {
 
   handleNewRound() {
     this.setState({
-      history: newRound(this.state.players, this.state.history)
+      history: newRound(this.state.players, this.state.history, this.state.selectedGame.id)
     });
   }
 
   handleEndGame() {
-    const newHistory = newRound(this.state.players, this.state.history);
-    const endScores = scoreTable(newHistory);
+    const newHistory = newRound(this.state.players, this.state.history, this.state.selectedGame.id);
+    const endScores = scoreTable(newHistory, this.state.selectedGame.id);
     this.setState({
       gameStarted: false,
       history: newHistory,
@@ -198,12 +198,13 @@ class App extends Component {
             <ResearchBar
               value={this.state.gameSearch}
               onChange={this.handleGameSearchChange}
-              onClick={(name, cover, summary, storyline, selectGame) =>
+              onClick={(name, cover, summary, storyline, id, selectGame) =>
                 selectGame({
                   name: name,
                   cover: cover,
                   summary: summary,
-                  storyline: storyline
+                  storyline: storyline,
+                  id: id
                 })
               }
             />
@@ -246,7 +247,7 @@ class App extends Component {
                   <FinalScores list={this.state.endScores} />
                 )}
                 {(this.state.gameStarted || this.state.displayFinalScores) && (
-                  <HistoryOfRounds list={this.state.history} />
+                  <HistoryOfRounds history={this.state.history} gameId={this.state.selectedGame.id} />
                 )}
                 {!this.state.gameStarted && (
                   <div>
