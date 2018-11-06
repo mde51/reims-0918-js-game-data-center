@@ -24,7 +24,7 @@ class App extends Component {
     super(props);
     this.state = {
       newPlayer: null,
-      tempPlayer: null,
+      tempPlayer: "",
       gamesList: null,
       selectedGame: null,
       gameStarted: false,
@@ -120,13 +120,17 @@ class App extends Component {
 
   submitNewPlayer() {
     // console.log("player");
+    const tempPlayer = this.state.tempPlayer;
     this.setState({
       players: [
         ...this.state.players,
         {
-          name: this.state.tempPlayer
+          name: tempPlayer,
+          inputScore: 0,
+          finalScore: 0
         }
-      ]
+      ],
+      tempPlayer: ""
     });
   }
 
@@ -134,12 +138,10 @@ class App extends Component {
     // console.log("finalscore");
     this.setState({
       players: [
-        ...this.state.players.map(
-          player =>
-            name === player.name
-              ? { ...player, finalScore: parseInt(player.inputScore) }
-              : player
-        )
+        ...this.state.players.map(player => {
+          const tempScore = parseInt(player.inputScore);
+          return name === player.name ? { ...player, inputScore: 0, finalScore: tempScore } : player;
+        })
       ]
     });
     // console.log(this.state.players);
@@ -319,6 +321,7 @@ class App extends Component {
                     <Row>
                       <Col>
                         <UserName
+                          tempPlayer={this.state.tempPlayer}
                           handleChange={this.handleNewPlayerChange}
                           submitNewPlayers={this.submitNewPlayer}
                         />
@@ -339,7 +342,7 @@ class App extends Component {
                     handleEndGame={this.handleEndGame}
                   />
                 )}
-                {this.state.tempPlayer && (
+                {this.state.players.length > 0 && (
                   <PlayersList
                     list={this.state.players}
                     handleInputScoreChange={this.handleInputScoreChange}
