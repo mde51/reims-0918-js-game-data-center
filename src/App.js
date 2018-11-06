@@ -36,7 +36,8 @@ class App extends Component {
       listFavs: false,
       history: {},
       endScores: null,
-      displayFinalScores: false
+      displayFinalScores: false,
+      disabledFav: false,
     };
 
     this.selectGame = this.selectGame.bind(this);
@@ -53,8 +54,47 @@ class App extends Component {
     this.handleNewRound = this.handleNewRound.bind(this);
     this.handleEndGame = this.handleEndGame.bind(this);
     this.handleXClick = this.handleXClick.bind(this);
+    // this.disableAddToFav = this.disableAddToFav.bind(this);
   }
+  // handleAddToFav(game) {
+  //   this.setState(prevState => ({ favs: [...prevState.favs, game] }));
 
+  //   console.log(this.state.favs);
+  // }
+
+  // handleAddToFav(game) {
+  //   const gameId = this.state.selectedGame.id;
+  //   const check = (favArray, gameId) => {
+  //     for (let i = 0; i < favArray.length; i++) {
+  //       if (favArray[i].id === gameId) {
+  //         return true;
+  //       }
+  //     }
+  //     return false;
+  //   }
+  //   if (check(this.state.favs, gameId)) {
+  //     this.setState({ disabledFav: true});
+  //   }else {
+  //     this.setState(prevState => ({ favs: [...prevState.favs, game] }));
+  //   }
+  // }
+
+  handleAddToFav(game) {
+    const gameId = this.state.selectedGame.id;
+    const check = (favArray, gameId) => {
+      for (let i = 0; i < favArray.length; i++) {
+        if (favArray[i].id === gameId) {
+          return true;
+        }
+      }
+      return false;
+    }
+    if (check(this.state.favs, gameId)) {
+      this.setState({ disabledFav: true});
+    }else {
+      this.setState({ favs: [...this.state.favs, game] });
+    }
+  }
 
   selectGame(game) {
     this.setState({
@@ -192,11 +232,11 @@ class App extends Component {
       });
   }
 
-  handleAddToFav(game) {
-    this.setState(prevState => ({ favs: [...prevState.favs, game] }));
+  // handleAddToFav(game) {
+  //   this.setState(prevState => ({ favs: [...prevState.favs, game] }));
 
-    console.log(this.state.favs);
-  }
+  //   console.log(this.state.favs);
+  // }
 
   handleDisplayFavs() {
     this.setState({ listFavs: true });
@@ -260,6 +300,7 @@ class App extends Component {
             {this.state.selectedGame && (
               <div>
                 <ChosenGame
+                disabledFav={this.state.disabledFav}
                   game={this.state.selectedGame}
                   onAddToFav={this.handleAddToFav}
                 />
