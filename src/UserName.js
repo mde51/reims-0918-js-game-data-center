@@ -1,7 +1,7 @@
 import React from "react";
 import { Input, Button } from "reactstrap";
 
-const UserName = ({ handleChange, submitNewPlayers }) => (
+const UserName = ({ tempPlayer, handleChange, submitNewPlayers }) => (
   <div>
       <Input
         width="30px"
@@ -12,6 +12,7 @@ const UserName = ({ handleChange, submitNewPlayers }) => (
         id="idUserName"
         placeholder="Write your username here !"
         onChange={handleChange}
+        value={tempPlayer}
       />
         <Button color="primary" className="addplayerbutton" onClick={submitNewPlayers}>
           Add Player

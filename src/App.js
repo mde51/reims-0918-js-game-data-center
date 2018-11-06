@@ -24,7 +24,7 @@ class App extends Component {
     super(props);
     this.state = {
       newPlayer: null,
-      tempPlayer: null,
+      tempPlayer: "",
       gamesList: null,
       selectedGame: null,
       gameStarted: false,
@@ -79,14 +79,16 @@ class App extends Component {
 
   submitNewPlayer() {
     // console.log("player");
+    const temp = this.state.tempPlayer;
     this.setState({
       players: [
         ...this.state.players,
         {
-          name: this.state.tempPlayer
+          name: temp
         }
-      ]
-    });
+      ],
+      tempPlayer: ""
+    }); 
   }
 
   submitFinalScorePlayer(name) {
@@ -270,6 +272,7 @@ class App extends Component {
                     <Row>
                       <Col>
                         <UserName
+                          tempPlayer={this.state.tempPlayer}
                           handleChange={this.handleNewPlayerChange}
                           submitNewPlayers={this.submitNewPlayer}
                         />
@@ -290,7 +293,7 @@ class App extends Component {
                     handleEndGame={this.handleEndGame}
                   />
                 )}
-                {this.state.tempPlayer && (
+                {(this.state.players.length > 0) && (
                   <PlayersList
                     list={this.state.players}
                     handleInputScoreChange={this.handleInputScoreChange}
