@@ -189,3 +189,7 @@ h1 {
   margin-top: 10px;
   margin-right: 10px;
 }
+
+.alert {
+  color: red;
+}
