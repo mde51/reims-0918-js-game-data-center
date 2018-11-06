@@ -13,6 +13,7 @@ import PlayersList from "./PlayersList";
 import PreviousNext from "./Pagination";
 import GamesFavsList from "./GamesFavsList";
 import FinalScores from "./FinalScores";
+import Footer from "./Footer";
 import HistoryOfRounds from "./HistoryOfRounds";
 import { fetchGames } from "./api/games";
 import { newRound } from "./lib/newRound";
@@ -129,17 +130,20 @@ class App extends Component {
 
   handleGameSearchChange(event) {
     //appel api ici
-    this.setState({ loading: true });
-    fetchGames(0, event.target.value)
-      .then(response => {
-        return this.setState({ gamesList: response.data, loading: false });
-      })
-      .catch(e => {
-        console.log("error", e);
+    if (event.target.value.length > 2) {
+      this.setState({ loading: true });
+      fetchGames(0, event.target.value)
+        .then(response => {
+          return this.setState({ gamesList: response.data, loading: false });
+        })
+        .catch(e => {
+          console.log("error", e);
+        });
+      }
+      //mise a jour du champ
+      this.setState({
+        gameSearch: event.target.value
       });
-    this.setState({
-      gameSearch: event.target.value
-    });
   }
 
   handleGameStart() {
@@ -221,11 +225,13 @@ class App extends Component {
           <Container>
             {this.state.gamesList && (
               <div>
-                <PreviousNext
-                  page={this.state.page}
-                  handleNextPage={this.handleNextPage}
-                  handlePreviousPage={this.handlePreviousPage}
-                />
+                <Row>
+                  <PreviousNext
+                    page={this.state.page}
+                    handleNextPage={this.handleNextPage}
+                    handlePreviousPage={this.handlePreviousPage}
+                  />
+                </Row>
                 <GamesList
                   list={this.state.gamesList}
                   selectGame={this.selectGame}
@@ -258,7 +264,8 @@ class App extends Component {
                   <HistoryOfRounds list={this.state.history} />
                 )}
                 {!this.state.gameStarted && (
-                  <div>
+                  <div id="table">
+                    <p className="text">Add your usernames !</p>
                     <Row>
                       <Col>
                         <UserName
@@ -267,8 +274,12 @@ class App extends Component {
                         />
                       </Col>
                     </Row>
-                    <Button color="primary" onClick={this.handleGameStart}>
-                      START !
+                    <Button
+                      color="primary"
+                      className="start"
+                      onClick={this.handleGameStart}
+                    >
+                      START!
                     </Button>
                   </div>
                 )}
@@ -278,14 +289,18 @@ class App extends Component {
                     handleEndGame={this.handleEndGame}
                   />
                 )}
-                <PlayersList
-                  list={this.state.players}
-                  handleInputScoreChange={this.handleInputScoreChange}
-                  submitFinalScorePlayer={this.submitFinalScorePlayer}
-                />
+                {this.state.tempPlayer && (
+                  <PlayersList
+                    list={this.state.players}
+                    handleInputScoreChange={this.handleInputScoreChange}
+                    submitFinalScorePlayer={this.submitFinalScorePlayer}
+                    gameStarted={this.state.gameStarted}
+                  />
+                )}
               </div>
             )}
           </Container>
+          <Footer />
         </div>
       </section>
     );
