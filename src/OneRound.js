@@ -2,23 +2,21 @@ import React from "react";
 import { Table } from "reactstrap";
 
 const OneRound = ({ round }) => (
-  <Table>
-  <table className="table table-striped">
-    <thead className="tableauRound">
+  <Table  striped>
+    <thead className="tableau">
       <tr>
         <th>name</th>
         <th>score</th>
       </tr>
     </thead>
     {round.map((player, indexPlayer) => (
-      <tbody key={indexPlayer} className="table-striped" >
+      <tbody key={indexPlayer}  >
         <tr>
           <td>{player.name}</td>
           <td>{player.score}</td>
         </tr>
       </tbody>
     ))}
-    </table>
   </Table>
 );
 
