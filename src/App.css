@@ -85,6 +85,11 @@ h1 {
   margin-bottom: 50px;
 }
 
+.buttonclean {
+  margin-top: -50px;
+  margin-bottom: 50px;
+}
+
 .inputscore {
   width : 200px;
   display: inline-block;
