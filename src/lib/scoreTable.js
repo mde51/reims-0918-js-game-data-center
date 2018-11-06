@@ -25,5 +25,5 @@ export const scoreTable = (history, gameId) => {
     name: key,
     score: objectPlayers[key]
   }));
-  return ({[gameId] : result});
+  return (result);
 };
