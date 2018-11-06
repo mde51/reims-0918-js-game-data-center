@@ -232,7 +232,7 @@ class App extends Component {
   };
   render() {
     return (
-      <section className="sect">
+      <section>
         <div className="App">
           <header className="App-header">
             <MainJumbotron
@@ -289,12 +289,7 @@ class App extends Component {
                 {this.state.displayFinalScores && (
                   <FinalScores list={this.state.endScores} />
                 )}
-                {(this.state.gameStarted || this.state.displayFinalScores) && (
-                  <HistoryOfRounds
-                    history={this.state.history}
-                    gameId={this.state.selectedGame.id}
-                  />
-                )}
+
                 {!this.state.gameStarted && (
                   <div id="table">
                     <p className="text">Add your usernames !</p>
@@ -335,11 +330,17 @@ class App extends Component {
                     gameStarted={this.state.gameStarted}
                   />
                 )}
+                {(this.state.gameStarted || this.state.displayFinalScores) && (
+                  <HistoryOfRounds
+                    history={this.state.history}
+                    gameId={this.state.selectedGame.id}
+                  />
+                )}
               </div>
             )}
           </Container>
+          <Footer />
         </div>
-        <Footer />
       </section>
     );
   }

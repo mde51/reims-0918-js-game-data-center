@@ -4,6 +4,7 @@ import { Table } from "reactstrap";
 
 const FinalScores = ({ list }) => (
   <section className="mt-4">
+    <p className="title">Your Final Scores</p>
     <Table bordered className="tableau">
       <thead>
         <tr>
