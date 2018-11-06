@@ -55,7 +55,6 @@ class App extends Component {
     this.handleXClick = this.handleXClick.bind(this);
   }
 
-
   selectGame(game) {
     this.setState({
       selectedGame: game,
@@ -69,7 +68,6 @@ class App extends Component {
   }
 
   handleInputScoreChange(name, inputScore) {
-    // console.log("inputscore")
     this.setState({
       players: this.state.players.map(
         player =>
@@ -79,7 +77,6 @@ class App extends Component {
   }
 
   submitNewPlayer() {
-    // console.log("player");
     const tempPlayer = this.state.tempPlayer;
     this.setState({
       players: [
@@ -95,16 +92,16 @@ class App extends Component {
   }
 
   submitFinalScorePlayer(name) {
-    // console.log("finalscore");
     this.setState({
       players: [
         ...this.state.players.map(player => {
           const tempScore = parseInt(player.inputScore);
-          return name === player.name ? { ...player, inputScore: 0, finalScore: tempScore } : player;
+          return name === player.name
+            ? { ...player, inputScore: 0, finalScore: tempScore }
+            : player;
         })
       ]
     });
-    // console.log(this.state.players);
   }
 
   handleNextPage = () => {
@@ -119,7 +116,6 @@ class App extends Component {
     );
   };
 
-
   handlePreviousPage = () => {
     this.setState({ page: this.state.page - 1 }, () =>
       fetchGames(this.state.page, this.state.gameSearch)
@@ -132,9 +128,7 @@ class App extends Component {
     );
   };
 
-
   handleGameSearchChange(event) {
-    //appel api ici
     if (event.target.value.length > 2) {
       this.setState({ loading: true });
       fetchGames(0, event.target.value)
@@ -145,7 +139,6 @@ class App extends Component {
           console.log("error", e);
         });
     }
-    //mise a jour du champ
     this.setState({
       gameSearch: event.target.value
     });
@@ -172,6 +165,19 @@ class App extends Component {
       this.state.selectedGame.id
     );
     const endScores = scoreTable(newHistory, this.state.selectedGame.id);
+    const compare = (a, b) => {
+      const scoreA = a.score;
+      const scoreB = b.score;
+      let comparison = 0;
+      if (scoreA > scoreB) {
+        comparison = -1;
+      } else if (scoreA < scoreB) {
+        comparison = 1;
+      }
+      return comparison;
+    };
+    endScores.sort(compare);
+
     this.setState({
       gameStarted: false,
       history: newHistory,
