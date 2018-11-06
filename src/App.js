@@ -37,7 +37,6 @@ class App extends Component {
       history: {},
       endScores: null,
       displayFinalScores: false,
-      disabledFav: false,
     };
 
     this.selectGame = this.selectGame.bind(this);
@@ -54,30 +53,7 @@ class App extends Component {
     this.handleNewRound = this.handleNewRound.bind(this);
     this.handleEndGame = this.handleEndGame.bind(this);
     this.handleXClick = this.handleXClick.bind(this);
-    // this.disableAddToFav = this.disableAddToFav.bind(this);
   }
-  // handleAddToFav(game) {
-  //   this.setState(prevState => ({ favs: [...prevState.favs, game] }));
-
-  //   console.log(this.state.favs);
-  // }
-
-  // handleAddToFav(game) {
-  //   const gameId = this.state.selectedGame.id;
-  //   const check = (favArray, gameId) => {
-  //     for (let i = 0; i < favArray.length; i++) {
-  //       if (favArray[i].id === gameId) {
-  //         return true;
-  //       }
-  //     }
-  //     return false;
-  //   }
-  //   if (check(this.state.favs, gameId)) {
-  //     this.setState({ disabledFav: true});
-  //   }else {
-  //     this.setState(prevState => ({ favs: [...prevState.favs, game] }));
-  //   }
-  // }
 
   handleAddToFav(game) {
     const gameId = this.state.selectedGame.id;
@@ -88,10 +64,8 @@ class App extends Component {
         }
       }
       return false;
-    }
-    if (check(this.state.favs, gameId)) {
-      this.setState({ disabledFav: true});
-    }else {
+    };
+    if (!check(this.state.favs, gameId)) {
       this.setState({ favs: [...this.state.favs, game] });
     }
   }
@@ -140,7 +114,9 @@ class App extends Component {
       players: [
         ...this.state.players.map(player => {
           const tempScore = parseInt(player.inputScore);
-          return name === player.name ? { ...player, inputScore: 0, finalScore: tempScore } : player;
+          return name === player.name
+            ? { ...player, inputScore: 0, finalScore: tempScore }
+            : player;
         })
       ]
     });
@@ -159,7 +135,6 @@ class App extends Component {
     );
   };
 
-
   handlePreviousPage = () => {
     this.setState({ page: this.state.page - 1 }, () =>
       fetchGames(this.state.page, this.state.gameSearch)
@@ -171,7 +146,6 @@ class App extends Component {
         })
     );
   };
-
 
   handleGameSearchChange(event) {
     //appel api ici
@@ -234,11 +208,6 @@ class App extends Component {
       });
   }
 
-  // handleAddToFav(game) {
-  //   this.setState(prevState => ({ favs: [...prevState.favs, game] }));
-
-  //   console.log(this.state.favs);
-  // }
 
   handleDisplayFavs() {
     this.setState({ listFavs: true });
@@ -250,6 +219,14 @@ class App extends Component {
     });
   };
   render() {
+    const check = (favArray, gameId) => {
+      for (let i = 0; i < favArray.length; i++) {
+        if (favArray[i].id === gameId) {
+          return true;
+        }
+      }
+      return false;
+    };
     return (
       <section>
         <div className="App">
@@ -302,7 +279,10 @@ class App extends Component {
             {this.state.selectedGame && (
               <div>
                 <ChosenGame
-                disabledFav={this.state.disabledFav}
+                  disabledFav={check(
+                    this.state.favs,
+                    this.state.selectedGame.id
+                  )}
                   game={this.state.selectedGame}
                   onAddToFav={this.handleAddToFav}
                 />
