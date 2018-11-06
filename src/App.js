@@ -24,7 +24,7 @@ class App extends Component {
     super(props);
     this.state = {
       newPlayer: null,
-      tempPlayer: null,
+      tempPlayer: "",
       gamesList: null,
       selectedGame: null,
       gameStarted: false,
@@ -79,13 +79,17 @@ class App extends Component {
 
   submitNewPlayer() {
     // console.log("player");
+    const tempPlayer = this.state.tempPlayer;
     this.setState({
       players: [
         ...this.state.players,
         {
-          name: this.state.tempPlayer
+          name: tempPlayer,
+          inputScore: 0,
+          finalScore: 0
         }
-      ]
+      ],
+      tempPlayer: ""
     });
   }
 
@@ -93,12 +97,10 @@ class App extends Component {
     // console.log("finalscore");
     this.setState({
       players: [
-        ...this.state.players.map(
-          player =>
-            name === player.name
-              ? { ...player, finalScore: parseInt(player.inputScore) }
-              : player
-        )
+        ...this.state.players.map(player => {
+          const tempScore = parseInt(player.inputScore);
+          return name === player.name ? { ...player, inputScore: 0, finalScore: tempScore } : player;
+        })
       ]
     });
     // console.log(this.state.players);
@@ -139,11 +141,11 @@ class App extends Component {
         .catch(e => {
           console.log("error", e);
         });
-      }
-      //mise a jour du champ
-      this.setState({
-        gameSearch: event.target.value
-      });
+    }
+    //mise a jour du champ
+    this.setState({
+      gameSearch: event.target.value
+    });
   }
 
   handleGameStart() {
@@ -152,12 +154,20 @@ class App extends Component {
 
   handleNewRound() {
     this.setState({
-      history: newRound(this.state.players, this.state.history, this.state.selectedGame.id)
+      history: newRound(
+        this.state.players,
+        this.state.history,
+        this.state.selectedGame.id
+      )
     });
   }
 
   handleEndGame() {
-    const newHistory = newRound(this.state.players, this.state.history, this.state.selectedGame.id);
+    const newHistory = newRound(
+      this.state.players,
+      this.state.history,
+      this.state.selectedGame.id
+    );
     const endScores = scoreTable(newHistory, this.state.selectedGame.id);
     this.setState({
       gameStarted: false,
@@ -208,7 +218,6 @@ class App extends Component {
             {this.state.loading && <div id="loader" />}
             <ResearchBar
               gameSearch={this.state.gameSearch}
-
               onXClick={this.handleXClick}
               onChange={this.handleGameSearchChange}
               onClick={(name, cover, summary, storyline, id, selectGame) =>
@@ -262,7 +271,10 @@ class App extends Component {
                   <FinalScores list={this.state.endScores} />
                 )}
                 {(this.state.gameStarted || this.state.displayFinalScores) && (
-                  <HistoryOfRounds history={this.state.history} gameId={this.state.selectedGame.id} />
+                  <HistoryOfRounds
+                    history={this.state.history}
+                    gameId={this.state.selectedGame.id}
+                  />
                 )}
                 {!this.state.gameStarted && (
                   <div id="table">
@@ -270,6 +282,7 @@ class App extends Component {
                     <Row>
                       <Col>
                         <UserName
+                          tempPlayer={this.state.tempPlayer}
                           handleChange={this.handleNewPlayerChange}
                           submitNewPlayers={this.submitNewPlayer}
                         />
@@ -290,7 +303,7 @@ class App extends Component {
                     handleEndGame={this.handleEndGame}
                   />
                 )}
-                {this.state.tempPlayer && (
+                {this.state.players.length > 0 && (
                   <PlayersList
                     list={this.state.players}
                     handleInputScoreChange={this.handleInputScoreChange}
