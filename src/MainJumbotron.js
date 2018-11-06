@@ -10,9 +10,6 @@ const MainJumbotron = ({ handleDisplayFavs }) => {
         </section>
         <Row>
           <Col>
-            <Button color="primary">Recently played</Button>
-          </Col>
-          <Col>
             <Button color="primary" onClick={handleDisplayFavs}>
               Favorites
               <img
