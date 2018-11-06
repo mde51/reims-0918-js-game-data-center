@@ -17,7 +17,6 @@ import { fetchGames } from "./api/games";
 import { newRound } from "./lib/newRound";
 import { scoreTable } from "./lib/scoreTable";
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -189,11 +188,11 @@ class App extends Component {
             {this.state.gamesList && (
               <div>
                 <Row>
-                <PreviousNext
-                  page={this.state.page}
-                  handleNextPage={this.handleNextPage}
-                  handlePreviousPage={this.handlePreviousPage}
-                />
+                  <PreviousNext
+                    page={this.state.page}
+                    handleNextPage={this.handleNextPage}
+                    handlePreviousPage={this.handlePreviousPage}
+                  />
                 </Row>
                 <GamesList
                   list={this.state.gamesList}
@@ -234,16 +233,17 @@ class App extends Component {
                   />
                 )}
                 {this.state.tempPlayer && (
-                <PlayersList
-                  list={this.state.players}
-                  handleInputScoreChange={this.handleInputScoreChange}
-                  submitFinalScorePlayer={this.submitFinalScorePlayer}
-                />
+                  <PlayersList
+                    list={this.state.players}
+                    handleInputScoreChange={this.handleInputScoreChange}
+                    submitFinalScorePlayer={this.submitFinalScorePlayer}
+                    gameStarted={this.state.gameStarted}
+                  />
                 )}
               </div>
             )}
           </Container>
-            <Footer />
+          <Footer />
         </div>
       </section>
     );

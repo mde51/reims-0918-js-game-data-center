@@ -162,13 +162,13 @@ h1 {
   position: relative;
   height: 40px;
   margin-top : 50px;
-  text-align: justify;
+  text-align: center;
   list-style: none;
 }
 
 .footergame {
   float: left;
-  margin-left: 515px;
+  margin-left: 700px;
   list-style: none;
 }
 

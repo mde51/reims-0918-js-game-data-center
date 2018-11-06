@@ -2,7 +2,7 @@ import React from "react";
 import RankingPlayer from "./RankingPlayer";
 import { Table } from "reactstrap";
 
-const PlayersList = ({ list, handleInputScoreChange, submitFinalScorePlayer }) => (
+const PlayersList = ({ list, handleInputScoreChange, submitFinalScorePlayer, gameStarted }) => (
   <section className="mt-4">
     <Table>
     <table className="table table-striped">
@@ -20,6 +20,7 @@ const PlayersList = ({ list, handleInputScoreChange, submitFinalScorePlayer }) =
             {...player}
             handleInputScoreChange={handleInputScoreChange}
             handleFinalScorePlayer={submitFinalScorePlayer}
+            gameStarted={gameStarted}
             rank={index}
           />
         ))}
