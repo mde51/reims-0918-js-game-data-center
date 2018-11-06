@@ -163,32 +163,27 @@ h1 {
 }
 
 .footer {
-  background: linear-gradient(to bottom,
-  #99B3E6
-  ,
-  #1F3D7A
-  );
+  background: linear-gradient(to bottom, #99b3e6, #1f3d7a);
   position: relative;
-  height: 40px;
-  margin-top : 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-top: 50px;
   width: 100%;
-  }
-  
-  .footergame {
+  padding-top: 5px;
+  height: 35px;
+  padding-top: 10px;
+}
+
+.game {
   float: left;
-  list-style: none;
-  margin-left: -40px;
-  }
-  
-  .footermentions {
+}
+
+.mentions {
+  margin-left: 20px;
   float: left;
-  list-style: none;
-  }
-  
-  .footername {
+}
+
+.made {
   float: right;
-  color: white;
-  list-style: none;
-  margin-top: 8px;
-  margin-right: 20px;
-  } 
+}
