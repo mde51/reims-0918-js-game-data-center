@@ -119,7 +119,18 @@ class App extends Component {
   };
 
   handleNextFavsPage = ({ handleDisplayFavs }) => {
-    this.setState({ favPage: this.state.favPage + 1 }, { handleDisplayFavs });
+    this.setState(
+      { favPage: this.state.favPage + 1 },
+      { handleDisplayFavs },
+      () =>
+        fetchGames(this.state.favPage, this.state.favs)
+          .then(response => {
+            return this.setState({ favs: response.data, loading: false });
+          })
+          .catch(e => {
+            console.log("error", e);
+          })
+    );
   };
 
   handlePreviousPage = () => {
@@ -135,7 +146,18 @@ class App extends Component {
   };
 
   handlePreviousFavsPage = ({ handleDisplayFavs }) => {
-    this.setState({ favPage: this.state.favPage - 1 }, { handleDisplayFavs });
+    this.setState(
+      { favPage: this.state.favPage - 1 },
+      { handleDisplayFavs },
+      () =>
+        fetchGames(this.state.favPage, this.state.favs)
+          .then(response => {
+            return this.setState({ favs: response.data, loading: false });
+          })
+          .catch(e => {
+            console.log("error", e);
+          })
+    );
   };
 
   handleGameSearchChange(event) {
@@ -243,7 +265,7 @@ class App extends Component {
                   handlePreviousFavsPage={this.handlePreviousFavsPage}
                 />
                 <GamesFavsList
-                  list={this.state.favs.slice(0, 6)}
+                  listFavs={this.state.favs.slice(0, 6)}
                   selectGame={this.selectGame}
                 />
               </div>
