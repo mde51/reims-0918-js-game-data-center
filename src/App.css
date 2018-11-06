@@ -26,6 +26,15 @@
   color: black;
 }
 
+.tableauRound {
+  background-color: rgba(58, 82, 94, 0.883);
+  text-align: center;
+  border-style: solid;
+  font-family: "Audiowide", cursive;
+  font-size: 25px;
+  color: black;
+}
+
 .font {
   font-family: "Audiowide", cursive;
   font-size: 30px;
