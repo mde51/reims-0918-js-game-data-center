@@ -24,7 +24,7 @@ const PlayersList = ({
             <RankingPlayer
               {...player}
               handleInputScoreChange={handleInputScoreChange}
-              handleFinalScorePlayer={submitFinalScorePlayer}
+              submitFinalScorePlayer={submitFinalScorePlayer}
               gameStarted={gameStarted}
               rank={index}
               key={index}
