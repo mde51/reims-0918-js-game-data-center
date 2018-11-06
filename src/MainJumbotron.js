@@ -1,17 +1,31 @@
 import React from "react";
 import { Jumbotron, Button, Container, Row, Col } from "reactstrap";
 
-const MainJumbotron = () => {
+const MainJumbotron = ({ handleDisplayFavs }) => {
   return (
-    <Jumbotron>
+    <Jumbotron className="mt-1">
       <Container>
+<<<<<<< HEAD
         <Row><h1 className="display-3">GAME DATA CENTER</h1></Row>
+=======
+        <section>
+          <img src={require("./Logo.png")} alt="" />
+        </section>
+>>>>>>> 4407859f642e0ed01cbe6dc2fd95a99d7b4d4a25
         <Row>
           <Col>
             <Button color="primary">Recently played</Button>
           </Col>
           <Col>
-            <Button color="primary">Favorites</Button>
+            <Button color="primary" onClick={handleDisplayFavs}>
+              Favorites
+              <img
+                alt="favorite"
+                src={require("./Favicon.png")}
+                height="22px"
+                className="favicon"
+              />
+            </Button>
           </Col>
         </Row>
       </Container>

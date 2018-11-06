@@ -3,8 +3,37 @@
   background-color: black;
 }
 
+.btn-primary {
+  color: #fff;
+  background-image: linear-gradient(to bottom, #99b3e6, #1f3d7a);
+  border-color: black;
+}
+
+.jumbotron {
+  background: none;
+}
+
+.gamelist {
+  cursor: pointer;
+  margin-top: 50px;
+}
+
+.tableau {
+  background-color: rgba(94, 131, 146, 0.883);
+  text-align: center;
+  border-style: solid;
+  font-family: "Audiowide", cursive;
+  font-size: 25px;
+  color: black;
+}
+
+.font {
+  font-family: "Audiowide", cursive;
+  font-size: 30px;
+  color: black;
+}
+
 .App-header {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,6 +49,15 @@
   color: #61dafb;
 }
 
+h1 {
+  background: linear-gradient(to right, #3a0331 0%, #da57d5 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 5px 5px blue;
+  color: #40a49a;
+  font-family: "Press Start 2P", cursive;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -27,4 +65,131 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 80%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.searchbar {
+  margin-top: -50px;
+  margin-bottom: 50px;
+}
+
+.buttonclean {
+  margin-top: -50px;
+  margin-bottom: 50px;
+}
+
+.inputscore {
+  width: 200px;
+  display: inline-block;
+  margin-right: 50px;
+}
+
+.pagination {
+  margin: 0 300px;
+  margin-bottom: -40px;
+}
+
+.chosengame {
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.inputname {
+  width: 25%;
+  display: inline-block;
+}
+
+.textcardlist {
+  float: left;
+  margin-left: -250px;
+  font-size: 30px;
+  margin-top: -10px;
+  font-family: impact;
+  background: linear-gradient(#1657f5 0%, #1657f5 50%, #163287 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text {
+  font-family: impact;
+  font-size: 30px;
+  background: linear-gradient(#1657f5 0%, #1657f5 50%, #163287 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.favicon {
+  margin-left: 10px;
+}
+
+.start {
+  margin-top: 30px;
+}
+
+.addplayerbutton {
+  margin-left: 20px;
+  margin-top: -3px;
+  margin-bottom: 0px
+}
+
+.footer {
+  background: linear-gradient(to bottom, #99b3e6, #1f3d7a);
+  position: relative;
+  height: 40px;
+  margin-top : 50px;
+  text-align: center;
+  list-style: none;
+}
+
+.footergame {
+  float: left;
+  margin-left: 700px;
+  list-style: none;
+}
+
+.footermentions {
+  float: left;
+  list-style: none;
+}
+
+.footername {
+  float: right;
+  color: white;
+  list-style: none;
+  margin-top: 10px;
+  margin-right: 10px;
 }

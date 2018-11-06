@@ -1,19 +1,28 @@
 import React from "react";
-import { Button, Form, FormGroup, Input } from "reactstrap";
+import { Input, InputGroup, InputGroupAddon, Button } from "reactstrap";
 
-const ResearchBar = () => {
+const ResearchBar = ({ gameSearch, onChange, onXClick }) => {
   return (
-    <Form>
-      <FormGroup>
-        <Input
-          type="search"
-          name="nameSearch"
-          id="idSearch"
-          placeholder="Write your game here !"
-        />
-      </FormGroup>
-      <Button class="btn btn-outline-success" type="submit">Search</Button>
-    </Form>
+    <div>
+      <InputGroup>
+          <Input
+            className="searchbar"
+            type="search"
+            name="nameSearch"
+            id="idSearch"
+            placeholder="Search a game !"
+            value={gameSearch}
+            onChange={onChange}
+          />
+          {gameSearch.length > 0 && (
+            <InputGroupAddon addonType="append">
+              <Button color="primary" onClick={onXClick} className="buttonclean">
+                X
+              </Button>
+            </InputGroupAddon>
+          )}
+      </InputGroup>
+    </div>
   );
 };
 
