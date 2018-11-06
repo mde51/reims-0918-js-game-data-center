@@ -68,7 +68,6 @@ class App extends Component {
   }
 
   handleInputScoreChange(name, inputScore) {
-    //console.log("inputscore")
     this.setState({
       players: this.state.players.map(
         player =>
@@ -78,7 +77,6 @@ class App extends Component {
   }
 
   submitNewPlayer() {
-    //console.log("player");
     this.setState({
       players: [
         ...this.state.players,
@@ -90,7 +88,6 @@ class App extends Component {
   }
 
   submitFinalScorePlayer(name) {
-    //console.log("finalscore");
     this.setState({
       players: [
         ...this.state.players.map(
@@ -101,7 +98,6 @@ class App extends Component {
         )
       ]
     });
-    //console.log(this.state.players);
   }
 
   handleNextPage = () => {
@@ -129,7 +125,6 @@ class App extends Component {
   };
 
   handleGameSearchChange(event) {
-    //appel api ici
     if (event.target.value.length > 2) {
       this.setState({ loading: true });
       fetchGames(0, event.target.value)
@@ -140,7 +135,6 @@ class App extends Component {
           console.log("error", e);
         });
     }
-    //mise a jour du champ
     this.setState({
       gameSearch: event.target.value
     });
