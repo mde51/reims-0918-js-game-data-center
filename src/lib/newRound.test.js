@@ -7,10 +7,10 @@ it("button New Round", () => {
     { name: "Gautier", finalScore: 4, inputScore: 4 }
   ];
   const currentHistory = {};
-  const gameId = "testID";
+  const gameId = 1234;
 
   const expectedHistory = {
-    testID: [
+    1234: [
       [
         { name: "Michel", score: 3 },
         { name: "Charles", score: 6 },
@@ -30,10 +30,10 @@ it("button New Round", () => {
     { name: "Gautier", finalScore: 4, inputScore: 4 }
   ];
 
-  const gameId = "testID";
+  const gameId = 1234;
 
   const currentHistory = {
-    testID: [
+    1234: [
       [
         { name: "Michel", score: 3 },
         { name: "Charles", score: 6 },
@@ -43,7 +43,7 @@ it("button New Round", () => {
   };
 
   const expectedHistory = {
-    testID: [
+    1234: [
       [
         { name: "Michel", score: 3 },
         { name: "Charles", score: 6 },
@@ -68,10 +68,10 @@ it("button New Round", () => {
     { name: "Gautier", finalScore: 4, inputScore: 4 }
   ];
 
-  const gameId = "testID2";
+  const gameId = 5678;
 
   const currentHistory = {
-    testID: [
+    1234: [
       [
         { name: "Michel", score: 3 },
         { name: "Charles", score: 6 },
@@ -81,14 +81,14 @@ it("button New Round", () => {
   };
 
   const expectedHistory = {
-    testID: [
+    1234: [
       [
         { name: "Michel", score: 3 },
         { name: "Charles", score: 6 },
         { name: "Gautier", score: 4 }
       ]
     ],
-    testID2: [
+    5678: [
       [
         { name: "Michel", score: 3 },
         { name: "Charles", score: 6 },

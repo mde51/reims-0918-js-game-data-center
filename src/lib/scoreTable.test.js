@@ -1,9 +1,21 @@
 import { scoreTable } from "./scoreTable.js";
 
 it("should return a table of object & global scores", () => {
-  const gameId = "gameId";
+  const gameId = 5678;
   const history = {
-    gameId: [
+    1234: [
+      [
+        { name: "Michel", score: 21 },
+        { name: "Charles", score: 5 },
+        { name: "Gautier", score: 1 }
+      ],
+      [
+        { name: "Michel", score: 3 },
+        { name: "Charles", score: 5 },
+        { name: "Gautier", score: 6 }
+      ]
+    ],
+    5678: [
       [
         { name: "Michel", score: 2 },
         { name: "Charles", score: 5 },
