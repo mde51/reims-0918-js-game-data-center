@@ -16,7 +16,7 @@ const changeCoverSize = cover => {
   return urlToArray.join("/");
 };
 
-const ChosenGame = ({ game }) => (
+const ChosenGame = ({ game, onAddToFav }) => (
   <div>
     <Card className="chosengame">
       <Row>
@@ -32,7 +32,9 @@ const ChosenGame = ({ game }) => (
           <CardBody>
             <CardTitle>{game.name}</CardTitle>
             <CardText>{game.summary}</CardText>
-            <Button color="primary">add this game to your favorites!</Button>
+            <Button color="primary" onClick={() => onAddToFav(game)}>
+              add this game to your favorites!
+            </Button>
           </CardBody>
         </Col>
       </Row>
