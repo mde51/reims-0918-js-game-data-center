@@ -1,16 +1,16 @@
 const scoreByPlayersByRound = round => {
-  const result = {};
-  const finalScores = (acc, player) => {
+  let result = {};
+  let finalScores = (acc, player) => {
     acc[player.name] = player.score;
     return acc;
   };
   return round.reduce(finalScores, result);
 };
 
-export const scoreTable = (history, id) => {
-  const finalScores = {};
-  const setFinalScores = (acc, round) => {
-    const roundScore = scoreByPlayersByRound(round);
+export const scoreTable = (history, gameId) => {
+  let finalScores = {};
+  let setFinalScores = (acc, round) => {
+    let roundScore = scoreByPlayersByRound(round);
     for (let name in roundScore) {
       if (!acc[name]) {
         acc[name] = roundScore[name];
@@ -20,10 +20,10 @@ export const scoreTable = (history, id) => {
     }
     return acc;
   };
-  const objectPlayers = history.reduce(setFinalScores, finalScores);
+  let objectPlayers = history[gameId].reduce(setFinalScores, finalScores);
   const result = Object.keys(objectPlayers).map(key => ({
     name: key,
     score: objectPlayers[key]
   }));
-  return ({[id] : result});
+  return ({[gameId] : result});
 };

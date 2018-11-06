@@ -14,20 +14,7 @@ it("should return a table of object & global scores", () => {
       { name: "Gautier", score: 6 }
     ]
   ]};
-  // const expected = {
-  //   unique_game_id: [
-  //     [
-  //       { name: "Michel", score: 2 },
-  //       { name: "Charles", score: 5 },
-  //       { name: "Gautier", score: 1 }
-  //     ],
-  //     [
-  //       { name: "Michel", score: 3 },
-  //       { name: "Charles", score: 5 },
-  //       { name: "Gautier", score: 6 }
-  //     ]
-  //   ]
-  // };
+
   const expected = {
     gameId: [
       {
