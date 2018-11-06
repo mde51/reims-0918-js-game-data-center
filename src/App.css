@@ -165,25 +165,30 @@ h1 {
 .footer {
   background: linear-gradient(to bottom, #99b3e6, #1f3d7a);
   position: relative;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  height: 40px;
   margin-top: 50px;
   width: 100%;
-  padding-top: 5px;
-  height: 35px;
-  padding-top: 10px;
 }
 
-.game {
+.footergame {
   float: left;
+  list-style: none;
+  margin-left: -40px;
 }
 
-.mentions {
-  margin-left: 20px;
+.footermentions {
   float: left;
+  list-style: none;
 }
 
-.made {
+.footername {
   float: right;
+  color: white;
+  list-style: none;
+  margin-top: 8px;
+  margin-right: 20px;
+}
+
+.alert {
+  color: red;
 }
