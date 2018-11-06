@@ -68,7 +68,7 @@ class App extends Component {
   }
 
   handleInputScoreChange(name, inputScore) {
-    // console.log("inputscore")
+    //console.log("inputscore")
     this.setState({
       players: this.state.players.map(
         player =>
@@ -78,7 +78,7 @@ class App extends Component {
   }
 
   submitNewPlayer() {
-    // console.log("player");
+    //console.log("player");
     this.setState({
       players: [
         ...this.state.players,
@@ -90,7 +90,7 @@ class App extends Component {
   }
 
   submitFinalScorePlayer(name) {
-    // console.log("finalscore");
+    //console.log("finalscore");
     this.setState({
       players: [
         ...this.state.players.map(
@@ -101,7 +101,7 @@ class App extends Component {
         )
       ]
     });
-    // console.log(this.state.players);
+    //console.log(this.state.players);
   }
 
   handleNextPage = () => {
@@ -139,11 +139,11 @@ class App extends Component {
         .catch(e => {
           console.log("error", e);
         });
-      }
-      //mise a jour du champ
-      this.setState({
-        gameSearch: event.target.value
-      });
+    }
+    //mise a jour du champ
+    this.setState({
+      gameSearch: event.target.value
+    });
   }
 
   handleGameStart() {
@@ -152,13 +152,34 @@ class App extends Component {
 
   handleNewRound() {
     this.setState({
-      history: newRound(this.state.players, this.state.history, this.state.selectedGame.id)
+      history: newRound(
+        this.state.players,
+        this.state.history,
+        this.state.selectedGame.id
+      )
     });
   }
 
   handleEndGame() {
-    const newHistory = newRound(this.state.players, this.state.history, this.state.selectedGame.id);
+    const newHistory = newRound(
+      this.state.players,
+      this.state.history,
+      this.state.selectedGame.id
+    );
     const endScores = scoreTable(newHistory, this.state.selectedGame.id);
+    const compare = (a, b) => {
+      const scoreA = a.score;
+      const scoreB = b.score;
+      let comparison = 0;
+      if (scoreA > scoreB) {
+        comparison = -1;
+      } else if (scoreA < scoreB) {
+        comparison = 1;
+      }
+      return comparison;
+    };
+    endScores.sort(compare)
+
     this.setState({
       gameStarted: false,
       history: newHistory,
@@ -208,7 +229,6 @@ class App extends Component {
             {this.state.loading && <div id="loader" />}
             <ResearchBar
               gameSearch={this.state.gameSearch}
-
               onXClick={this.handleXClick}
               onChange={this.handleGameSearchChange}
               onClick={(name, cover, summary, storyline, id, selectGame) =>
@@ -262,7 +282,10 @@ class App extends Component {
                   <FinalScores list={this.state.endScores} />
                 )}
                 {(this.state.gameStarted || this.state.displayFinalScores) && (
-                  <HistoryOfRounds history={this.state.history} gameId={this.state.selectedGame.id} />
+                  <HistoryOfRounds
+                    history={this.state.history}
+                    gameId={this.state.selectedGame.id}
+                  />
                 )}
                 {!this.state.gameStarted && (
                   <div id="table">
