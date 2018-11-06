@@ -134,14 +134,14 @@ h1 {
   margin-left: -250px;
   font-size: 30px;
   margin-top: -10px;
-  font-family: impact;
+  font-family: "Audiowide", cursive;
   background: linear-gradient(#1657f5 0%, #1657f5 50%, #163287 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text {
-  font-family: impact;
+  font-family: "Audiowide", cursive;
   font-size: 30px;
   background: linear-gradient(#1657f5 0%, #1657f5 50%, #163287 100%);
   -webkit-background-clip: text;
@@ -159,33 +159,36 @@ h1 {
 .addplayerbutton {
   margin-left: 20px;
   margin-top: -3px;
-  margin-bottom: 0px
+  margin-bottom: 0px;
 }
 
 .footer {
-  background: linear-gradient(to bottom, #99b3e6, #1f3d7a);
+  background: linear-gradient(to bottom,
+  #99B3E6
+  ,
+  #1F3D7A
+  );
   position: relative;
   height: 40px;
   margin-top : 50px;
-  text-align: center;
-  list-style: none;
-}
-
-.footergame {
-  float: left;
-  margin-left: 700px;
-  list-style: none;
-}
-
-.footermentions {
+  width: 100%;
+  }
+  
+  .footergame {
   float: left;
   list-style: none;
-}
-
-.footername {
+  margin-left: -40px;
+  }
+  
+  .footermentions {
+  float: left;
+  list-style: none;
+  }
+  
+  .footername {
   float: right;
   color: white;
   list-style: none;
-  margin-top: 10px;
-  margin-right: 10px;
-}
+  margin-top: 8px;
+  margin-right: 20px;
+  } 

@@ -139,11 +139,11 @@ class App extends Component {
         .catch(e => {
           console.log("error", e);
         });
-      }
-      //mise a jour du champ
-      this.setState({
-        gameSearch: event.target.value
-      });
+    }
+    //mise a jour du champ
+    this.setState({
+      gameSearch: event.target.value
+    });
   }
 
   handleGameStart() {
@@ -152,12 +152,20 @@ class App extends Component {
 
   handleNewRound() {
     this.setState({
-      history: newRound(this.state.players, this.state.history, this.state.selectedGame.id)
+      history: newRound(
+        this.state.players,
+        this.state.history,
+        this.state.selectedGame.id
+      )
     });
   }
 
   handleEndGame() {
-    const newHistory = newRound(this.state.players, this.state.history, this.state.selectedGame.id);
+    const newHistory = newRound(
+      this.state.players,
+      this.state.history,
+      this.state.selectedGame.id
+    );
     const endScores = scoreTable(newHistory, this.state.selectedGame.id);
     this.setState({
       gameStarted: false,
@@ -198,7 +206,7 @@ class App extends Component {
   };
   render() {
     return (
-      <section>
+      <section className="sect">
         <div className="App">
           <header className="App-header">
             <MainJumbotron
@@ -208,7 +216,6 @@ class App extends Component {
             {this.state.loading && <div id="loader" />}
             <ResearchBar
               gameSearch={this.state.gameSearch}
-
               onXClick={this.handleXClick}
               onChange={this.handleGameSearchChange}
               onClick={(name, cover, summary, storyline, id, selectGame) =>
@@ -262,7 +269,10 @@ class App extends Component {
                   <FinalScores list={this.state.endScores} />
                 )}
                 {(this.state.gameStarted || this.state.displayFinalScores) && (
-                  <HistoryOfRounds history={this.state.history} gameId={this.state.selectedGame.id} />
+                  <HistoryOfRounds
+                    history={this.state.history}
+                    gameId={this.state.selectedGame.id}
+                  />
                 )}
                 {!this.state.gameStarted && (
                   <div id="table">
@@ -301,8 +311,8 @@ class App extends Component {
               </div>
             )}
           </Container>
-          <Footer />
         </div>
+        <Footer />
       </section>
     );
   }
