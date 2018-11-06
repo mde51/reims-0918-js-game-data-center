@@ -14,7 +14,7 @@ const FinalScores = ({ list }) => (
       </thead>
       <tbody>
         {list.map((player, index) => (
-          <FinalRank {...player} i={index} />
+          <FinalRank {...player} i={index} key={index} />
         ))}
       </tbody>
     </Table>
