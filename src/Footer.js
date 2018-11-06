@@ -6,12 +6,12 @@ const Footer = () => {
       <div>
         <ul>
           <li className="footergame">
-            <a class="nav-link text-white" href="#">
+            <a className="nav-link text-white" href="#">
               ©Game Date Center
             </a>
           </li>
           <li className="footermentions">
-            <a class="nav-link text-white" href="#">
+            <a className="nav-link text-white" href="#">
               Mentions Légales
             </a>
           </li>
