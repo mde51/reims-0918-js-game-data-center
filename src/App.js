@@ -153,6 +153,7 @@ class App extends Component {
           console.log("error", e);
         });
     }
+    //mise a jour du champ
     this.setState({
       gameSearch: event.target.value
     });
@@ -231,7 +232,7 @@ class App extends Component {
   };
   render() {
     return (
-      <section>
+      <section className="sect">
         <div className="App">
           <header className="App-header">
             <MainJumbotron
@@ -337,8 +338,8 @@ class App extends Component {
               </div>
             )}
           </Container>
-          <Footer />
         </div>
+        <Footer />
       </section>
     );
   }
