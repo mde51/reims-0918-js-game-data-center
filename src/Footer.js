@@ -1,9 +1,9 @@
 import React from "react";
 
-const Footer = ({}) => {
+const Footer = () => {
   return (
     <footer className="footer">
-    <div>
+      <div>
         <ul>
           <li className="footergame">
             <a className="nav-link text-white" href="#">
@@ -19,7 +19,7 @@ const Footer = ({}) => {
             Made By: Charles, Robin, Michel, Gautier
           </li>
         </ul>
-    </div>
+      </div>
     </footer>
   );
 };
