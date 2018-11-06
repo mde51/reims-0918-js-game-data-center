@@ -51,6 +51,7 @@ class App extends Component {
     this.handleGameStart = this.handleGameStart.bind(this);
     this.handleNewRound = this.handleNewRound.bind(this);
     this.handleEndGame = this.handleEndGame.bind(this);
+    this.handleXClick = this.handleXClick.bind(this);
   }
 
   selectGame(game) {
@@ -185,6 +186,12 @@ class App extends Component {
   handleDisplayFavs() {
     this.setState({ listFavs: true });
   }
+
+  handleXClick = event => {
+    this.setState({
+      gameSearch: event.target.value.replace(/""/)
+    });
+  };
   render() {
     return (
       <section>
@@ -196,7 +203,9 @@ class App extends Component {
             />
             {this.state.loading && <div id="loader" />}
             <ResearchBar
-              value={this.state.gameSearch}
+              gameSearch={this.state.gameSearch}
+
+              onXClick={this.handleXClick}
               onChange={this.handleGameSearchChange}
               onClick={(name, cover, summary, storyline, selectGame) =>
                 selectGame({
