@@ -123,17 +123,20 @@ class App extends Component {
 
   handleGameSearchChange(event) {
     //appel api ici
-    this.setState({ loading: true });
-    fetchGames(0, event.target.value)
-      .then(response => {
-        return this.setState({ gamesList: response.data, loading: false });
-      })
-      .catch(e => {
-        console.log("error", e);
+    if (event.target.value.length > 2) {
+      this.setState({ loading: true });
+      fetchGames(0, event.target.value)
+        .then(response => {
+          return this.setState({ gamesList: response.data, loading: false });
+        })
+        .catch(e => {
+          console.log("error", e);
+        });
+      }
+      //mise a jour du champ
+      this.setState({
+        gameSearch: event.target.value
       });
-    this.setState({
-      gameSearch: event.target.value
-    });
   }
 
   handleGameStart() {
