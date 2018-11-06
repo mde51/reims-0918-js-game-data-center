@@ -32,8 +32,23 @@ const ChosenGame = ({ game, onAddToFav }) => (
           <CardBody>
             <CardTitle>{game.name}</CardTitle>
             <CardText>{game.summary}</CardText>
-            <Button color="primary" onClick={() => onAddToFav(game)}>
-              add this game to your favorites!
+            <a href="#table">
+              <Button color="primary" className="mt-5">
+                Begin a tournament with this game !
+              </Button>
+            </a>
+            <Button
+              color="primary"
+              className="mt-5"
+              onClick={() => onAddToFav(game)}
+            >
+              Add this game to your favorites !{" "}
+              <img
+                src={require("./Favicon.png")}
+                alt="favorite"
+                height="25px"
+                className="favicon"
+              />
             </Button>
           </CardBody>
         </Col>

@@ -1,23 +1,37 @@
 import React from "react";
 import { Button, Input } from "reactstrap";
 
-const RankingPlayer = ({ handleInputScoreChange, name, i, handleFinalScorePlayer, finalScore}) => {
+const RankingPlayer = ({
+  gameStarted,
+  handleInputScoreChange,
+  name,
+  rank,
+  handleFinalScorePlayer,
+  finalScore
+}) => {
   return (
     <tr>
-      <th>{i=i+1}</th>
-      <td>{name}</td>
-      <td width="500px">
-        <Input
-          width="30px"
-          maxLength="5"
-          type=""
-          className="inputscore"
-          placeholder="Write your score"
-          onChange={event => handleInputScoreChange(name, event.target.value)}
-        />
-        <Button color="primary" onClick={event => handleFinalScorePlayer(name)}>Add Score</Button>
-      </td>
-      <td>{finalScore}</td>
+      <th className="font">{rank + 1}</th>
+      <td className="font text-capitalize">{name}</td>
+      {gameStarted && (
+        <td width="500px">
+          <Input
+            width="30px"
+            maxlength="5"
+            type=""
+            className="inputscore"
+            placeholder="Write your score"
+            onChange={event => handleInputScoreChange(name, event.target.value)}
+          />
+          <Button
+            color="primary"
+            onClick={event => handleFinalScorePlayer(name)}
+          >
+            Add Score
+          </Button>
+        </td>
+      )}
+      <td className="font">{finalScore}</td>
     </tr>
   );
 };

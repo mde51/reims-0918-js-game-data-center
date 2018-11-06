@@ -1,17 +1,18 @@
 import React from "react";
 import OneRound from "./OneRound";
 
-const HistoryOfRounds = ({ list }) => (
+const HistoryOfRounds = ({ history, gameId }) => (
   <div>
-    {list.map((round, indexRound) => (
-      <div key={indexRound}>
-        <p>
-          Round n°
-          {indexRound + 1}
-        </p>
-        <OneRound round={round} />
-      </div>
-    ))}
+    {history[gameId] &&
+      history[gameId].map((round, indexRound) => (
+        <div key={indexRound}>
+          <p>
+            Round n°
+            {indexRound + 1}
+          </p>
+          <OneRound round={round} />
+        </div>
+      ))}
   </div>
 );
 

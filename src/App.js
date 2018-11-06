@@ -11,9 +11,9 @@ import GameMenu from "./GameMenu";
 import ChosenGame from "./ChosenGame";
 import PlayersList from "./PlayersList";
 import PreviousNext from "./Pagination";
-import PreviousNextFavs from "./PaginationFavs";
 import GamesFavsList from "./GamesFavsList";
 import FinalScores from "./FinalScores";
+import Footer from "./Footer";
 import HistoryOfRounds from "./HistoryOfRounds";
 import { fetchGames } from "./api/games";
 import { newRound } from "./lib/newRound";
@@ -32,10 +32,9 @@ class App extends Component {
       loading: false,
       players: [],
       page: 0,
-      favPage: 0,
       favs: [],
       listFavs: false,
-      history: [],
+      history: {},
       endScores: null,
       displayFinalScores: false
     };
@@ -53,9 +52,9 @@ class App extends Component {
     this.handleGameStart = this.handleGameStart.bind(this);
     this.handleNewRound = this.handleNewRound.bind(this);
     this.handleEndGame = this.handleEndGame.bind(this);
-    this.handleNextFavsPage = this.handleNextFavsPage.bind(this);
-    this.handlePreviousFavsPage = this.handlePreviousFavsPage.bind(this);
+    this.handleXClick = this.handleXClick.bind(this);
   }
+
 
   selectGame(game) {
     this.setState({
@@ -118,20 +117,6 @@ class App extends Component {
     );
   };
 
-  handleNextFavsPage = ({ handleDisplayFavs }) => {
-    this.setState(
-      { favPage: this.state.favPage + 1 },
-      { handleDisplayFavs },
-      () =>
-        fetchGames(this.state.favPage, this.state.favs)
-          .then(response => {
-            return this.setState({ favs: response.data, loading: false });
-          })
-          .catch(e => {
-            console.log("error", e);
-          })
-    );
-  };
 
   handlePreviousPage = () => {
     this.setState({ page: this.state.page - 1 }, () =>
@@ -145,31 +130,20 @@ class App extends Component {
     );
   };
 
-  handlePreviousFavsPage = ({ handleDisplayFavs }) => {
-    this.setState(
-      { favPage: this.state.favPage - 1 },
-      { handleDisplayFavs },
-      () =>
-        fetchGames(this.state.favPage, this.state.favs)
-          .then(response => {
-            return this.setState({ favs: response.data, loading: false });
-          })
-          .catch(e => {
-            console.log("error", e);
-          })
-    );
-  };
 
   handleGameSearchChange(event) {
     //appel api ici
-    this.setState({ loading: true });
-    fetchGames(0, event.target.value)
-      .then(response => {
-        return this.setState({ gamesList: response.data, loading: false });
-      })
-      .catch(e => {
-        console.log("error", e);
-      });
+    if (event.target.value.length > 2) {
+      this.setState({ loading: true });
+      fetchGames(0, event.target.value)
+        .then(response => {
+          return this.setState({ gamesList: response.data, loading: false });
+        })
+        .catch(e => {
+          console.log("error", e);
+        });
+    }
+    //mise a jour du champ
     this.setState({
       gameSearch: event.target.value
     });
@@ -181,13 +155,21 @@ class App extends Component {
 
   handleNewRound() {
     this.setState({
-      history: newRound(this.state.players, this.state.history)
+      history: newRound(
+        this.state.players,
+        this.state.history,
+        this.state.selectedGame.id
+      )
     });
   }
 
   handleEndGame() {
-    const newHistory = newRound(this.state.players, this.state.history);
-    const endScores = scoreTable(newHistory);
+    const newHistory = newRound(
+      this.state.players,
+      this.state.history,
+      this.state.selectedGame.id
+    );
+    const endScores = scoreTable(newHistory, this.state.selectedGame.id);
     this.setState({
       gameStarted: false,
       history: newHistory,
@@ -219,6 +201,12 @@ class App extends Component {
   handleDisplayFavs() {
     this.setState({ listFavs: true });
   }
+
+  handleXClick = event => {
+    this.setState({
+      gameSearch: event.target.value.replace(/""/)
+    });
+  };
   render() {
     return (
       <section>
@@ -230,14 +218,16 @@ class App extends Component {
             />
             {this.state.loading && <div id="loader" />}
             <ResearchBar
-              value={this.state.gameSearch}
+              gameSearch={this.state.gameSearch}
+              onXClick={this.handleXClick}
               onChange={this.handleGameSearchChange}
-              onClick={(name, cover, summary, storyline, selectGame) =>
+              onClick={(name, cover, summary, storyline, id, selectGame) =>
                 selectGame({
                   name: name,
                   cover: cover,
                   summary: summary,
-                  storyline: storyline
+                  storyline: storyline,
+                  id: id
                 })
               }
             />
@@ -246,11 +236,13 @@ class App extends Component {
           <Container>
             {this.state.gamesList && (
               <div>
-                <PreviousNext
-                  page={this.state.page}
-                  handleNextPage={this.handleNextPage}
-                  handlePreviousPage={this.handlePreviousPage}
-                />
+                <Row>
+                  <PreviousNext
+                    page={this.state.page}
+                    handleNextPage={this.handleNextPage}
+                    handlePreviousPage={this.handlePreviousPage}
+                  />
+                </Row>
                 <GamesList
                   list={this.state.gamesList}
                   selectGame={this.selectGame}
@@ -259,11 +251,6 @@ class App extends Component {
             )}
             {this.state.listFavs && (
               <div>
-                <PreviousNextFavs
-                  favPage={this.state.favPage}
-                  handleNextFavsPage={this.handleNextFavsPage}
-                  handlePreviousFavsPage={this.handlePreviousFavsPage}
-                />
                 <GamesFavsList
                   listFavs={this.state.favs.slice(0, 6)}
                   selectGame={this.selectGame}
@@ -280,10 +267,14 @@ class App extends Component {
                   <FinalScores list={this.state.endScores} />
                 )}
                 {(this.state.gameStarted || this.state.displayFinalScores) && (
-                  <HistoryOfRounds list={this.state.history} />
+                  <HistoryOfRounds
+                    history={this.state.history}
+                    gameId={this.state.selectedGame.id}
+                  />
                 )}
                 {!this.state.gameStarted && (
-                  <div>
+                  <div id="table">
+                    <p className="text">Add your usernames !</p>
                     <Row>
                       <Col>
                         <UserName
@@ -292,8 +283,12 @@ class App extends Component {
                         />
                       </Col>
                     </Row>
-                    <Button color="primary" onClick={this.handleGameStart}>
-                      START !
+                    <Button
+                      color="primary"
+                      className="start"
+                      onClick={this.handleGameStart}
+                    >
+                      START!
                     </Button>
                   </div>
                 )}
@@ -303,14 +298,18 @@ class App extends Component {
                     handleEndGame={this.handleEndGame}
                   />
                 )}
-                <PlayersList
-                  list={this.state.players}
-                  handleInputScoreChange={this.handleInputScoreChange}
-                  submitFinalScorePlayer={this.submitFinalScorePlayer}
-                />
+                {this.state.tempPlayer && (
+                  <PlayersList
+                    list={this.state.players}
+                    handleInputScoreChange={this.handleInputScoreChange}
+                    submitFinalScorePlayer={this.submitFinalScorePlayer}
+                    gameStarted={this.state.gameStarted}
+                  />
+                )}
               </div>
             )}
           </Container>
+          <Footer />
         </div>
       </section>
     );

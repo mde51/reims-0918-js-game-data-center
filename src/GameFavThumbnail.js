@@ -7,7 +7,7 @@ const changeCoverSize = cover => {
   return urlToArray.join("/");
 };
 
-const GameFavThumbnail = ({ name, cover, summary, storyline, selectGame }) => (
+const GameFavThumbnail = ({ name, cover, summary, storyline, id, selectGame }) => (
   <div>
     <Card
       onClick={() =>
@@ -15,7 +15,8 @@ const GameFavThumbnail = ({ name, cover, summary, storyline, selectGame }) => (
           name: name,
           cover: cover,
           summary: summary,
-          storyline: storyline
+          storyline: storyline,
+          id: id
         })
       }
     >

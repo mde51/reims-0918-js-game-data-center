@@ -1,18 +1,34 @@
 import { scoreTable } from "./scoreTable.js";
 
 it("should return a table of object & global scores", () => {
-  const history = [
-    [
-      { name: "Michel", score: 2 },
-      { name: "Charles", score: 5 },
-      { name: "Gautier", score: 1 }
+  const gameId = 5678;
+  const history = {
+    1234: [
+      [
+        { name: "Michel", score: 21 },
+        { name: "Charles", score: 5 },
+        { name: "Gautier", score: 1 }
+      ],
+      [
+        { name: "Michel", score: 3 },
+        { name: "Charles", score: 5 },
+        { name: "Gautier", score: 6 }
+      ]
     ],
-    [
-      { name: "Michel", score: 3 },
-      { name: "Charles", score: 5 },
-      { name: "Gautier", score: 6 }
+    5678: [
+      [
+        { name: "Michel", score: 2 },
+        { name: "Charles", score: 5 },
+        { name: "Gautier", score: 1 }
+      ],
+      [
+        { name: "Michel", score: 3 },
+        { name: "Charles", score: 5 },
+        { name: "Gautier", score: 6 }
+      ]
     ]
-  ];
+  };
+
   const expected = [
     {
       name: "Michel",
@@ -27,5 +43,5 @@ it("should return a table of object & global scores", () => {
       score: 7
     }
   ];
-  expect(scoreTable(history)).toEqual(expected);
+  expect(scoreTable(history, gameId)).toEqual(expected);
 });

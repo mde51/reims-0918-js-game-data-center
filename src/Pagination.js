@@ -11,6 +11,7 @@ import {
 const PreviousNext = ({ handleNextPage, handlePreviousPage, page }) => (
   <Container className="pagination">
     <Row>
+      <p className="textcardlist">Popular :</p>
       <Pagination aria-label="Page navigation example">
         <Col>
           {page !== 0 && (
