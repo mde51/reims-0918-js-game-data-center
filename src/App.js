@@ -56,6 +56,21 @@ class App extends Component {
     this.handleXClick = this.handleXClick.bind(this);
   }
 
+  handleAddToFav(game) {
+    const gameId = this.state.selectedGame.id;
+    const check = (favArray, gameId) => {
+      for (let i = 0; i < favArray.length; i++) {
+        if (favArray[i].id === gameId) {
+          return true;
+        }
+      }
+      return false;
+    };
+    if (!check(this.state.favs, gameId)) {
+      this.setState({ favs: [...this.state.favs, game] });
+    }
+  }
+
   selectGame(game) {
     this.setState({
       selectedGame: game,
@@ -215,11 +230,6 @@ class App extends Component {
       });
   }
 
-  handleAddToFav(game) {
-    this.setState(prevState => ({ favs: [...prevState.favs, game] }));
-
-    console.log(this.state.favs);
-  }
 
   handleDisplayFavs() {
     this.setState({ listFavs: true });
@@ -231,6 +241,14 @@ class App extends Component {
     });
   };
   render() {
+    const check = (favArray, gameId) => {
+      for (let i = 0; i < favArray.length; i++) {
+        if (favArray[i].id === gameId) {
+          return true;
+        }
+      }
+      return false;
+    };
     return (
       <section>
         <div className="App">
@@ -238,6 +256,7 @@ class App extends Component {
             <MainJumbotron
               favs={this.state.favs}
               handleDisplayFavs={this.handleDisplayFavs}
+              gamesList={this.state.gamesList}
             />
             {this.state.loading && <div id="loader" />}
             <ResearchBar
@@ -283,6 +302,10 @@ class App extends Component {
             {this.state.selectedGame && (
               <div>
                 <ChosenGame
+                  disabledFav={check(
+                    this.state.favs,
+                    this.state.selectedGame.id
+                  )}
                   game={this.state.selectedGame}
                   onAddToFav={this.handleAddToFav}
                 />

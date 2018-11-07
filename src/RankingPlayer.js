@@ -19,21 +19,18 @@ const RankingPlayer = ({
           <Input
             width="30px"
             maxLength="5"
-            type=""
+            type="number"
             className="inputscore"
             placeholder="Write your score"
             onChange={event => handleInputScoreChange(name, event.target.value)}
             value={inputScore}
           />
-          <Button
-            color="primary"
-            onClick={() => submitFinalScorePlayer(name)}
-          >
+          <Button color="primary" onClick={() => submitFinalScorePlayer(name)}>
             Confirm
           </Button>
         </td>
       )}
-      <td className="font">{finalScore}</td>
+      {gameStarted && <td className="font">{finalScore}</td>}
     </tr>
   );
 };
