@@ -149,7 +149,7 @@ h1 {
 .textcardlist {
   float: left;
   margin-left: -250px;
-  font-size: 30px;
+  font-size: 20px;
   margin-top: -10px;
   font-family: "Audiowide", cursive;
   background: linear-gradient(#1657f5 0%, #1657f5 50%, #163287 100%);
@@ -163,6 +163,16 @@ h1 {
   background: linear-gradient(#1657f5 0%, #1657f5 50%, #163287 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.textjumb {
+  font-family: "Audiowide", cursive;
+  font-size: 30px;
+  background: linear-gradient(#1657f5 0%, #1657f5 50%, #163287 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 30px;
+  margin-top: -20px;
 }
 
 .favicon {
@@ -211,9 +221,16 @@ h1 {
 }
 
 h2 {
-  color: blue;
+  font-family: "Audiowide", cursive;
+  background: linear-gradient(#1657f5 0%, #1657f5 50%, #163287 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 28px;
 }
 
 h3 {
   color: black;
+  font-family: "Audiowide", cursive;
+  font-size: 25px;
+  margin-bottom: 30px;
 }
