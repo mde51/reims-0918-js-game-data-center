@@ -10,7 +10,7 @@ const MainJumbotron = ({ handleDisplayFavs, favs, gamesList }) => {
         </section>
         {gamesList && (
           <Row>
-            <h2>
+            <h2 className="textjumb">
               Welcome, challengers ! Please select the game you will be playing.
             </h2>
           </Row>
