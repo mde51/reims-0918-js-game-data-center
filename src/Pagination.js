@@ -11,15 +11,17 @@ import {
 const PreviousNext = ({ handleNextPage, handlePreviousPage, page }) => (
   <Container className="pagination">
     <Row>
-      <p className="textcardlist">SORTED BY POPULARITY :</p>
-      <Pagination aria-label="Page navigation example">
-        <Col>
-          {page !== 0 && (
+      <Col>
+        <p className="textcardlist mt-5">SORTED BY POPULARITY :</p>
+      </Col>
+      <Pagination aria-label="Page navigation example" className="mb-5">
+        {page !== 0 && (
+          <Col>
             <PaginationItem>
               <PaginationLink onClick={handlePreviousPage} previous />
             </PaginationItem>
-          )}
-        </Col>
+          </Col>
+        )}
         <Col>
           <PaginationItem>
             <PaginationLink onClick={handleNextPage} next />
