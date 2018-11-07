@@ -25,15 +25,12 @@ const RankingPlayer = ({
             onChange={event => handleInputScoreChange(name, event.target.value)}
             value={inputScore}
           />
-          <Button
-            color="primary"
-            onClick={() => submitFinalScorePlayer(name)}
-          >
+          <Button color="primary" onClick={() => submitFinalScorePlayer(name)}>
             Add Score
           </Button>
         </td>
       )}
-      <td className="font">{finalScore}</td>
+      {gameStarted && <td className="font">{finalScore}</td>}
     </tr>
   );
 };
