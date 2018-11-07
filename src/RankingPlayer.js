@@ -30,7 +30,7 @@ const RankingPlayer = ({
           </Button>
         </td>
       )}
-      <td className="font">{finalScore}</td>
+      {gameStarted && <td className="font">{finalScore}</td>}
     </tr>
   );
 };
