@@ -256,6 +256,7 @@ class App extends Component {
             <MainJumbotron
               favs={this.state.favs}
               handleDisplayFavs={this.handleDisplayFavs}
+              gamesList={this.state.gamesList}
             />
             {this.state.loading && <div id="loader" />}
             <ResearchBar
