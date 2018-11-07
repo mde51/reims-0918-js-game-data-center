@@ -29,7 +29,7 @@ const RankingPlayer = ({
             color="primary"
             onClick={() => submitFinalScorePlayer(name)}
           >
-            Add Score
+            Confirm
           </Button>
         </td>
       )}
