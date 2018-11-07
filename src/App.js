@@ -37,6 +37,7 @@ class App extends Component {
       history: {},
       endScores: null,
       displayFinalScores: false,
+      doubleUserName: false
     };
 
     this.selectGame = this.selectGame.bind(this);
@@ -83,7 +84,6 @@ class App extends Component {
   }
 
   handleInputScoreChange(name, inputScore) {
-    // console.log("inputscore")
     this.setState({
       players: this.state.players.map(
         player =>
@@ -93,23 +93,34 @@ class App extends Component {
   }
 
   submitNewPlayer() {
-    // console.log("player");
-    const tempPlayer = this.state.tempPlayer;
-    this.setState({
-      players: [
-        ...this.state.players,
-        {
-          name: tempPlayer,
-          inputScore: 0,
-          finalScore: 0
+    const tempPlayer = this.state.tempPlayer.toUpperCase();
+    const check = (arr, value) => {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].name === value) {
+          return true;
         }
-      ],
-      tempPlayer: ""
-    });
+      }
+      return false;
+    };
+    if (check(this.state.players, tempPlayer)) {
+      this.setState({ doubleUserName: true });
+    } else {
+      this.setState({
+        players: [
+          ...this.state.players,
+          {
+            name: tempPlayer,
+            inputScore: 0,
+            finalScore: 0
+          }
+        ],
+        tempPlayer: "",
+        doubleUserName: false
+      });
+    }
   }
 
   submitFinalScorePlayer(name) {
-    // console.log("finalscore");
     this.setState({
       players: [
         ...this.state.players.map(player => {
@@ -120,7 +131,6 @@ class App extends Component {
         })
       ]
     });
-    // console.log(this.state.players);
   }
 
   handleNextPage = () => {
@@ -148,7 +158,6 @@ class App extends Component {
   };
 
   handleGameSearchChange(event) {
-    //appel api ici
     if (event.target.value.length > 2) {
       this.setState({ loading: true });
       fetchGames(0, event.target.value)
@@ -186,6 +195,19 @@ class App extends Component {
       this.state.selectedGame.id
     );
     const endScores = scoreTable(newHistory, this.state.selectedGame.id);
+    const compare = (a, b) => {
+      const scoreA = a.score;
+      const scoreB = b.score;
+      let comparison = 0;
+      if (scoreA > scoreB) {
+        comparison = -1;
+      } else if (scoreA < scoreB) {
+        comparison = 1;
+      }
+      return comparison;
+    };
+    endScores.sort(compare);
+
     this.setState({
       gameStarted: false,
       history: newHistory,
@@ -289,12 +311,7 @@ class App extends Component {
                 {this.state.displayFinalScores && (
                   <FinalScores list={this.state.endScores} />
                 )}
-                {(this.state.gameStarted || this.state.displayFinalScores) && (
-                  <HistoryOfRounds
-                    history={this.state.history}
-                    gameId={this.state.selectedGame.id}
-                  />
-                )}
+
                 {!this.state.gameStarted && (
                   <div id="table">
                     <p className="text">Add your usernames !</p>
@@ -305,6 +322,11 @@ class App extends Component {
                           handleChange={this.handleNewPlayerChange}
                           submitNewPlayers={this.submitNewPlayer}
                         />
+                        {this.state.doubleUserName && (
+                          <p className="alert">
+                            This username has been submitted already !
+                          </p>
+                        )}
                       </Col>
                     </Row>
                     <Button
@@ -328,6 +350,12 @@ class App extends Component {
                     handleInputScoreChange={this.handleInputScoreChange}
                     submitFinalScorePlayer={this.submitFinalScorePlayer}
                     gameStarted={this.state.gameStarted}
+                  />
+                )}
+                {(this.state.gameStarted || this.state.displayFinalScores) && (
+                  <HistoryOfRounds
+                    history={this.state.history}
+                    gameId={this.state.selectedGame.id}
                   />
                 )}
               </div>

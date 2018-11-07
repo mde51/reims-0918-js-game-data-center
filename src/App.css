@@ -26,10 +26,27 @@
   color: black;
 }
 
+.tableauRound {
+  background-color: rgba(58, 82, 94, 0.883);
+  text-align: center;
+  border-style: solid;
+  font-family: "Audiowide", cursive;
+  font-size: 25px;
+  color: black;
+}
+
 .font {
   font-family: "Audiowide", cursive;
   font-size: 30px;
   color: black;
+}
+
+.title {
+  font-family: "Audiowide", cursive;
+  font-size: 30px;
+  background: linear-gradient(#1657f5 0%, #1657f5 50%, #163287 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .App-header {
@@ -134,14 +151,14 @@ h1 {
   margin-left: -250px;
   font-size: 30px;
   margin-top: -10px;
-  font-family: impact;
+  font-family: "Audiowide", cursive;
   background: linear-gradient(#1657f5 0%, #1657f5 50%, #163287 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text {
-  font-family: impact;
+  font-family: "Audiowide", cursive;
   font-size: 30px;
   background: linear-gradient(#1657f5 0%, #1657f5 50%, #163287 100%);
   -webkit-background-clip: text;
@@ -159,22 +176,21 @@ h1 {
 .addplayerbutton {
   margin-left: 20px;
   margin-top: -3px;
-  margin-bottom: 0px
+  margin-bottom: 0px;
 }
 
 .footer {
   background: linear-gradient(to bottom, #99b3e6, #1f3d7a);
   position: relative;
   height: 40px;
-  margin-top : 50px;
-  text-align: center;
-  list-style: none;
+  margin-top: 50px;
+  width: 100%;
 }
 
 .footergame {
   float: left;
-  margin-left: 700px;
   list-style: none;
+  margin-left: -40px;
 }
 
 .footermentions {
@@ -186,6 +202,10 @@ h1 {
   float: right;
   color: white;
   list-style: none;
-  margin-top: 10px;
-  margin-right: 10px;
+  margin-top: 8px;
+  margin-right: 20px;
+}
+
+.alert {
+  color: red;
 }
