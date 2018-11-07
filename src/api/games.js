@@ -7,7 +7,7 @@ export const fetchGames = (page, gameSearch) => {
       6}`,
     {
       headers: {
-        "user-key": "cbb82cff9c17815a56e39c667661a7cb",
+        "user-key": "fecd6414efd5e0abab75643c9116d301",
         Accept: "application/json"
       }
     }
