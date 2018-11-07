@@ -36,7 +36,8 @@ class App extends Component {
       listFavs: false,
       history: {},
       endScores: null,
-      displayFinalScores: false
+      displayFinalScores: false,
+      doubleUserName: false
     };
 
     this.selectGame = this.selectGame.bind(this);
@@ -77,18 +78,31 @@ class App extends Component {
   }
 
   submitNewPlayer() {
-    const tempPlayer = this.state.tempPlayer;
-    this.setState({
-      players: [
-        ...this.state.players,
-        {
-          name: tempPlayer,
-          inputScore: 0,
-          finalScore: 0
+    const tempPlayer = this.state.tempPlayer.toUpperCase();
+    const check = (arr, value) => {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].name === value) {
+          return true;
         }
-      ],
-      tempPlayer: ""
-    });
+      }
+      return false;
+    };
+    if (check(this.state.players, tempPlayer)) {
+      this.setState({ doubleUserName: true });
+    } else {
+      this.setState({
+        players: [
+          ...this.state.players,
+          {
+            name: tempPlayer,
+            inputScore: 0,
+            finalScore: 0
+          }
+        ],
+        tempPlayer: "",
+        doubleUserName: false
+      });
+    }
   }
 
   submitFinalScorePlayer(name) {
@@ -139,6 +153,7 @@ class App extends Component {
           console.log("error", e);
         });
     }
+    //mise a jour du champ
     this.setState({
       gameSearch: event.target.value
     });
@@ -274,12 +289,7 @@ class App extends Component {
                 {this.state.displayFinalScores && (
                   <FinalScores list={this.state.endScores} />
                 )}
-                {(this.state.gameStarted || this.state.displayFinalScores) && (
-                  <HistoryOfRounds
-                    history={this.state.history}
-                    gameId={this.state.selectedGame.id}
-                  />
-                )}
+
                 {!this.state.gameStarted && (
                   <div id="table">
                     <p className="text">Add your usernames !</p>
@@ -290,6 +300,11 @@ class App extends Component {
                           handleChange={this.handleNewPlayerChange}
                           submitNewPlayers={this.submitNewPlayer}
                         />
+                        {this.state.doubleUserName && (
+                          <p className="alert">
+                            This username has been submitted already !
+                          </p>
+                        )}
                       </Col>
                     </Row>
                     <Button
@@ -313,6 +328,12 @@ class App extends Component {
                     handleInputScoreChange={this.handleInputScoreChange}
                     submitFinalScorePlayer={this.submitFinalScorePlayer}
                     gameStarted={this.state.gameStarted}
+                  />
+                )}
+                {(this.state.gameStarted || this.state.displayFinalScores) && (
+                  <HistoryOfRounds
+                    history={this.state.history}
+                    gameId={this.state.selectedGame.id}
                   />
                 )}
               </div>

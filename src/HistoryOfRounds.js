@@ -6,7 +6,7 @@ const HistoryOfRounds = ({ history, gameId }) => (
     {history[gameId] &&
       history[gameId].map((round, indexRound) => (
         <div key={indexRound}>
-          <p>
+          <p className="title">
             Round n°
             {indexRound + 1}
           </p>
