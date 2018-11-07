@@ -9,8 +9,7 @@ const PlayersList = ({
   gameStarted
 }) => (
   <section className="mt-4">
-    <Table>
-      <table className="table table-striped">
+    <Table striped>
         <thead className="tableau">
           <tr>
             <th>Rank</th>
@@ -31,7 +30,6 @@ const PlayersList = ({
             />
           ))}
         </tbody>
-      </table>
     </Table>
   </section>
 );
