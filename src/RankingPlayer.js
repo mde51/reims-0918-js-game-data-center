@@ -26,7 +26,7 @@ const RankingPlayer = ({
             value={inputScore}
           />
           <Button color="primary" onClick={() => submitFinalScorePlayer(name)}>
-            Add Score
+            Confirm
           </Button>
         </td>
       )}

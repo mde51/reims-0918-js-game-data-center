@@ -15,7 +15,7 @@ const UserName = ({ tempPlayer, handleChange, submitNewPlayers }) => (
         value={tempPlayer}
       />
         <Button color="primary" className="addplayerbutton" onClick={submitNewPlayers}>
-          Add Player
+          Confirm
         </Button>
     <br />
   </div>
